@@ -1,12 +1,13 @@
 ﻿// ctrl+r ctrl+g limpa referencias nao utilizadas 
 
-
-
+using System;
 using System.Collections.Generic;
+using System.Text;
+
 
 namespace QuickBuy.Dominio.Entidades
 {
-    class Usuario : Entidade
+    public class Usuario : Entidade
     {
         public int Id { get; set; }
         public string Email { get; set; }
@@ -21,7 +22,11 @@ namespace QuickBuy.Dominio.Entidades
 
         public override void Validate()
         {
-            throw new System.NotImplementedException();
+            if (string.IsNullOrEmpty(Email))
+                AdicionarCritica("Crítica: Email nao pode ser vazio!");
+
+            if (string.IsNullOrEmpty(Senha))
+                AdicionarCritica("Crítica: Senha nao pode ser vazio!");
         }
     }
 }

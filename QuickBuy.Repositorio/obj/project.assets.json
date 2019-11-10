@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    ".NETCoreApp,Version=v3.0": {}
+    ".NETCoreApp,Version=v3.0": {
+      "QuickBuy.Dominio/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.0",
+        "compile": {
+          "bin/placeholder/QuickBuy.Dominio.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/QuickBuy.Dominio.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "QuickBuy.Dominio/1.0.0": {
+      "type": "project",
+      "path": "../QuickBuy.Dominio/QuickBuy.Dominio.csproj",
+      "msbuildProject": "../QuickBuy.Dominio/QuickBuy.Dominio.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    ".NETCoreApp,Version=v3.0": []
+    ".NETCoreApp,Version=v3.0": [
+      "QuickBuy.Dominio >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\Weslen\\.nuget\\packages\\": {},
@@ -36,7 +55,11 @@
       },
       "frameworks": {
         "netcoreapp3.0": {
-          "projectReferences": {}
+          "projectReferences": {
+            "E:\\CURSOS_UDEMY\\ASPNET_CORE_ANGULAR\\QuickBuy\\QuickBuy.Dominio\\QuickBuy.Dominio.csproj": {
+              "projectPath": "E:\\CURSOS_UDEMY\\ASPNET_CORE_ANGULAR\\QuickBuy\\QuickBuy.Dominio\\QuickBuy.Dominio.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

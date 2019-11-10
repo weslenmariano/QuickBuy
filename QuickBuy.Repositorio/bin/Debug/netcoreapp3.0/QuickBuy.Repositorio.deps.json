@@ -7,14 +7,27 @@
   "targets": {
     ".NETCoreApp,Version=v3.0": {
       "QuickBuy.Repositorio/1.0.0": {
+        "dependencies": {
+          "QuickBuy.Dominio": "1.0.0"
+        },
         "runtime": {
           "QuickBuy.Repositorio.dll": {}
+        }
+      },
+      "QuickBuy.Dominio/1.0.0": {
+        "runtime": {
+          "QuickBuy.Dominio.dll": {}
         }
       }
     }
   },
   "libraries": {
     "QuickBuy.Repositorio/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "QuickBuy.Dominio/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
