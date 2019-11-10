@@ -1,10 +1,11 @@
 ﻿using QuickBuy.Dominio.ObjetoDeValor;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace QuickBuy.Dominio.Entidades
 {
-    public class Pedido
+    public class Pedido : Entidade
     {
         public int Id { get; set; }
         public DateTime DataPedido { get; set; }
@@ -24,5 +25,16 @@ namespace QuickBuy.Dominio.Entidades
         /// </summary>
 
         public ICollection<ItemPedido> ItensPedidos { get; set; }
+
+        public override void Validate()
+        {
+            LimparMensagensValidacao();
+
+            if (!ItensPedidos.Any())
+                AdicionarCritica("Crítica: Pedido nao pode ser vazio! Não foi encontrado Itens de pedido.");
+
+            if (string.IsNullOrEmpty(CEP))
+                AdicionarCritica("Crítica: CEP nao pode ser vazio!");
+        }
     }
 }
