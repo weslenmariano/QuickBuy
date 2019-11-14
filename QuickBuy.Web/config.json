@@ -1,0 +1,7 @@
+{
+  "ConnectionStrings": {
+    "QuickBuyDB": "Server=localhost;Database=QuickBuyDB;Uid=root;Pwd=;",
+    "SqlServerConnection": "Server=.; Database=MySql_Curso; User Id=myUsername; Password=myPassword;"
+  }
+  
+}
