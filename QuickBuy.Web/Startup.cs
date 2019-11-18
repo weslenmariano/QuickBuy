@@ -79,7 +79,7 @@ namespace QuickBuy.Web
                 if (env.IsDevelopment())
                 {
                     // usando o cliserver aqui as vezes da erro de compilacao devido a sincronia do dotnetcore com o angular.
-                    // spa.UseAngularCliServer(npmScript: "start");
+                     // spa.UseAngularCliServer(npmScript: "start");
 
                     // como alternativa pode ser rodado o angular saparadamente. -- ClientApp
                     spa.UseProxyToSpaDevelopmentServer("http://localhost:4200/");
