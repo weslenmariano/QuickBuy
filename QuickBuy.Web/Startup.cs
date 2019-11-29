@@ -87,5 +87,19 @@ namespace QuickBuy.Web
                 }
             });
         }
+        /*
+        git
+        Criacao branch
+        git checkout -b feature/RT-101-Alterações-Front-Otimizacoes-Rota
+
+        Commitar Ajustes
+        git commit -m"RT-154 Incluir checkbox para incluir a data de agendamento"
+
+        Enviar Git
+        git push
+
+        Buscar do Git
+        git pull
+        */
     }
 }
