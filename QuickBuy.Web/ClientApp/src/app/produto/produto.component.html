@@ -1,3 +1,25 @@
-body{
+<h4 class="h4">Cadastro de Produto</h4>
 
-}
+<label for="inputNome" class="sr-only">Nome</label>
+<input type="text" id="inputNome"
+       name="nome" placeholder="Nome"
+       class="form-control mb-2 col-md-4"
+       [(ngModel)]="produto.nome"
+       #nomex="ngModel"
+       [ngClass]="{
+       'is-invalid': nomex.invalid && (nomex.dirty || nomex.touched),
+       'is-invalid': nomex.valid   && (nomex.dirty || nomex.thouched)
+       }"
+       required/>
+
+<input type="text" id="inputDescricao"
+       name="descricao" placeholder="Descrição"
+       class="form-control mb-2"
+       [(ngModel)]="produto.descricao"
+       #descricaox="ngModel"
+       [ngClass]="{
+           'is-invalid':descricaox.invalid && (descricaox.dirty || descricaox.touched),
+           'is-valid':descricaox.valid && (descricaox.dirty || descricaox.touched)
+           }"
+       minlength="4"
+       required />
