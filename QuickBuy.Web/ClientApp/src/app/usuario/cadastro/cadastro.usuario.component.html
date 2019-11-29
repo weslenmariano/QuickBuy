@@ -1,11 +1,49 @@
 <div class="text-center">
   <form class="form-signin">
 
-    <h1 class="h4 mb-2 login">Login do Cliente</h1>
+    <h1 class="h4 mb-2 login">Cadastrar Usuario</h1>
+
+    <label for="inputNome" class="sr-only">Nome</label>
+    <input type="text" id="inputNome"
+           name="Nome" placeholder="Nome"
+           class="form-control mb-2"
+           [(ngModel)]="usuario.nome"
+           #nomex="ngModel"
+           [ngClass]="{
+           'is-invalid':nomex.invalid && (nomex.dirty || nomex.touched),
+           'is-valid':nomex.valid && (nomex.dirty || nomex.touched)
+           }"
+           minlength="4"
+           required />
+    <div class="invalid-feedback mb-2" *ngIf="nomex.invalid && (nomex.dirty || nomex.touched)">
+      <div *ngIf="nomex.errors.required">
+        <!-- se o erro for de requided inclui a div no html-->
+        O nome é de preenchimento obrigatório!
+      </div>
+    </div>
+
+    <label for="inputSobreNome" class="sr-only">Sobre Nome</label>
+    <input type="text" id="inputSobreNome"
+           name="sobreNome" placeholder="Sobre Nome"
+           class="form-control mb-2"
+           [(ngModel)]="usuario.sobreNome"
+           #sobreNomex="ngModel"
+           [ngClass]="{
+           'is-invalid':sobreNomex.invalid && (sobreNomex.dirty || sobreNomex.touched),
+           'is-valid':sobreNomex.valid && (sobreNomex.dirty || sobreNomex.touched)
+           }"
+           minlength="4"
+           required />
+    <div class="invalid-feedback mb-2" *ngIf="sobreNomex.invalid && (sobreNomex.dirty || sobreNomex.touched)">
+      <div *ngIf="sobreNomex.errors.required">
+        <!-- se o erro for de requided inclui a div no html-->
+        O sobrenome é de preenchimento obrigatório!
+      </div>
+    </div>
 
     <label for="inputEmail" class="sr-only">Email</label>
     <input type="email" id="inputEmail"
-           name="email" placeholder="Informe o seu Email"
+           name="email" placeholder="Email"
            class="form-control mb-2"
            [(ngModel)]="usuario.email"
            #emailx="ngModel"
@@ -32,7 +70,7 @@
 
     <label for="inputSenha" class="sr-only">Senha</label>
     <input type="password" id="inputSenha"
-           name="senha" placeholder="Informe o sua Senha"
+           name="senha" placeholder="Senha"
            [(ngModel)]="usuario.senha"
            #senhax="ngModel"
            class="form-control mb-2"
@@ -53,13 +91,10 @@
       </div>
     </div>
 
-    <button class="btn btn-primary btn-block mb-3" type="submit" (click)="entrar()" [disabled]="ativarSpinner">
+    <button class="btn btn-primary btn-block mb-3" type="submit" (click)="cadastrar()" [disabled]="ativarSpinner">
       <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="ativarSpinner"></span>
-      Entrar
+      Cadastrar
     </button>
-    <div>
-      Novo por aqui? <a [routerLink]='["/novo-usuario"]'>Cadastre-se</a>
-    </div>
 
     <div class="alert alert-danger mb-2" role="alert" *ngIf="mensagem">
       {{mensagem}}
@@ -67,16 +102,6 @@
 
     <img src="../../../assets/img/quick-logo.jpg" />
 
-    <div class="alert alert-primary" role="alert" *ngIf="usuarioAutenticado">
-      Usuario Autenticado!
-    </div>
-    <div *ngIf="usuarioAutenticado">
-      <div class="alert alert-warning" role="alert">
-        <div *ngFor="let us of usuarios">
-          {{us}}
-        </div>
-      </div>
-    </div>
   </form>
 
 </div>

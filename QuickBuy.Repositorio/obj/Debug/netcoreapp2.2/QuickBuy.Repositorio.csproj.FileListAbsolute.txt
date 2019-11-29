@@ -9,3 +9,15 @@ E:\CURSOS_UDEMY\ASPNET_CORE_ANGULAR\QuickBuy\QuickBuy.Repositorio\obj\Debug\netc
 E:\CURSOS_UDEMY\ASPNET_CORE_ANGULAR\QuickBuy\QuickBuy.Repositorio\obj\Debug\netcoreapp2.2\QuickBuy.Repositorio.csproj.CopyComplete
 E:\CURSOS_UDEMY\ASPNET_CORE_ANGULAR\QuickBuy\QuickBuy.Repositorio\obj\Debug\netcoreapp2.2\QuickBuy.Repositorio.dll
 E:\CURSOS_UDEMY\ASPNET_CORE_ANGULAR\QuickBuy\QuickBuy.Repositorio\obj\Debug\netcoreapp2.2\QuickBuy.Repositorio.pdb
+C:\ProjetoNetCore\QuickBuy\QuickBuy.Repositorio\bin\Debug\netcoreapp2.2\QuickBuy.Repositorio.deps.json
+C:\ProjetoNetCore\QuickBuy\QuickBuy.Repositorio\bin\Debug\netcoreapp2.2\QuickBuy.Repositorio.dll
+C:\ProjetoNetCore\QuickBuy\QuickBuy.Repositorio\bin\Debug\netcoreapp2.2\QuickBuy.Repositorio.pdb
+C:\ProjetoNetCore\QuickBuy\QuickBuy.Repositorio\bin\Debug\netcoreapp2.2\QuickBuy.Dominio.dll
+C:\ProjetoNetCore\QuickBuy\QuickBuy.Repositorio\bin\Debug\netcoreapp2.2\QuickBuy.Dominio.pdb
+C:\ProjetoNetCore\QuickBuy\QuickBuy.Repositorio\obj\Debug\netcoreapp2.2\QuickBuy.Repositorio.csprojAssemblyReference.cache
+C:\ProjetoNetCore\QuickBuy\QuickBuy.Repositorio\obj\Debug\netcoreapp2.2\QuickBuy.Repositorio.csproj.CoreCompileInputs.cache
+C:\ProjetoNetCore\QuickBuy\QuickBuy.Repositorio\obj\Debug\netcoreapp2.2\QuickBuy.Repositorio.AssemblyInfoInputs.cache
+C:\ProjetoNetCore\QuickBuy\QuickBuy.Repositorio\obj\Debug\netcoreapp2.2\QuickBuy.Repositorio.AssemblyInfo.cs
+C:\ProjetoNetCore\QuickBuy\QuickBuy.Repositorio\obj\Debug\netcoreapp2.2\QuickBuy.Repositorio.csproj.CopyComplete
+C:\ProjetoNetCore\QuickBuy\QuickBuy.Repositorio\obj\Debug\netcoreapp2.2\QuickBuy.Repositorio.dll
+C:\ProjetoNetCore\QuickBuy\QuickBuy.Repositorio\obj\Debug\netcoreapp2.2\QuickBuy.Repositorio.pdb

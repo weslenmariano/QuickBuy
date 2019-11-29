@@ -6,3 +6,12 @@ E:\CURSOS_UDEMY\ASPNET_CORE_ANGULAR\QuickBuy\QuickBuy.Dominio\obj\Debug\netcorea
 E:\CURSOS_UDEMY\ASPNET_CORE_ANGULAR\QuickBuy\QuickBuy.Dominio\obj\Debug\netcoreapp2.2\QuickBuy.Dominio.AssemblyInfo.cs
 E:\CURSOS_UDEMY\ASPNET_CORE_ANGULAR\QuickBuy\QuickBuy.Dominio\obj\Debug\netcoreapp2.2\QuickBuy.Dominio.dll
 E:\CURSOS_UDEMY\ASPNET_CORE_ANGULAR\QuickBuy\QuickBuy.Dominio\obj\Debug\netcoreapp2.2\QuickBuy.Dominio.pdb
+C:\ProjetoNetCore\QuickBuy\QuickBuy.Dominio\bin\Debug\netcoreapp2.2\QuickBuy.Dominio.deps.json
+C:\ProjetoNetCore\QuickBuy\QuickBuy.Dominio\bin\Debug\netcoreapp2.2\QuickBuy.Dominio.dll
+C:\ProjetoNetCore\QuickBuy\QuickBuy.Dominio\bin\Debug\netcoreapp2.2\QuickBuy.Dominio.pdb
+C:\ProjetoNetCore\QuickBuy\QuickBuy.Dominio\obj\Debug\netcoreapp2.2\QuickBuy.Dominio.csprojAssemblyReference.cache
+C:\ProjetoNetCore\QuickBuy\QuickBuy.Dominio\obj\Debug\netcoreapp2.2\QuickBuy.Dominio.csproj.CoreCompileInputs.cache
+C:\ProjetoNetCore\QuickBuy\QuickBuy.Dominio\obj\Debug\netcoreapp2.2\QuickBuy.Dominio.AssemblyInfoInputs.cache
+C:\ProjetoNetCore\QuickBuy\QuickBuy.Dominio\obj\Debug\netcoreapp2.2\QuickBuy.Dominio.AssemblyInfo.cs
+C:\ProjetoNetCore\QuickBuy\QuickBuy.Dominio\obj\Debug\netcoreapp2.2\QuickBuy.Dominio.dll
+C:\ProjetoNetCore\QuickBuy\QuickBuy.Dominio\obj\Debug\netcoreapp2.2\QuickBuy.Dominio.pdb

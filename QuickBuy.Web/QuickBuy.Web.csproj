@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
@@ -19,17 +19,35 @@
 
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Compile Remove="ClientApp\src\app\counter\**" />
+    <Compile Remove="ClientApp\src\app\fetch-data\**" />
     <Content Remove="$(SpaRoot)**" />
+    <Content Remove="ClientApp\src\app\counter\**" />
+    <Content Remove="ClientApp\src\app\fetch-data\**" />
+    <EmbeddedResource Remove="ClientApp\src\app\counter\**" />
+    <EmbeddedResource Remove="ClientApp\src\app\fetch-data\**" />
     <None Remove="$(SpaRoot)**" />
+    <None Remove="ClientApp\src\app\counter\**" />
+    <None Remove="ClientApp\src\app\fetch-data\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\SampleDataController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="ClientApp\src\app\autorizacao\guarda.rotas.ts" />
+    <None Remove="ClientApp\src\app\counter\counter.component.html" />
+    <None Remove="ClientApp\src\app\counter\counter.component.spec.ts" />
+    <None Remove="ClientApp\src\app\counter\counter.component.ts" />
+    <None Remove="ClientApp\src\app\fetch-data\fetch-data.component.html" />
+    <None Remove="ClientApp\src\app\fetch-data\fetch-data.component.ts" />
     <None Remove="ClientApp\src\app\modelo\usuario.ts" />
     <None Remove="ClientApp\src\app\produto\produto.component.ts" />
     <None Remove="ClientApp\src\app\servicos\produto\produto.servico.ts" />
     <None Remove="ClientApp\src\app\servicos\usuario\usuario.servico.ts" />
+    <None Remove="ClientApp\src\app\usuario\cadastro\cadastro.usuario.component.ts" />
     <None Remove="ClientApp\src\app\usuario\login\login.component.ts" />
   </ItemGroup>
 
@@ -43,6 +61,7 @@
     <TypeScriptCompile Include="ClientApp\src\app\produto\produto.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\servicos\produto\produto.servico.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\servicos\usuario\usuario.servico.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\usuario\cadastro\cadastro.usuario.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\usuario\login\login.component.ts" />
   </ItemGroup>
 
@@ -50,10 +69,6 @@
     <Content Update="config.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ClientApp\src\app\usuario\cadastro\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
