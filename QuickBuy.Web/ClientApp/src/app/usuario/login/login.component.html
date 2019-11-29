@@ -19,7 +19,7 @@
     <!-- definindo uma variavel emailx --- do tipo ngmodel-->
     <!-- email -- Tipo de validação, poderia ser date, valor de moeda etc... -->
 
-    <div class="invalid-feedback mb-2"  *ngIf="emailx.invalid && (emailx.dirty || emailx.touched)">
+    <div class="invalid-feedback mb-2" *ngIf="emailx.invalid && (emailx.dirty || emailx.touched)">
       <div *ngIf="emailx.errors.required">
         <!-- se o erro for de requided inclui a div no html-->
         O email é de preenchimento obrigatório!
@@ -53,8 +53,14 @@
       </div>
     </div>
 
-    <button class="btn btn-primary btn-block" type="submit" (click)="entrar()">Entrar</button>
+    <button class="btn btn-primary btn-block mb-3" type="submit" (click)="entrar()">
+      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+      Entrar
+    </button>
 
+    <div class="alert alert-danger mb-2" role="alert" *ngIf="mensagem">
+      {{mensagem}}
+    </div>
 
     <img src="../../../assets/img/quick-logo.jpg" />
 

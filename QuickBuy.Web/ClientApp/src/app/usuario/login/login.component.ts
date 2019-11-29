@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core"
 import { Usuario } from "../../modelo/usuario";
 import { Router, ActivatedRoute } from "@angular/router";
+import { UsuarioServico } from "../../servicos/usuario/usuario.servico";
 
 @Component({
     selector: "app-login",
@@ -12,10 +13,11 @@ export class LoginComponent implements OnInit {
    
     public usuario;
     public returnUrl: string;
+    public mensagem: string;
 //    public usuarios = ["usuario1", "usuario2", "usuario3", "usuario4", "usuario5"]
 //    public usuarioAutenticado: boolean;
 
-    constructor(private router: Router, private ativatedRouter: ActivatedRoute) {
+    constructor(private router: Router, private ativatedRouter: ActivatedRoute, private usuarioServico: UsuarioServico) {
         
         
     }
@@ -31,12 +33,30 @@ export class LoginComponent implements OnInit {
     //public titulo = "Titudo do componente";
 
     entrar() {
-        if (this.usuario.email == "teste@teste.com.br" && this.usuario.senha == "1234") {
-           // this.usuarioAutenticado = true;
-            sessionStorage.setItem("usuario-autenticado", "1");
-            this.router.navigate([this.returnUrl]);
-        }
-        //alert('Entrar no sistema.');
+
+        this.usuarioServico.verificarUsuario(this.usuario)
+            .subscribe(
+                usuario_json => {
+                    //essa linha sera executada no caso de retorno sem erros
+                    //var usuarioRetorno: Usuario;
+                   // usuarioRetorno = data;
+                   // sessionStorage.setItem("usuario-autenticado", "1");
+                    
+                    this.usuarioServico.usuario = usuario_json;
+
+                    if (this.returnUrl == null) {
+                        this.router.navigate(['/']);
+                    } else {
+                        this.router.navigate([this.returnUrl]);
+                    }
+                    
+                },
+                err => {
+                    console.log(err.error);
+                    this.mensagem = err.error;
+                }
+            );
+       
     }
 
   
