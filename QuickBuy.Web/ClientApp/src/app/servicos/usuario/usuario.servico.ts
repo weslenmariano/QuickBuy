@@ -32,32 +32,29 @@ export class UsuarioServico {
         this._usuario = null;
     }
 
+
+    get headers(): HttpHeaders {
+        return new HttpHeaders().set('content-type', 'application/json');
+    }
+
     constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
         this.baseURL = baseUrl;
     }
 
     public verificarUsuario(usuario: Usuario): Observable<Usuario> {
 
-        const headers = new HttpHeaders().set('content-type', 'application/json');
-        var body = {
-            email: usuario.email,
-            senha: usuario.senha
-        }
+        //const headers = new HttpHeaders().set('content-type', 'application/json');
+        //var body = {
+        //    email: usuario.email,
+        //    senha: usuario.senha
+        //}
 
         // this.baseURL = raiz do site que pode ser exemplo.: http://www.quickbuy.com.br
-        return this.http.post<Usuario>(this.baseURL + "api/usuario/VerificarUsuario", body, { headers });
+        return this.http.post<Usuario>(this.baseURL + "api/usuario/VerificarUsuario", JSON.stringify(usuario), { headers: this.headers });
   }
 
   public cadastrarUsuario(usuario: Usuario): Observable<Usuario> {
-    const headers = new HttpHeaders().set('content-type', 'application/json');
-
-    var body = {
-      email: usuario.email,
-      senha: usuario.senha,
-      nome: usuario.nome,
-      sobreNome: usuario.sobreNome
-    }
-
-    return this.http.post<Usuario>(this.baseURL + "api/usuario", body, { headers });
+   
+    return this.http.post<Usuario>(this.baseURL + "api/usuario", JSON.stringify(usuario), { headers: this.headers });
   }
 }

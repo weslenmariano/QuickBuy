@@ -1,20 +1,31 @@
-<h4 class="h4">Cadastro de Produto</h4>
+<h4 class="h4 titulo">Cadastro de Produto</h4>
 
 <label for="inputNome" class="sr-only">Nome</label>
 <input type="text" id="inputNome"
-       name="nome" placeholder="Nome"
+       name="nomeProduto" placeholder="Nome do produto"
        class="form-control mb-2 col-md-4"
        [(ngModel)]="produto.nome"
        #nomex="ngModel"
        [ngClass]="{
-       'is-invalid': nomex.invalid && (nomex.dirty || nomex.touched),
-       'is-invalid': nomex.valid   && (nomex.dirty || nomex.thouched)
-       }"
+           'is-invalid':nomex.invalid && (nomex.dirty || nomex.touched),
+           'is-valid':nomex.valid && (nomex.dirty || nomex.touched)
+           }"
+       minlength="4"
        required/>
+<div class="invalid-feedback mb-2" *ngIf="nomex.invalid && (nomex.dirty || nomex.touched)">
+  <div *ngIf="nomex.errors.required">
+    Nome do produto é de preenchimento obrigatório.
+  </div>
+  <div *ngIf="nomex.errors.minlength">
+    <!-- se o erro for de requided inclui a div no html-->
+    O nome do produto deve ter mais de 4 caracteres.
+  </div>
+</div>
 
+<label for="inputDescricao" class="sr-only">Descrição</label>
 <input type="text" id="inputDescricao"
-       name="descricao" placeholder="Descrição"
-       class="form-control mb-2"
+       name="descricaoPoduto" placeholder="Descrição do produto"
+       class="form-control mb-2 col-md-4"
        [(ngModel)]="produto.descricao"
        #descricaox="ngModel"
        [ngClass]="{
@@ -23,3 +34,43 @@
            }"
        minlength="4"
        required />
+<div class="invalid-feedback mb-2" *ngIf="descricaox.invalid && (descricaox.dirty || descricaox.touched)">
+  <div *ngIf="descricaox.errors.required">
+    Descrição do produto é de preenchimento obrigatório.
+  </div>
+  <div *ngIf="descricaox.errors.minlength">
+    <!-- se o erro for de requided inclui a div no html-->
+    A descrição do produto deve ter mais de 4 caracteres.
+  </div>
+</div>
+
+
+<label for="inputPreco" class="sr-only">Preço</label>
+<input type="number" id="inputPreco"
+       name="precoProduto" placeholder="Preço"
+       class="form-control mb-2 col-md-2"
+       [(ngModel)]="produto.preco"
+       #precox ="ngModel"
+       [ngClass]="{
+           'is-invalid':precox.invalid && (precox.dirty || precox.touched),
+           'is-valid':precox.valid && (precox.dirty || precox.touched)
+           }"
+       required/>
+
+<div class="invalid-feedback mb-2" *ngIf="precox.invalid && (precox.dirty || precox.touched)">
+  <div *ngIf="precox.errors.required">
+    Preço do produto é de preenchimento obrigatório.
+  </div>
+</div>
+
+<div class="input-group mb-2">
+  <div class="custom-file col-md-4">
+    <input type="file" class="custom-file-input"
+           id="inputFile" aria-describedby="inputGroupFileAddon04" (change)="inputChange($event.target.files)" />
+    <label for="inputFile" class="custom-file-label">Escolha uma foto</label>
+  </div>
+</div>
+
+<button class="btn btn-primary mb-2" (click)="cadastrar()" [disabled]="ativarSpinner">
+      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="ativarSpinner"></span>
+ Cadastrar</button>

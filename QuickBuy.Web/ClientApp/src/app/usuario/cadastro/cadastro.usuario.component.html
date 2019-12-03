@@ -100,6 +100,10 @@
       {{mensagem}}
     </div>
 
+    <div class="alert alert-success" *ngIf="usuarioCadastrado">
+       Usuário cadastrado com sucesso! <a class="alert-link" [routerLink]='["/entrar"]'>Clique aqui</a> para entrar no sistema com a sua conta.
+    </div>
+
     <img src="../../../assets/img/quick-logo.jpg" />
 
   </form>
