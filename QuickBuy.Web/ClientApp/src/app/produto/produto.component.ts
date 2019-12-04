@@ -18,7 +18,8 @@ export class ProdutoComponent implements OnInit {
     public produto: Produto;
     public arquivoSelecionado: File;
     public ativarSpinner: boolean;
-
+    public ativarSpinnerFoto: boolean;
+    public mensagem: string;
 
     constructor(private produtoServico: ProdutoServico) {
 
@@ -32,7 +33,7 @@ export class ProdutoComponent implements OnInit {
 
 
         this.arquivoSelecionado = files.item(0);
-        this.ativarSpinner = true;
+        this.ativarSpinnerFoto = true;
         //alert(this.arquivoSelecionado.name);
         this.produtoServico.enviarArquivo(this.arquivoSelecionado)
             .subscribe(
@@ -40,32 +41,42 @@ export class ProdutoComponent implements OnInit {
                     this.produto.nomeArquivo = nomeArquivo;
                     //alert(this.produto.nomeArquivo)
                     console.log(nomeArquivo);
-                    this.ativarSpinner = false;
+                    this.ativarSpinnerFoto = false;
                 },
                 erro => {
                     console.log(erro.error);
-                    this.ativarSpinner = false;
+                    this.ativarSpinnerFoto = false;
                     
                 }
             );
     }
 
     public cadastrar() {
-        //this.produtoServico.cadastrar(this.produto)
-        //  .subscribe(
-        //    produtoJson => {
-        //      console.log(produtoJson);
-
-        //    },
-        //    err => {
-        //      console.log(err.error);
-        //    }
-        //  );
+        this.ativarEspera();
+        this.produtoServico.cadastrar(this.produto)
+          .subscribe(
+            produtoJson => {
+              console.log(produtoJson);
+                  this.desativarEspera();
+            },
+            err => {
+              this.mensagem = err.error;
+                console.log(err.error);
+                this.desativarEspera();
+            }
+          );
     }
     public obterNome(): string {
         return "Samsung";
     }
 
+    public ativarEspera() {
+        this.ativarSpinner = true;
+    }
+
+    public desativarEspera() {
+        this.ativarSpinner = false;
+    }
 
 
 }

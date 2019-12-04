@@ -11,7 +11,7 @@
            'is-valid':nomex.valid && (nomex.dirty || nomex.touched)
            }"
        minlength="4"
-       required/>
+       required />
 <div class="invalid-feedback mb-2" *ngIf="nomex.invalid && (nomex.dirty || nomex.touched)">
   <div *ngIf="nomex.errors.required">
     Nome do produto é de preenchimento obrigatório.
@@ -50,12 +50,12 @@
        name="precoProduto" placeholder="Preço"
        class="form-control mb-2 col-md-2"
        [(ngModel)]="produto.preco"
-       #precox ="ngModel"
+       #precox="ngModel"
        [ngClass]="{
            'is-invalid':precox.invalid && (precox.dirty || precox.touched),
            'is-valid':precox.valid && (precox.dirty || precox.touched)
            }"
-       required/>
+       required />
 
 <div class="invalid-feedback mb-2" *ngIf="precox.invalid && (precox.dirty || precox.touched)">
   <div *ngIf="precox.errors.required">
@@ -69,8 +69,18 @@
            id="inputFile" aria-describedby="inputGroupFileAddon04" (change)="inputChange($event.target.files)" />
     <label for="inputFile" class="custom-file-label">Escolha uma foto</label>
   </div>
+  <div class="spinner-border text-primary" role="status" *ngIf="ativarSpinnerFoto">
+    <span class="sr-only">Loading Foto...</span>
+  </div>
+
 </div>
 
 <button class="btn btn-primary mb-2" (click)="cadastrar()" [disabled]="ativarSpinner">
-      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="ativarSpinner"></span>
- Cadastrar</button>
+  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="ativarSpinner"></span>
+  Cadastrar
+</button>
+
+<div class="alert alert-danger mb-2 col-md-4" role="alert" *ngIf="mensagem">
+  {{mensagem}}
+</div>
+

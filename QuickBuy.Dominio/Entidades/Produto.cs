@@ -10,11 +10,15 @@ namespace QuickBuy.Dominio.Entidades
         public string Nome { get; set; }
         public string Descricao { get; set; }
         public decimal Preco { get; set; }
+        public string NomeArquivo { get; set; }
 
         public override void Validate()
         {
             if (string.IsNullOrEmpty(Nome))
-                AdicionarCritica("Crítica: Nome nao pode ser vazio!");
+                AdicionarCritica("Nome não pode ser vazio");
+
+            if (string.IsNullOrEmpty(Descricao))
+                AdicionarCritica("A descrição não foi informada");
         }
     }
 }

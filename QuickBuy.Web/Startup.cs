@@ -104,5 +104,8 @@ namespace QuickBuy.Web
         Buscar do Git
         git pull
         */
+        // sequencia da chamada do projeto angular
+        // compoente.html ->componente.ts -> servico.ts -> api/controller(ProdutoController).
+        // api/controller por sua vez referencia o backend
     }
 }
