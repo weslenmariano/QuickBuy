@@ -31,11 +31,8 @@ namespace QuickBuy.Web.Controllers
         {
             try
             {
-                return Ok(_produtoRepositorio.ObterTodos());
-                //if(condicao == false)
-                //{
-                //    return BadRequest("mensagem de ajuda");
-                //}
+                return Json(_produtoRepositorio.ObterTodos());
+                
             }
             catch (Exception ex)
             {
@@ -61,6 +58,21 @@ namespace QuickBuy.Web.Controllers
             {
                 return BadRequest(ex.ToString());
 
+            }
+        }
+
+        [HttpPost("Deletar")]
+        public IActionResult Deletar([FromBody] Produto produto)
+        {
+            try
+            {
+                /// produto da requisicao deve tar a propriedade do Id > 0 para conseguir remover.
+                _produtoRepositorio.Remover(produto);
+                return Json(_produtoRepositorio.ObterTodos());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.ToString());
             }
         }
 

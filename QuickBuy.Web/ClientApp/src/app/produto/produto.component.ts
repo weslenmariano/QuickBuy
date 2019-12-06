@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core"
 import { ProdutoServico } from "../servicos/produto/produto.servico";
 import { Produto } from "../modelo/produto";
+import { Router } from "@angular/router";
 
 @Component({
     selector: "app-produto", // qual tag html que o component produto sera renderizado
@@ -21,7 +22,7 @@ export class ProdutoComponent implements OnInit {
     public ativarSpinnerFoto: boolean;
     public mensagem: string;
 
-    constructor(private produtoServico: ProdutoServico) {
+    constructor(private produtoServico: ProdutoServico, private router: Router) {
 
     }
 
@@ -46,7 +47,7 @@ export class ProdutoComponent implements OnInit {
                 erro => {
                     console.log(erro.error);
                     this.ativarSpinnerFoto = false;
-                    
+
                 }
             );
     }
@@ -54,17 +55,18 @@ export class ProdutoComponent implements OnInit {
     public cadastrar() {
         this.ativarEspera();
         this.produtoServico.cadastrar(this.produto)
-          .subscribe(
-            produtoJson => {
-              console.log(produtoJson);
-                  this.desativarEspera();
-            },
-            err => {
-              this.mensagem = err.error;
-                console.log(err.error);
-                this.desativarEspera();
-            }
-          );
+            .subscribe(
+                produtoJson => {
+                    console.log(produtoJson);
+                    this.desativarEspera();
+                    this.router.navigate(['/pesquisar-produto']);
+                },
+                err => {
+                    this.mensagem = err.error;
+                    console.log(err.error);
+                    this.desativarEspera();
+                }
+            );
     }
     public obterNome(): string {
         return "Samsung";
