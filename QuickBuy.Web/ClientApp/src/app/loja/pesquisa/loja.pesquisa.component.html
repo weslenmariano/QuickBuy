@@ -1,0 +1,21 @@
+<div class="d-flex justify-content-center" *ngIf="!produtos">
+  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+  Carregando Produtos...
+</div>
+
+<div class="container" *ngIf="produtos">
+  <div class="row">
+    <div class="col-md-4 mb-4" *ngFor="let p of produtos">
+      <a (click)="abrirProduto(p)" style="cursor:pointer">
+        <div class="card">
+          <img class="card-top align-self-center" src="../../../../../arquivos/{{p.nomeArquivo}}" style="width:180px;height:180px;" />
+          <div class="card-body">
+            <!--  <h5 class="card-title">{{p.nome}}</h5> -->
+            <div class="card-text">{{p.descricao | truncate:50}}</div>
+            <h5 class="h5">R$ {{p.preco}}</h5>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

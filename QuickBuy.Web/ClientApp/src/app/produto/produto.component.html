@@ -10,7 +10,7 @@
            'is-invalid':nomex.invalid && (nomex.dirty || nomex.touched),
            'is-valid':nomex.valid && (nomex.dirty || nomex.touched)
            }"
-       minlength="4"
+       minlength="10"
        required />
 <div class="invalid-feedback mb-2" *ngIf="nomex.invalid && (nomex.dirty || nomex.touched)">
   <div *ngIf="nomex.errors.required">
@@ -18,7 +18,7 @@
   </div>
   <div *ngIf="nomex.errors.minlength">
     <!-- se o erro for de requided inclui a div no html-->
-    O nome do produto deve ter mais de 4 caracteres.
+    O nome do produto deve ter mais de 10 caracteres.
   </div>
 </div>
 
@@ -32,7 +32,7 @@
            'is-invalid':descricaox.invalid && (descricaox.dirty || descricaox.touched),
            'is-valid':descricaox.valid && (descricaox.dirty || descricaox.touched)
            }"
-       minlength="4"
+       minlength="50"
        required />
 <div class="invalid-feedback mb-2" *ngIf="descricaox.invalid && (descricaox.dirty || descricaox.touched)">
   <div *ngIf="descricaox.errors.required">
@@ -40,7 +40,7 @@
   </div>
   <div *ngIf="descricaox.errors.minlength">
     <!-- se o erro for de requided inclui a div no html-->
-    A descrição do produto deve ter mais de 4 caracteres.
+    A descrição do produto deve ter mais de 50 caracteres.
   </div>
 </div>
 
@@ -75,10 +75,15 @@
 
 </div>
 
-<button class="btn btn-primary mb-2" (click)="cadastrar()" [disabled]="ativarSpinner">
-  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="ativarSpinner"></span>
-  Cadastrar
-</button>
+<div class="form-inline">
+  <button class="btn btn-primary" style="margin-right:4px" (click)="cadastrar()" [disabled]="ativarSpinner">
+    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="ativarSpinner"></span>
+    Cadastrar
+  </button>
+  <button class="btn btn-secondary" [routerLink]='["/pesquisar-produto"]'>Cancelar</button>
+</div>
+
+
 
 <div class="alert alert-danger mb-2 col-md-4" role="alert" *ngIf="mensagem">
   {{mensagem}}
