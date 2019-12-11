@@ -1,4 +1,39 @@
-efetivar comprar teste
-<div *ngFor="let p of produtos">
-  {{p.nome}}
+<div class="container">
+  <div class="row">
+    <div class="col-md-9">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Produto</th>
+            <th>Quantidade</th>
+            <th>Preço</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let p of produtos">
+            <td style="width:20%"><img src="../../../../../arquivos/{{p.nomeArquivo}}" style="width:40%;height:20%" /></td>
+            <td style="width:40%">{{p.descricao}}</td>
+            <td style="width:10%"><input type="number"  class="form-control" value="1" (change)="atualizarPreco(p, $event.target.value)"/></td>
+            <td style="width:30%">R$ {{p.preco | number:'1.0-2'}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-3">
+      <div class="row'">
+        <div class="card" style="width:100%">
+          <div class="card-header">Resumo</div>
+          <div class="card-body">
+            <table class="mb-2">
+              <tr>
+                <td style="width:50%"><strong>Total:</strong></td><td><strong>R$ 1300.00</strong></td>
+              </tr>
+            </table>
+            <button class="btn btn-danger">Efetivar Compra</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
