@@ -12,10 +12,12 @@ import { Produto } from "../../modelo/produto";
 export class LojaEfetivarComponent implements OnInit {
     public carrinhoCompras: LojaCarrinhoCompras;
     public produtos: Produto[];
+    public total: number;
 
     ngOnInit(): void {
         this.carrinhoCompras = new LojaCarrinhoCompras();
         this.produtos = this.carrinhoCompras.obterProdutos();
+        this.atualizarTotal();
     }
 
     constructor(private produtoServico: ProdutoServico) {
@@ -26,10 +28,31 @@ export class LojaEfetivarComponent implements OnInit {
         if (!produto.precoOriginal) {
             produto.precoOriginal = produto.preco;
         }
+        if (quantidade <= 0) {
+            quantidade = 1;
+            produto.quantidade = quantidade;
+        }
         produto.preco = produto.precoOriginal * quantidade;
-        
+        this.carrinhoCompras.atualizar(this.produtos);
+        this.atualizarTotal();
 
 
+
+    }
+
+    public remover(produto: Produto) {
+        this.carrinhoCompras.removerProduto(produto);
+        this.produtos = this.carrinhoCompras.obterProdutos();
+        this.atualizarTotal();
+    }
+
+    public atualizarTotal() {
+        // reduce percorre toda a lista, item a item.
+        // acc variavel acumuladora
+        // produto variavel a ser usada como lambda
+        // acc + produto.preco ---- é feito a somatorio do anterior total + o item atual.
+        // 0 é o indice que sera iniciado a leitura da lista
+        this.total = this.produtos.reduce((acc, produto) => acc + produto.preco, 0);
     }
 
 }
