@@ -9,26 +9,40 @@
       <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" [ngClass]='{"show": isExpanded}'>
         <ul class="navbar-nav flex-grow">
           <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
-            <a class="nav-link text-dark" [routerLink]='["/"]'>Home</a>
+            <a class="nav-link text-dark" [routerLink]='["/"]'>
+              <img src="assets/img/home.png" style="width:32px;height:32px" />
+            </a>
           </li>
-       
+
           <li class="nav-item" [routerLinkActive]='["link-active"]' *ngIf="usuarioAdministrador()">
             <a class="nav-link text-dark" [routerLink]='["/pesquisar-produto"]'>Produto</a>
           </li>
           <li class="nav-item" [routerLinkActive]='["link-active"]' *ngIf="!usuarioLogado()">
-            <a class="nav-link text-dark" [routerLink]='["/entrar"]'>Entrar</a>
+            <a class="nav-link text-dark" [routerLink]='["/entrar"]'>
+              <img src="assets/img/log-in.png" style="width:32px;height:32px" />
+            </a>
+          </li>
+
+          <li class="nav-item" [routerLinkActive]='["link-active"]' *ngIf="temItensCarrinhoCompras()">
+            <a class="nav-link text-dark" [routerLink]='["/loja-efetivar"]'>
+              <img src="assets/img/ccompras.png" style="width:32px;height:32px" />
+            </a>
           </li>
 
           <li class="nav-item dropdown" *ngIf="usuarioLogado()">
             <a class="nav-link text-dark dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false" href="#"
                id="linkMenu" data-toggle="dropdown">{{usuario.nome}}</a>
             <ul class="dropdown-menu" aria-labelledby="linkMenu">
-              <li class="dropdown-item" role="menu" [routerLink]='["/sair"]' (click)="sair()">Sair</li>
+              <li class="dropdown-item" role="menu" [routerLink]='["/sair"]' (click)="sair()">
+                <img src="assets/img/log-out.png" style="width:32px;height:32px" /> Sair
+              </li>
             </ul>
           </li>
+
+
           <!--<li class="nav-item" [routerLinkActive]='["link-active"]' *ngIf="usuarioLogado()">
-            <a class="nav-item nav-link text-dark" [routerLink]='["/sair"]' (click)="sair()">Sair</a>
-          </li>-->
+    <a class="nav-item nav-link text-dark" [routerLink]='["/sair"]' (click)="sair()">Sair</a>
+  </li>-->
         </ul>
       </div>
     </div>
