@@ -62,6 +62,8 @@ namespace QuickBuy.Web.Controllers
                     return BadRequest("Usuário ja cadastrado no sistema.");
                 }
 
+               // usuario.EhAdministrador = true;
+
                 _usuarioRepositorio.Adicionar(usuario);
                 // return Created("api/usuario", usuario);
                 return Ok();

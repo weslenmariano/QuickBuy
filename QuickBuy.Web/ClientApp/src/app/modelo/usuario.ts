@@ -4,4 +4,5 @@ export class Usuario {
     public senha: string;
     public nome: string;
     public sobreNome: string;
+    public ehAdministrador: boolean;
 }

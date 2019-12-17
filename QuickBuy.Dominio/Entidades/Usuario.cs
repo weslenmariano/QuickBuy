@@ -14,6 +14,7 @@ namespace QuickBuy.Dominio.Entidades
         public string Senha { get; set; }
         public string Nome { get; set; }
         public string SobreNome { get; set; }
+        public bool EhAdministrador { get; set; }
 
         /// <summary>
         /// O usuario pode ter nenhum ou muitos pedidos
@@ -23,10 +24,10 @@ namespace QuickBuy.Dominio.Entidades
         public override void Validate()
         {
             if (string.IsNullOrEmpty(Email))
-                AdicionarCritica("Crítica: Email nao pode ser vazio!");
+                AdicionarCritica("Email nao pode ser vazio!");
 
             if (string.IsNullOrEmpty(Senha))
-                AdicionarCritica("Crítica: Senha nao pode ser vazio!");
+                AdicionarCritica("Senha nao pode ser vazio!");
         }
     }
 }

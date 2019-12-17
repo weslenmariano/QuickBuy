@@ -41,12 +41,13 @@ import { LojaEfetivarComponent } from './loja/efetivar/loja.efetivar.component';
         TruncateModule,
         RouterModule.forRoot([
             { path: '', component: HomeComponent, pathMatch: 'full' },
-            { path: 'produto', component: ProdutoComponent },
+            //{ path: 'produto', component: ProdutoComponent },
+            { path: 'produto', component: ProdutoComponent, canActivate: [GuardaRotas] },
             { path: 'entrar', component: LoginComponent },
             { path: 'novo-usuario', component: CadastroUsuarioComponent },
-            { path: 'pesquisar-produto', component: PesquisaProdutoComponent },
+            { path: 'pesquisar-produto', component: PesquisaProdutoComponent, canActivate: [GuardaRotas]},
             { path: 'loja-produto', component: LojaProdutoComponent },
-            { path: 'loja-efetivar', component: LojaEfetivarComponent }
+            { path: 'loja-efetivar', component: LojaEfetivarComponent, canActivate:[GuardaRotas] }
 
         ])
     ],
@@ -54,4 +55,3 @@ import { LojaEfetivarComponent } from './loja/efetivar/loja.efetivar.component';
     bootstrap: [AppComponent]
 })
 export class AppModule { }
-// { path: 'produto', component: ProdutoComponent, canActivate:[GuardaRotas]},
