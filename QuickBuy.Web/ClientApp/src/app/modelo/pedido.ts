@@ -1,5 +1,5 @@
 import { ItemPedido } from "./itemPedido";
-import { OnInit } from "@angular/core";
+
 
 export class Pedido {
     public id: number;
@@ -12,11 +12,10 @@ export class Pedido {
     public enderecoCompleto: string;
     public numeroEndereco: string;
     public formaPagamentoId: number;
-
     public itensPedido: ItemPedido[];
 
     constructor() {
-        this.itensPedido = [];
         this.dataPedido = new Date();
+        this.itensPedido = [];
     }
 }

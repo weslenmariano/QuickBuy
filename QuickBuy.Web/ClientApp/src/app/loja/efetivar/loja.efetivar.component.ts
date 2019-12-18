@@ -6,6 +6,7 @@ import { Router } from "@angular/router";
 import { Pedido } from "../../modelo/pedido";
 import { UsuarioServico } from "../../servicos/usuario/usuario.servico";
 import { ItemPedido } from "../../modelo/itemPedido";
+import { PedidoServico } from "../../servicos/pedido/pedido.servico";
 
 @Component({
     selector: "loja-efetivar",
@@ -24,7 +25,7 @@ export class LojaEfetivarComponent implements OnInit {
         this.atualizarTotal();
     }
 
-    constructor(private produtoServico: ProdutoServico, private router: Router, private usuarioServico: UsuarioServico) {
+    constructor(private usuarioServico: UsuarioServico, private pedidoServico: PedidoServico, private router: Router) {
 
     }
 
@@ -64,13 +65,25 @@ export class LojaEfetivarComponent implements OnInit {
     }
 
     public efetivarCompra() {
-        let pedido = this.criarPedido();
+        this.pedidoServico.efetivarCompra(this.criarPedido())
+            .subscribe(
+                pedidoId => {
+                    console.log(pedidoId);
+                    sessionStorage.setItem("pedidoId", pedidoId.toString());
+                    this.produtos = [];
+                    this.carrinhoCompras.limparCarrinhoCompras();
+                    //redirecionar para outra pagina
+                    this.router.navigate(['/compra-realizada-sucesso']);
 
-
+                },
+                seerro => {
+                    console.log(seerro.error);
+                });
     }
 
     public criarPedido(): Pedido {
         let pedido = new Pedido();
+
         pedido.usuarioId = this.usuarioServico.usuario.id;
         pedido.cep = "123456789";
         pedido.cidade = "Sao Paulo";
@@ -78,17 +91,21 @@ export class LojaEfetivarComponent implements OnInit {
         pedido.dataPrevisaoEntrega = new Date();
         pedido.formaPagamentoId = 1;
         pedido.numeroEndereco = "12";
+        pedido.enderecoCompleto = "endereco completo"
 
         this.produtos = this.carrinhoCompras.obterProdutos();
+       
         for (let produto of this.produtos) {
-            let itemPedido = new ItemPedido();
+            let itemPedido = new ItemPedido(); 
             itemPedido.produtoId = produto.id;
+
             if (!produto.quantidade) {
                 produto.quantidade = 1;
             }
             itemPedido.quantidade = produto.quantidade;
 
             pedido.itensPedido.push(itemPedido);
+            alert("Quantidade de itens:" + pedido.itensPedido.length);
         }
 
         return pedido;

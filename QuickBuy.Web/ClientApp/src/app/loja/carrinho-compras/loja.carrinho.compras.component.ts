@@ -2,6 +2,7 @@ import { Produto } from "../../modelo/produto";
 import { Router } from "@angular/router";
 
 export class LojaCarrinhoCompras {
+    
     public produtos: Produto[] = []; // a declaracao ja esta inicializando a lista.
 
     constructor() {
@@ -50,6 +51,10 @@ export class LojaCarrinhoCompras {
         var itens = this.obterProdutos();
         
         return (itens.length > 0);
+    }
+
+    public limparCarrinhoCompras() {
+        localStorage.setItem("produtoLocalStorage","");        
     }
 
 }

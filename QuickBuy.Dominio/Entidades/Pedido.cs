@@ -31,20 +31,20 @@ namespace QuickBuy.Dominio.Entidades
         ///  pedido deve ter pelo menos um item de pedido ou muitos itens de pedidos
         /// </summary>
 
-        public virtual ICollection<ItemPedido> ItensPedidos { get; set; }
+        public virtual ICollection<ItemPedido> ItensPedido { get; set; }
 
         public override void Validate()
         {
             LimparMensagensValidacao();
 
-            if (!ItensPedidos.Any())
-                AdicionarCritica("Crítica: Pedido nao pode ser vazio! Não foi encontrado Itens de pedido.");
+            if (!ItensPedido.Any())
+                AdicionarCritica("Pedido nao pode ser vazio! Não foi encontrado Itens de pedido.");
 
             if (string.IsNullOrEmpty(CEP))
-                AdicionarCritica("Crítica: CEP nao pode ser vazio!");
+                AdicionarCritica("CEP nao pode ser vazio!");
 
             if (FormaPagamentoId == 0)
-                AdicionarCritica("Crítica: Não foi informado a forma de pagamento.");
+                AdicionarCritica("Não foi informado a forma de pagamento.");
         }
     }
 }

@@ -72,6 +72,9 @@
     <None Remove="ClientApp\src\app\fetch-data\fetch-data.component.html" />
     <None Remove="ClientApp\src\app\fetch-data\fetch-data.component.ts" />
     <None Remove="ClientApp\src\app\loja\carrinho-compras\loja.carrinho.compras.component.ts" />
+    <None Remove="ClientApp\src\app\loja\efetivar\loja.compra.realizada.component.css" />
+    <None Remove="ClientApp\src\app\loja\efetivar\loja.compra.realizada.component.html" />
+    <None Remove="ClientApp\src\app\loja\efetivar\loja.compra.realizada.component.ts" />
     <None Remove="ClientApp\src\app\loja\efetivar\loja.efetivar.component.css" />
     <None Remove="ClientApp\src\app\loja\efetivar\loja.efetivar.component.html" />
     <None Remove="ClientApp\src\app\loja\efetivar\loja.efetivar.component.ts" />
@@ -103,6 +106,13 @@
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\autorizacao\guarda.rotas.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\loja\carrinho-compras\loja.carrinho.compras.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\loja\efetivar\loja.compra.realizada.component.css">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\loja\efetivar\loja.compra.realizada.component.html">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\loja\efetivar\loja.compra.realizada.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\loja\efetivar\loja.efetivar.component.html">
       <SubType>Code</SubType>
     </TypeScriptCompile>
