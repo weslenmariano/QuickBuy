@@ -1,0 +1,11 @@
+E:\CURSOS_UDEMY\ASPNET_CORE_ANGULAR\QuickBuy\QuickBuy.Repositorio\bin\Release\netcoreapp2.2\QuickBuy.Repositorio.deps.json
+E:\CURSOS_UDEMY\ASPNET_CORE_ANGULAR\QuickBuy\QuickBuy.Repositorio\bin\Release\netcoreapp2.2\QuickBuy.Repositorio.dll
+E:\CURSOS_UDEMY\ASPNET_CORE_ANGULAR\QuickBuy\QuickBuy.Repositorio\bin\Release\netcoreapp2.2\QuickBuy.Repositorio.pdb
+E:\CURSOS_UDEMY\ASPNET_CORE_ANGULAR\QuickBuy\QuickBuy.Repositorio\bin\Release\netcoreapp2.2\QuickBuy.Dominio.dll
+E:\CURSOS_UDEMY\ASPNET_CORE_ANGULAR\QuickBuy\QuickBuy.Repositorio\bin\Release\netcoreapp2.2\QuickBuy.Dominio.pdb
+E:\CURSOS_UDEMY\ASPNET_CORE_ANGULAR\QuickBuy\QuickBuy.Repositorio\obj\Release\netcoreapp2.2\QuickBuy.Repositorio.csprojAssemblyReference.cache
+E:\CURSOS_UDEMY\ASPNET_CORE_ANGULAR\QuickBuy\QuickBuy.Repositorio\obj\Release\netcoreapp2.2\QuickBuy.Repositorio.AssemblyInfoInputs.cache
+E:\CURSOS_UDEMY\ASPNET_CORE_ANGULAR\QuickBuy\QuickBuy.Repositorio\obj\Release\netcoreapp2.2\QuickBuy.Repositorio.AssemblyInfo.cs
+E:\CURSOS_UDEMY\ASPNET_CORE_ANGULAR\QuickBuy\QuickBuy.Repositorio\obj\Release\netcoreapp2.2\QuickBuy.Repositorio.csproj.CopyComplete
+E:\CURSOS_UDEMY\ASPNET_CORE_ANGULAR\QuickBuy\QuickBuy.Repositorio\obj\Release\netcoreapp2.2\QuickBuy.Repositorio.dll
+E:\CURSOS_UDEMY\ASPNET_CORE_ANGULAR\QuickBuy\QuickBuy.Repositorio\obj\Release\netcoreapp2.2\QuickBuy.Repositorio.pdb

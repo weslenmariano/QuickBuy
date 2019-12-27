@@ -18,7 +18,7 @@ export class LojaCarrinhoCompras {
             this.produtos = JSON.parse(produtoLocalStorage);
             this.produtos.push(produto);
             
-        }
+        } 
         localStorage.setItem("produtoLocalStorage", JSON.stringify(this.produtos));
 
     }
@@ -47,8 +47,12 @@ export class LojaCarrinhoCompras {
         localStorage.setItem("produtoLocalStorage", JSON.stringify(produtos));
     }
 
-    public temItensCarrinhoCompras() {
+    public temItensCarrinhoCompras(usuarioId? : number) {
         var itens = this.obterProdutos();
+
+        if (usuarioId) {
+            itens = itens.filter(i => i.usuarioId == usuarioId);
+        }
         
         return (itens.length > 0);
     }

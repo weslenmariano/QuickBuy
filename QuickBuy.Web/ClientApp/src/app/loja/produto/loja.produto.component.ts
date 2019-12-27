@@ -3,6 +3,7 @@ import { ProdutoServico } from "../../servicos/produto/produto.servico";
 import { Produto } from "../../modelo/produto";
 import { Router } from "@angular/router";
 import { LojaCarrinhoCompras } from "../carrinho-compras/loja.carrinho.compras.component";
+import { UsuarioServico } from "../../servicos/usuario/usuario.servico";
 
 @Component({
     selector: "loja-app-produto",
@@ -24,11 +25,14 @@ export class LojaProdutoComponent implements OnInit {
 
     }
 
-    constructor(private produtoServico: ProdutoServico, private router: Router) {
+    constructor(private produtoServico: ProdutoServico, private router: Router, private usuarioServico: UsuarioServico) {
 
     }
 
     public comprar() {
+
+        this.produto.usuarioId = this.usuarioServico.usuario.id;
+        //alert("USUARIO ID DA SESSAO: "+this.produto.usuarioId)
         this.carrinhoCompras.adicionar(this.produto);
         this.router.navigate(["/loja-efetivar"]);
     }

@@ -30,7 +30,7 @@
           </li>
 
           <li class="nav-item dropdown" *ngIf="usuarioLogado()">
-            <a class="nav-link text-dark dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false" href="#"
+            <a class="nav-link text-dark dropdown-toggle h4 text-center" role="button" aria-haspopup="true" aria-expanded="false" href="#"
                id="linkMenu" data-toggle="dropdown">{{usuario.nome}}</a>
             <ul class="dropdown-menu" aria-labelledby="linkMenu">
               <li class="dropdown-item" role="menu" [routerLink]='["/sair"]' (click)="sair()">
@@ -38,7 +38,7 @@
               </li>
             </ul>
           </li>
-
+          
 
           <!--<li class="nav-item" [routerLinkActive]='["link-active"]' *ngIf="usuarioLogado()">
     <a class="nav-item nav-link text-dark" [routerLink]='["/sair"]' (click)="sair()">Sair</a>
