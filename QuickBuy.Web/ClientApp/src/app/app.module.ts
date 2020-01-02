@@ -20,6 +20,9 @@ import { LojaProdutoComponent } from './loja/produto/loja.produto.component';
 import { LojaEfetivarComponent } from './loja/efetivar/loja.efetivar.component';
 import { PedidoServico } from './servicos/pedido/pedido.servico';
 import { LojaCompraRealizadaComponent } from './loja/efetivar/loja.compra.realizada.component';
+import { DadosUsuarioComponent } from './usuario/dadosUsuario/dados.usuario.component';
+import { UsuarioDadosServico } from './servicos/usuario/usuarioDados.servico';
+
 
 
 @NgModule({
@@ -34,7 +37,8 @@ import { LojaCompraRealizadaComponent } from './loja/efetivar/loja.compra.realiz
         LojaPesquisaComponent,
         LojaProdutoComponent,
         LojaEfetivarComponent,
-        LojaCompraRealizadaComponent
+        LojaCompraRealizadaComponent,
+        DadosUsuarioComponent,
 
     ],
     imports: [
@@ -51,11 +55,12 @@ import { LojaCompraRealizadaComponent } from './loja/efetivar/loja.compra.realiz
             { path: 'pesquisar-produto', component: PesquisaProdutoComponent, canActivate: [GuardaRotas]},
             { path: 'loja-produto', component: LojaProdutoComponent },
             { path: 'loja-efetivar', component: LojaEfetivarComponent, canActivate: [GuardaRotas] },
-            { path: 'compra-realizada-sucesso', component: LojaCompraRealizadaComponent }
+            { path: 'compra-realizada-sucesso', component: LojaCompraRealizadaComponent },
+            { path: 'usuario-dados', component: DadosUsuarioComponent }
 
         ])
     ],
-    providers: [UsuarioServico, ProdutoServico, PedidoServico],
+    providers: [UsuarioServico, ProdutoServico, PedidoServico,UsuarioDadosServico],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

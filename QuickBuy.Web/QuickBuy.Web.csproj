@@ -88,6 +88,7 @@
     <None Remove="ClientApp\src\app\modelo\pedido.ts" />
     <None Remove="ClientApp\src\app\modelo\produto.ts" />
     <None Remove="ClientApp\src\app\modelo\usuario.ts" />
+    <None Remove="ClientApp\src\app\modelo\usuarioDados.ts" />
     <None Remove="ClientApp\src\app\produto\pesquisa\pesquisa.produto.component.css" />
     <None Remove="ClientApp\src\app\produto\pesquisa\pesquisa.produto.component.html" />
     <None Remove="ClientApp\src\app\produto\pesquisa\pesquisa.produto.component.ts" />
@@ -95,7 +96,11 @@
     <None Remove="ClientApp\src\app\servicos\pedido\pedido.servico.ts" />
     <None Remove="ClientApp\src\app\servicos\produto\produto.servico.ts" />
     <None Remove="ClientApp\src\app\servicos\usuario\usuario.servico.ts" />
+    <None Remove="ClientApp\src\app\servicos\usuario\usuarioDados.servico.ts" />
     <None Remove="ClientApp\src\app\usuario\cadastro\cadastro.usuario.component.ts" />
+    <None Remove="ClientApp\src\app\usuario\dadosUsuario\dados.usuario.component.css" />
+    <None Remove="ClientApp\src\app\usuario\dadosUsuario\dados.usuario.component.html" />
+    <None Remove="ClientApp\src\app\usuario\dadosUsuario\dados.usuario.component.ts" />
     <None Remove="ClientApp\src\app\usuario\login\login.component.ts" />
   </ItemGroup>
 
@@ -137,6 +142,9 @@
     <TypeScriptCompile Include="ClientApp\src\app\modelo\itemPedido.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\modelo\pedido.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\modelo\produto.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\modelo\usuarioDados.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\modelo\usuario.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\produto\pesquisa\pesquisa.produto.component.css">
       <SubType>Code</SubType>
@@ -148,8 +156,18 @@
     <TypeScriptCompile Include="ClientApp\src\app\produto\produto.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\servicos\pedido\pedido.servico.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\servicos\produto\produto.servico.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\servicos\usuario\usuarioDados.servico.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\servicos\usuario\usuario.servico.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\usuario\cadastro\cadastro.usuario.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\usuario\dadosUsuario\dados.usuario.component.css">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\usuario\dadosUsuario\dados.usuario.component.html">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\usuario\dadosUsuario\dados.usuario.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\usuario\login\login.component.ts" />
   </ItemGroup>
 

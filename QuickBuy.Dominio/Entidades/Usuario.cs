@@ -21,8 +21,11 @@ namespace QuickBuy.Dominio.Entidades
         /// </summary>
         public virtual ICollection<Pedido> Pedidos { get; set; }
 
+
         public override void Validate()
         {
+            LimparMensagensValidacao();
+
             if (string.IsNullOrEmpty(Email))
                 AdicionarCritica("Email nao pode ser vazio!");
 

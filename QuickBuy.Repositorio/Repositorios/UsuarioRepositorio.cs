@@ -23,5 +23,7 @@ namespace QuickBuy.Repositorio.Repositorios
         {
             return QuickBuyContexto.Usuarios.FirstOrDefault(u => u.Email == email);
         }
+
+      
     }
 }
