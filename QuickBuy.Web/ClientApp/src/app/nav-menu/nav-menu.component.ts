@@ -47,7 +47,7 @@ export class NavMenuComponent implements OnInit {
     }
 
     public temItensCarrinhoCompras(): boolean {
-        return this.usuarioLogado() && this.carrinhoCompras.temItensCarrinhoCompras();
+        return this.usuarioLogado() && this.carrinhoCompras.temItensCarrinhoCompras(this.usuarioServico.usuario.id);
 
     }
 }

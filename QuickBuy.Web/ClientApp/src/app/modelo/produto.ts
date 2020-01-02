@@ -6,4 +6,5 @@ export class Produto {
     public nomeArquivo: string;
     public precoOriginal: number;
     public quantidade: number;
+    public usuarioId: number;
 }

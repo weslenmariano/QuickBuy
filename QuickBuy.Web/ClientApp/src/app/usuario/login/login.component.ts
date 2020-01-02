@@ -14,7 +14,8 @@ export class LoginComponent implements OnInit {
   public usuario;
   public returnUrl: string;
   public mensagem: string;
-  private ativarSpinner: boolean;
+    public
+    ativarSpinner: boolean;
   //    public usuarios = ["usuario1", "usuario2", "usuario3", "usuario4", "usuario5"]
   //    public usuarioAutenticado: boolean;
 

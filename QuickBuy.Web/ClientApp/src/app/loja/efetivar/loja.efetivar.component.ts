@@ -21,8 +21,12 @@ export class LojaEfetivarComponent implements OnInit {
 
     ngOnInit(): void {
         this.carrinhoCompras = new LojaCarrinhoCompras();
-        this.produtos = this.carrinhoCompras.obterProdutos();
+        this.produtos = this.carrinhoCompras.obterProdutos();        
+        this.produtos = this.produtos.filter(p => p.usuarioId == this.usuarioServico.usuario.id);
         this.atualizarTotal();
+        if (!this.temProdutoDoUsuario()) {
+            this.router.navigate(['/']);
+        }
     }
 
     constructor(private usuarioServico: UsuarioServico, private pedidoServico: PedidoServico, private router: Router) {
@@ -49,8 +53,9 @@ export class LojaEfetivarComponent implements OnInit {
     public remover(produto: Produto) {
         this.carrinhoCompras.removerProduto(produto);
         this.produtos = this.carrinhoCompras.obterProdutos();
+        this.produtos = this.produtos.filter(p => p.usuarioId == this.usuarioServico.usuario.id);
         this.atualizarTotal();
-        if (!this.carrinhoCompras.temItensCarrinhoCompras()) {
+        if (!this.temProdutoDoUsuario()) {
             this.router.navigate(['/']);
         }
     }
@@ -91,9 +96,10 @@ export class LojaEfetivarComponent implements OnInit {
         pedido.dataPrevisaoEntrega = new Date();
         pedido.formaPagamentoId = 1;
         pedido.numeroEndereco = "12";
-        pedido.enderecoCompleto = "endereco completo"
+        pedido.enderecoCompleto = "endereco completo" 
 
         this.produtos = this.carrinhoCompras.obterProdutos();
+        //this.produtos.filter(p => p.usuarioId = this.usuarioServico.usuario.id);
        
         for (let produto of this.produtos) {
             let itemPedido = new ItemPedido(); 
@@ -109,6 +115,14 @@ export class LojaEfetivarComponent implements OnInit {
         }
 
         return pedido;
+    }
+
+    public temProdutoDoUsuario(): boolean {
+        //alert(this.produtos.length);
+        if (this.produtos.length > 0) {
+            return true;
+        }
+        return false;
     }
 
 }
