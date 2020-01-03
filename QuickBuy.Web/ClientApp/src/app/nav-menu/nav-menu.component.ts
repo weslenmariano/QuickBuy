@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsuarioServico } from '../servicos/usuario/usuario.servico';
 import { LojaCarrinhoCompras } from '../loja/carrinho-compras/loja.carrinho.compras.component';
+import { UsuarioDadosServico } from '../servicos/usuario/usuarioDados.servico';
 
 @Component({
     selector: 'app-nav-menu',
@@ -18,7 +19,7 @@ export class NavMenuComponent implements OnInit {
         this.carrinhoCompras = new LojaCarrinhoCompras();
     }
 
-    constructor(private router: Router, private usuarioServico: UsuarioServico) {
+    constructor(private router: Router, private usuarioServico: UsuarioServico, private usuarioDadosServico: UsuarioDadosServico) {
 
     }
     collapse() {
@@ -37,8 +38,14 @@ export class NavMenuComponent implements OnInit {
         return this.usuarioServico.usuario_administrador();
     }
 
+    meusDados() {
+        if(this.usuarioLogado())
+        this.router.navigate(['/usuario-dados/']);
+    }
+
     sair() {
         this.usuarioServico.limpar_sessao();
+        this.usuarioDadosServico.limpar_sessao();
         this.router.navigate(['/']);
     }
 

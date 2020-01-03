@@ -12,4 +12,5 @@ export class UsuarioDados {
     public CEP: string;
     public Estado: string;
     public Cidade: string;
+    public DataNascimento: string;
 }

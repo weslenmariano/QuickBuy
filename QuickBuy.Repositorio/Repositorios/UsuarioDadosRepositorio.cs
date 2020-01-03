@@ -16,9 +16,9 @@ namespace QuickBuy.Repositorio.Repositorios
 
         public UsuarioDados ObterDadosUsuario(string email)
         {
-            //var usuario = QuickBuyContexto.Usuarios.FirstOrDefault(u => u.Email == email);
+            var usuario = QuickBuyContexto.Usuarios.FirstOrDefault(u => u.Email == email);
 
-            return QuickBuyContexto.UsuarioDados.FirstOrDefault(ud => ud.UsuarioId == 6); ;
+            return QuickBuyContexto.UsuarioDados.FirstOrDefault(ud => ud.UsuarioId == usuario.Id); ;
         }
 
     

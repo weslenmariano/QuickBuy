@@ -12,6 +12,7 @@ namespace QuickBuy.Dominio.Entidades
         public string NomeCompleto { get; set; }
         public string Rg { get; set; }
         public string Cpf { get; set; }
+        public string DataNascimento { get; set; }
         public string TelefoneFixo { get; set; }
         public string TelefoneMovel { get; set; }
         public string EnderecoResidencial { get; set; }
@@ -35,12 +36,6 @@ namespace QuickBuy.Dominio.Entidades
             if (string.IsNullOrEmpty(Cpf))
                 AdicionarCritica("Cpf não pode ser vazio!");
             
-            if (string.IsNullOrEmpty(TelefoneFixo))
-                AdicionarCritica("Telefone Fixo não pode ser vazio!");
-
-            if (string.IsNullOrEmpty(TelefoneMovel))
-                AdicionarCritica("Telefone Móvel não pode ser vazio!");
-
             if (string.IsNullOrEmpty(EnderecoResidencial))
                 AdicionarCritica("Endereço Residencial Fixo não pode ser vazio!");
 

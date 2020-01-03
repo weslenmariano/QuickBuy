@@ -24,7 +24,7 @@ export class UsuarioDadosServico {
     }
 
     public limpar_sessao() {
-        sessionStorage.setItem("dados-usuario", "");
+        sessionStorage.setItem("dadosUsrSession", "");
         this._dadosUsuario = null;
     }
 
@@ -60,4 +60,11 @@ export class UsuarioDadosServico {
         let params = new HttpParams().set('email', usuarioEmail);
         return this.http.get<UsuarioDados>(this.baseURL + "api/usuarioDados", { params: params });
     }
+
+    public atualizar(usuarioDados: UsuarioDados): Observable<UsuarioDados> {
+
+        return this.http.post<UsuarioDados>(this.baseURL + "api/usuarioDados", JSON.stringify(usuarioDados), { headers: this.headers });
+    }
+
+    
 }

@@ -49,7 +49,12 @@ export class LoginComponent implements OnInit {
           if (this.returnUrl == null) {
             this.router.navigate(['/']);
           } else {
-            this.router.navigate([this.returnUrl]);
+              if (this.usuarioServico.usuario_administrador()) {
+                  this.router.navigate([this.returnUrl]);
+              } else {
+                  this.router.navigate(['/']);
+              }
+            
           }
 
         },

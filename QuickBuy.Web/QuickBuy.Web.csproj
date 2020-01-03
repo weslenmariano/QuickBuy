@@ -65,6 +65,7 @@
     <None Remove="ClientApp\dist\styles.css.map" />
     <None Remove="ClientApp\dist\vendor.js" />
     <None Remove="ClientApp\dist\vendor.js.map" />
+    <None Remove="ClientApp\src\app\autorizacao\guarda.adm.rotas.ts" />
     <None Remove="ClientApp\src\app\autorizacao\guarda.rotas.ts" />
     <None Remove="ClientApp\src\app\counter\counter.component.html" />
     <None Remove="ClientApp\src\app\counter\counter.component.spec.ts" />
@@ -109,6 +110,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\autorizacao\guarda.adm.rotas.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\autorizacao\guarda.rotas.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\loja\carrinho-compras\loja.carrinho.compras.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\loja\efetivar\loja.compra.realizada.component.css">
@@ -178,6 +182,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ClientApp\src\assets\js\" />
     <Folder Include="wwwroot\arquivos\" />
   </ItemGroup>
 

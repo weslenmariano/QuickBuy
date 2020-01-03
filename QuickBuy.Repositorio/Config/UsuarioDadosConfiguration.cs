@@ -30,6 +30,11 @@ namespace QuickBuy.Repositorio.Config
                 .HasMaxLength(50);
 
             builder
+               .Property(u => u.DataNascimento)
+               .IsRequired()
+               .HasMaxLength(10);
+
+            builder
                 .Property(u => u.TelefoneFixo)
                 .IsRequired()
                 .HasMaxLength(50);

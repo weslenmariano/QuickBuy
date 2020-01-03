@@ -3,7 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { TruncateModule  } from 'ng2-truncate';
+import { TruncateModule } from 'ng2-truncate';
+import { NgxMaskModule } from 'ngx-mask';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -22,6 +23,7 @@ import { PedidoServico } from './servicos/pedido/pedido.servico';
 import { LojaCompraRealizadaComponent } from './loja/efetivar/loja.compra.realizada.component';
 import { DadosUsuarioComponent } from './usuario/dadosUsuario/dados.usuario.component';
 import { UsuarioDadosServico } from './servicos/usuario/usuarioDados.servico';
+import { GuardaAdmRotas } from './autorizacao/guarda.adm.rotas';
 
 
 
@@ -46,17 +48,18 @@ import { UsuarioDadosServico } from './servicos/usuario/usuarioDados.servico';
         HttpClientModule,
         FormsModule,
         TruncateModule,
+        NgxMaskModule.forRoot(),
         RouterModule.forRoot([
             { path: '', component: HomeComponent, pathMatch: 'full' },
             //{ path: 'produto', component: ProdutoComponent },
-            { path: 'produto', component: ProdutoComponent, canActivate: [GuardaRotas] },
+            { path: 'produto', component: ProdutoComponent, canActivate: [GuardaAdmRotas] },
             { path: 'entrar', component: LoginComponent },
             { path: 'novo-usuario', component: CadastroUsuarioComponent },
-            { path: 'pesquisar-produto', component: PesquisaProdutoComponent, canActivate: [GuardaRotas]},
+            { path: 'pesquisar-produto', component: PesquisaProdutoComponent, canActivate: [GuardaAdmRotas]},
             { path: 'loja-produto', component: LojaProdutoComponent },
             { path: 'loja-efetivar', component: LojaEfetivarComponent, canActivate: [GuardaRotas] },
             { path: 'compra-realizada-sucesso', component: LojaCompraRealizadaComponent },
-            { path: 'usuario-dados', component: DadosUsuarioComponent }
+            { path: 'usuario-dados', component: DadosUsuarioComponent, canActivate: [GuardaRotas]  }
 
         ])
     ],

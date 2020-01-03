@@ -31,5 +31,34 @@ namespace QuickBuy.Web.Controllers
 
             }
         }
+
+        [HttpPost]
+        public IActionResult Post([FromBody]UsuarioDados usuarioDados)
+        {
+            try
+            {
+                usuarioDados.Validate();
+                if (!usuarioDados.EhValido)
+                {
+                    return BadRequest(usuarioDados.ObterMensagensValidacao());
+                }
+
+                if (usuarioDados.Id > 0)
+                {
+                    _usuarioDadosRepositorio.Atualizar(usuarioDados);
+                }
+                else
+                {
+                    _usuarioDadosRepositorio.Adicionar(usuarioDados);
+                }
+
+                return Created("api/usuarioDados", usuarioDados);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.ToString());
+
+            }
+        }
     }
 }

@@ -6,7 +6,7 @@ import { UsuarioServico } from "../servicos/usuario/usuario.servico";
 @Injectable({
     providedIn:'root'
 })
-export class GuardaRotas implements CanActivate {
+export class GuardaAdmRotas implements CanActivate {
 
     // private router: Router
     constructor(private router: Router, private usuarioServico: UsuarioServico) {
@@ -18,7 +18,7 @@ export class GuardaRotas implements CanActivate {
         //this.usuarioServico
        
 
-        if (this.usuarioServico.usuario_autenticado()) {
+        if (this.usuarioServico.usuario_administrador()) {
             
             return true;
         }
@@ -30,7 +30,6 @@ export class GuardaRotas implements CanActivate {
         return false;
     }
 
-    
     
     
 
