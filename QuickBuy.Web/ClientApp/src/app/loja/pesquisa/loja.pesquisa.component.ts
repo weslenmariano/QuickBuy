@@ -13,7 +13,7 @@ import { Router } from "@angular/router";
 export class LojaPesquisaComponent implements OnInit{
 
     public produtos: Produto[];
-
+    
     ngOnInit(): void {
     
     }
@@ -23,7 +23,6 @@ export class LojaPesquisaComponent implements OnInit{
             .subscribe(
                 produtos => {
                     this.produtos = produtos;
-
                 },
                 erro => {
                     console.log(erro.error);
@@ -33,7 +32,8 @@ export class LojaPesquisaComponent implements OnInit{
     }
 
     public abrirProduto(produto: Produto) {
-       // alert(produto.nome);
+       // alert(produto.nomeArquivo);
+        
         sessionStorage.setItem('produtoDetalhe', JSON.stringify(produto));
         this.router.navigate(['/loja-produto'])
 

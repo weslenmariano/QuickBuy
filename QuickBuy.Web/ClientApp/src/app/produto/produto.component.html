@@ -86,8 +86,8 @@
            id="inputFileMultiplo" aria-describedby="inputGroupFileAddon04" (change)="inputChange($event.target.files, 1)" multiple />
     <label for="inputFileMultiplo" class="custom-file-label">Escolha demais imagens para o produto</label>
   </div>
-  <div class="spinner-border text-primary" role="status" *ngIf="spinnerGaleria">
-    <span class="sr-only">Loading Fotos...</span>
+  <div *ngIf="qtdArquivos > 0 && item.length == 0">
+    <span class="spinner-border text-primary" role="status" aria-hidden="true"></span>
   </div>
 </div>
 <div *ngIf="exibirGaleria">
@@ -103,13 +103,13 @@
 </div>
 
 
-<tbody>
+<!--<tbody>
   <tr *ngFor="let i of item">
 
     <td>{{i}}</td>
 
   </tr>
-</tbody>
+</tbody>-->
 
 
 

@@ -29,7 +29,7 @@ export class ProdutoComponent implements OnInit {
     public pathFotoPrincipal: string;
     public mensagem: string;
     
-    
+    public qtdArquivos: number;
 
     public item: string[] = [];
     public arquivosDeletarGaleria: string[] = [];
@@ -59,7 +59,9 @@ export class ProdutoComponent implements OnInit {
     ngOnInit(): void {
         var produtoSession = sessionStorage.getItem('produtoSession');
         var produtoComplementoSession = sessionStorage.getItem('produtoComplementoSession');
-        
+
+
+       // alert(this.spinnerGaleria);
         this.prodComp = new ProdutoComplemento();
         if (produtoSession != "") {
             //RECUPERANDO DADOS DO PRODUTO DA SESSAO
@@ -73,7 +75,7 @@ export class ProdutoComponent implements OnInit {
             var NomesArquivosComp: string[] = [];
             this.editComp.forEach(function (value) {
                 console.log(value.nomeArquivo);
-                alert("Galeria da sessao:"+ value.nomeArquivo);
+              //  alert("Galeria da sessao:"+ value.nomeArquivo);
                 NomesArquivosComp.push(value.nomeArquivo);
             });
 
@@ -82,7 +84,7 @@ export class ProdutoComponent implements OnInit {
             if (this.arquivosDeletarGaleria.length > 0) {
                 this.criarGaleria(this.arquivosDeletarGaleria);
             }
-            alert("alert0:"+this.arquivosDeletarGaleria);
+         //   alert("alert0:"+this.arquivosDeletarGaleria);
           
         }
         else {
@@ -152,21 +154,15 @@ export class ProdutoComponent implements OnInit {
     }
 
     public inputChange(files: FileList, opcao: number) {
-
-        //alert("Qtd Arquivos: "+ files.length);
-        //alert(opcao);
+        this.qtdArquivos = files.length;
         if (opcao == 0) {
-            //alert("um arquivo.");
             this.arquivoSelecionado = files.item(0);
             this.ativarSpinnerFoto = true;
-            //alert(this.arquivoSelecionado.name);
             this.produtoServico.enviarArquivo(this.arquivoSelecionado)
                 .subscribe(
                     nomeArquivo => {
                         this.produto.nomeArquivo = nomeArquivo;
-                        //this.pathFotoPrincipal = nomeArquivo;
                         this.criarGaleriaImgPrincipal(nomeArquivo);
-                        //alert(this.produto.nomeArquivo)
                         console.log(nomeArquivo);
                         this.ativarSpinnerFoto = false;
                         this.exibirFotoPrincipal = true;
@@ -181,10 +177,6 @@ export class ProdutoComponent implements OnInit {
                 );
         }
         else if (opcao == 1) { // multiplos arquivos
-            
-            
-            //alert("Ativar spinner Galeria." + this.ativarEsperaGaleria());
-            
             this.item = [];
             if (this.edicaoProduto && this.arquivosDeletarGaleria.length > 0) { this.DeletaImagemGaleria = true };
             for (var i = 0; i < files.length; i++) {
@@ -194,10 +186,8 @@ export class ProdutoComponent implements OnInit {
                 this.produtoComplementoServico.enviarArquivo(this.arquivoSelecionado)
                     .subscribe(
                         nomeArquivo => {
-                            this.ativarEsperaGaleria();                           
                             this.item.push(nomeArquivo);
                             this.criarGaleria(this.item);
-                           // console.log("Desativou Spinner");
                         },
                         erro => {
                             console.log(erro.error);
@@ -206,10 +196,6 @@ export class ProdutoComponent implements OnInit {
                 
             }
             //#################
-            this.desativarEsperaGaleria();
-
-          //  this.ativarSpinnerGaleria = false;
-           // this.criarGaleria(this.item);
         } else {
             alert('Opcao Invalida');
         }
@@ -217,21 +203,15 @@ export class ProdutoComponent implements OnInit {
 
 
     public criarGaleria(item: string[]) {
-       // alert("Chamada Criar Galeria para exibir as imagens selecionadas");
         this.exibirGaleria = true;
-        this.ativarEsperaGaleria();
-        
         var pathArquivos = "../../../../../arquivos/";
         var array = [];
-
-        //alert(item.length);
         if (item.length >= 1) {
             //alert("populando Array das imagens a serem exibidas na tela");
             for (var i = 0; i < item.length; i++) {
                 array.push({ "small": pathArquivos + item[i], "medium": pathArquivos + item[i], "big": pathArquivos + item[i] });
             }
         } else {
-            //alert("Exibir galeria false");
             this.exibirGaleria = false;
         }
 
@@ -255,12 +235,12 @@ export class ProdutoComponent implements OnInit {
    
 
     public cadastrar() {
-       
+        var semImagem: string = "produto-sem-imagem.jpg";
         let produtoCadastradoId: number;
-        alert("Alert Cadastrar Item:"+this.item);
+        if (this.produto.nomeArquivo == null) {
+            this.produto.nomeArquivo = semImagem;
+        }
         this.criarGaleria(this.item);
-        //this.adicionarComplementoLista(this.item);
-      
         this.ativarEspera();
         this.produtoServico.cadastrar(this.produto)
             .subscribe(
@@ -306,14 +286,13 @@ export class ProdutoComponent implements OnInit {
                     );
             }
             if (this.DeletaImagemGaleria) {
-                alert("Deletar imagens Server Galeria");
+             //   alert("Deletar imagens Server Galeria");
                 for (var i = 0; i < this.editComp.length; i++) {
                     this.produtoComplementoServico.deletarArquivos(this.editComp[i])
                         .subscribe(
                             produtoDeletarJson => {
                                 console.log(produtoDeletarJson);
                                 this.LimparSessao();
-                                //this.desativarEspera();
                             },
                             err => {
                                 this.mensagem = err.error;
@@ -326,18 +305,17 @@ export class ProdutoComponent implements OnInit {
                 
             }
         }
-        alert("Deletar Principal:" + this.DeletaImagemPrincipal);
-        alert(JSON.stringify(this.produtoImgPrincipal));
+   //     alert("Deletar Principal:" + this.DeletaImagemPrincipal);
+    //    alert(JSON.stringify(this.produtoImgPrincipal));
         // REMOVER IMAGENS ANTIGAS, CASO SEJA EDITAR
         if (this.DeletaImagemPrincipal) {
-            alert("Deletar imagens Server PRINCIPAL");
+    //        alert("Deletar imagens Server PRINCIPAL");
             for (var i = 0; i < this.editComp.length; i++) {
                 this.produtoServico.deletarArquivo(this.produtoImgPrincipal)
                     .subscribe(
                         produtoDeletarJson => {
                             console.log(produtoDeletarJson);
                             this.LimparSessao();
-                            //this.desativarEspera();
                         },
                         err => {
                             this.mensagem = err.error;

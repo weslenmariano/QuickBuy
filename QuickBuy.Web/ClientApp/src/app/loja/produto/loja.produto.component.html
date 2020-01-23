@@ -1,7 +1,14 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-6"><img src="../../../../../arquivos/{{produto.nomeArquivo}}" style="width:400px;height:400px;" /></div>
-    <div class="col-md-6">
+    <div class="d-flex justify-content-center" *ngIf="item.length ==0" style="width:400px;height:400px;">
+      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+      Carregando Imagens...
+    </div>
+    <!-- <div class="col-md-6"><img src="../../../../../arquivos/{{produto.nomeArquivo}}" style="width:400px;height:400px;" /></div>-->
+    <div class="col-md-6 border border-secondary" style="width:400px;height:400px; padding:10px; border-radius:20px">
+      <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
+    </div>
+    <div class="col-md-6" style="padding-left:50px">
       <div class="row mb-4" style="color:#666"><h1 class="h4">{{produto.descricao}}</h1></div>
       <div class="row mb-4"><h1 class="h4">R$ {{produto.preco}}</h1></div>
       <div class="row mb-4">
@@ -9,7 +16,7 @@
       </div>
     </div>
   </div>
-  <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
+
 
 
 
