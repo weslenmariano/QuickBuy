@@ -1,7 +1,7 @@
 <header>
   <nav class='navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3'>
     <div class="container">
-      <a class="navbar-brand" [routerLink]='["/"]'>QuickBuy</a>
+      <a class="navbar-brand" [routerLink]='["/"]'><img src="../../../assets/img/quick-logo2.png" style="width:90px; height:40px" /></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-label="Toggle navigation"
         [attr.aria-expanded]="isExpanded" (click)="toggle()">
         <span class="navbar-toggler-icon"></span>
@@ -10,32 +10,39 @@
         <ul class="navbar-nav flex-grow">
           <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
             <a class="nav-link text-dark" [routerLink]='["/"]'>
-              <img src="assets/img/home.png" style="width:32px;height:32px" />
+              <img src="assets/img/home.png" style="width:32px;height:32px"  data-toggle="tooltip" data-placement="bottom" data-html="true" title="Home" />
             </a>
           </li>
 
           <li class="nav-item" [routerLinkActive]='["link-active"]' *ngIf="usuarioAdministrador()">
-            <a class="nav-link text-dark" [routerLink]='["/pesquisar-produto"]'>Produto</a>
+            <a class="nav-link text-dark" [routerLink]='["/pesquisar-produto"]'>
+              <img src="assets/img/boxes_210x210.png" style="width:32px;height:32px" data-toggle="tooltip" data-placement="bottom" data-html="true" title="Produtos" />
+            </a>
           </li>
           <li class="nav-item" [routerLinkActive]='["link-active"]' *ngIf="!usuarioLogado()">
             <a class="nav-link text-dark" [routerLink]='["/entrar"]'>
-              <img src="assets/img/log-in.png" style="width:32px;height:32px" />
+              <img src="assets/img/log-in.png" style="width:32px;height:32px"  data-toggle="tooltip" data-placement="bottom" data-html="true" title="Entrar" />
             </a>
           </li>
 
           <li class="nav-item" [routerLinkActive]='["link-active"]' *ngIf="temItensCarrinhoCompras()">
             <a class="nav-link text-dark" [routerLink]='["/loja-efetivar"]'>
-              <img src="assets/img/ccompras.png" style="width:32px;height:32px" />
+              <img src="assets/img/ccompras.png" style="width:32px;height:32px"  data-toggle="tooltip" data-placement="bottom" data-html="true" title="Meus Produtos" />
             </a>
           </li>
+
 
           <li class="nav-item dropdown" *ngIf="usuarioLogado()">
             <a class="nav-link text-dark dropdown-toggle h4 text-center" role="button" aria-haspopup="true" aria-expanded="false" href="#"
                id="linkMenu" data-toggle="dropdown">{{usuario.nome}}</a>
             <ul class="dropdown-menu" aria-labelledby="linkMenu">
+              <li class="dropdown-item" role="menu" [routerLink]='["/sair"]' (click)="meusDados()">
+                <img src="assets/img/meusDados_210x210.png" style="width:32px;height:32px" /> Meus Dados
+              </li>
               <li class="dropdown-item" role="menu" [routerLink]='["/sair"]' (click)="sair()">
                 <img src="assets/img/log-out.png" style="width:32px;height:32px" /> Sair
               </li>
+
             </ul>
           </li>
           

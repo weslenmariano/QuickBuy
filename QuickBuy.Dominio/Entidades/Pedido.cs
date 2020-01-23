@@ -18,11 +18,6 @@ namespace QuickBuy.Dominio.Entidades
         public virtual Usuario Usuario { get; set; }
 
         public DateTime DataPrevisaoEntrega { get; set; }
-        public string CEP { get; set; }
-        public string Estado { get; set; }
-        public string Cidade { get; set; }
-        public string EnderecoCompleto { get; set; }
-        public int NumeroEndereco { get; set; }
 
         public int FormaPagamentoId { get; set; }
         public virtual FormaPagamento FormaPagamento { get; set; }
@@ -39,9 +34,6 @@ namespace QuickBuy.Dominio.Entidades
 
             if (!ItensPedido.Any())
                 AdicionarCritica("Pedido nao pode ser vazio! Não foi encontrado Itens de pedido.");
-
-            if (string.IsNullOrEmpty(CEP))
-                AdicionarCritica("CEP nao pode ser vazio!");
 
             if (FormaPagamentoId == 0)
                 AdicionarCritica("Não foi informado a forma de pagamento.");

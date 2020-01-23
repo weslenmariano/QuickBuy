@@ -40,29 +40,11 @@ namespace QuickBuy.Repositorio.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("CEP")
-                        .IsRequired()
-                        .HasMaxLength(10);
-
-                    b.Property<string>("Cidade")
-                        .IsRequired()
-                        .HasMaxLength(100);
-
                     b.Property<DateTime>("DataPedido");
 
                     b.Property<DateTime>("DataPrevisaoEntrega");
 
-                    b.Property<string>("EnderecoCompleto")
-                        .IsRequired()
-                        .HasMaxLength(100);
-
-                    b.Property<string>("Estado")
-                        .IsRequired()
-                        .HasMaxLength(100);
-
                     b.Property<int>("FormaPagamentoId");
-
-                    b.Property<int>("NumeroEndereco");
 
                     b.Property<int>("UsuarioId");
 
@@ -98,6 +80,30 @@ namespace QuickBuy.Repositorio.Migrations
                     b.ToTable("Produtos");
                 });
 
+            modelBuilder.Entity("QuickBuy.Dominio.Entidades.ProdutoComplemento", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("Ativo");
+
+                    b.Property<string>("NomeArquivo")
+                        .IsRequired()
+                        .HasMaxLength(200);
+
+                    b.Property<int>("ProdutoId");
+
+                    b.Property<string>("TipoArquivo")
+                        .IsRequired()
+                        .HasMaxLength(400);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProdutoId");
+
+                    b.ToTable("ProdutoComplementos");
+                });
+
             modelBuilder.Entity("QuickBuy.Dominio.Entidades.Usuario", b =>
                 {
                     b.Property<int>("Id")
@@ -124,6 +130,67 @@ namespace QuickBuy.Repositorio.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Usuarios");
+                });
+
+            modelBuilder.Entity("QuickBuy.Dominio.Entidades.UsuarioDados", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CEP")
+                        .IsRequired()
+                        .HasMaxLength(10);
+
+                    b.Property<string>("Cidade")
+                        .IsRequired()
+                        .HasMaxLength(150);
+
+                    b.Property<string>("ComplementoResidencial")
+                        .IsRequired()
+                        .HasMaxLength(250);
+
+                    b.Property<string>("Cpf")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<string>("DataNascimento")
+                        .IsRequired()
+                        .HasMaxLength(10);
+
+                    b.Property<string>("EnderecoResidencial")
+                        .IsRequired()
+                        .HasMaxLength(150);
+
+                    b.Property<string>("Estado")
+                        .IsRequired()
+                        .HasMaxLength(3);
+
+                    b.Property<string>("NomeCompleto")
+                        .IsRequired()
+                        .HasMaxLength(150);
+
+                    b.Property<int>("NumeroResidencial")
+                        .HasMaxLength(10);
+
+                    b.Property<string>("Rg")
+                        .IsRequired()
+                        .HasMaxLength(20);
+
+                    b.Property<string>("TelefoneFixo")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<string>("TelefoneMovel")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<int>("UsuarioId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("UsuarioDados");
                 });
 
             modelBuilder.Entity("QuickBuy.Dominio.ObjetoDeValor.FormaPagamento", b =>
@@ -167,7 +234,7 @@ namespace QuickBuy.Repositorio.Migrations
             modelBuilder.Entity("QuickBuy.Dominio.Entidades.ItemPedido", b =>
                 {
                     b.HasOne("QuickBuy.Dominio.Entidades.Pedido")
-                        .WithMany("ItensPedidos")
+                        .WithMany("ItensPedido")
                         .HasForeignKey("PedidoId");
                 });
 
@@ -180,6 +247,22 @@ namespace QuickBuy.Repositorio.Migrations
 
                     b.HasOne("QuickBuy.Dominio.Entidades.Usuario", "Usuario")
                         .WithMany("Pedidos")
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("QuickBuy.Dominio.Entidades.ProdutoComplemento", b =>
+                {
+                    b.HasOne("QuickBuy.Dominio.Entidades.Produto", "Produto")
+                        .WithMany()
+                        .HasForeignKey("ProdutoId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("QuickBuy.Dominio.Entidades.UsuarioDados", b =>
+                {
+                    b.HasOne("QuickBuy.Dominio.Entidades.Usuario", "Usuario")
+                        .WithMany()
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

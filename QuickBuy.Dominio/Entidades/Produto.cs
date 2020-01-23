@@ -14,6 +14,8 @@ namespace QuickBuy.Dominio.Entidades
 
         public override void Validate()
         {
+            LimparMensagensValidacao();
+
             if (string.IsNullOrEmpty(Nome))
                 AdicionarCritica("Nome não pode ser vazio");
 

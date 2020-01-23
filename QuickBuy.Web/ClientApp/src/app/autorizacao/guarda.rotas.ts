@@ -29,6 +29,9 @@ export class GuardaRotas implements CanActivate {
         //se usuario autenticado
         return false;
     }
+
+    
+    
     
 
 }
