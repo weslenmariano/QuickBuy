@@ -111,6 +111,23 @@ namespace QuickBuy.Web.Controllers
             }
         }
 
+        [HttpPost("DeletarArquivo")]
+        public IActionResult DeletarArquivo([FromBody] Produto produto)
+        {
+            try
+            {
+                var pastaArquivos = _hostingEnvironment.WebRootPath + "\\arquivos\\";
+                System.IO.File.Delete(pastaArquivos + produto.NomeArquivo);
+                /// produto da requisicao deve tar a propriedade do Id > 0 para conseguir remover.
+                //_produtoComplementoRepositorio.Remover(produtoComplemento);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.ToString());
+            }
+        }
+
         private static string GerarNovoNomeArquivo(string nomeArquivo, string extensao)
         {
             var arrayNomeCampacto = Path.GetFileNameWithoutExtension(nomeArquivo).Take(10).ToArray();

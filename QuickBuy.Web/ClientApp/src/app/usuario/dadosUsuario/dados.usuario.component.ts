@@ -51,7 +51,7 @@ export class DadosUsuarioComponent implements OnInit {
 
                     if (this.usuarioDados == null) {
                         this.usuarioDados = new UsuarioDados();
-                        alert(this.usuario.id);
+                       // alert(this.usuario.id);
                         this.usuarioDados.UsuarioId = this.usuario.id;
                     } else {
                         this.usuarioDados.UsuarioId = this.usuario.id;

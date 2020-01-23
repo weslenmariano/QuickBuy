@@ -80,6 +80,30 @@ namespace QuickBuy.Repositorio.Migrations
                     b.ToTable("Produtos");
                 });
 
+            modelBuilder.Entity("QuickBuy.Dominio.Entidades.ProdutoComplemento", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("Ativo");
+
+                    b.Property<string>("NomeArquivo")
+                        .IsRequired()
+                        .HasMaxLength(200);
+
+                    b.Property<int>("ProdutoId");
+
+                    b.Property<string>("TipoArquivo")
+                        .IsRequired()
+                        .HasMaxLength(400);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProdutoId");
+
+                    b.ToTable("ProdutoComplementos");
+                });
+
             modelBuilder.Entity("QuickBuy.Dominio.Entidades.Usuario", b =>
                 {
                     b.Property<int>("Id")
@@ -224,6 +248,14 @@ namespace QuickBuy.Repositorio.Migrations
                     b.HasOne("QuickBuy.Dominio.Entidades.Usuario", "Usuario")
                         .WithMany("Pedidos")
                         .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("QuickBuy.Dominio.Entidades.ProdutoComplemento", b =>
+                {
+                    b.HasOne("QuickBuy.Dominio.Entidades.Produto", "Produto")
+                        .WithMany()
+                        .HasForeignKey("ProdutoId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

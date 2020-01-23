@@ -13,7 +13,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let p of produtos">
-            <td style="width:10%"><img src="../../../../../arquivos/{{p.nomeArquivo}}" style="width:80%;height:20%" /></td>
+            <td style="width:10%"><img src="../../../../../arquivos/{{p.nomeArquivo}}" style="width:60px;height:60px" /></td>
             <td style="width:50%">{{p.descricao}}</td>
             <td style="width:10%">
               <input type="number" class="form-control" value="1" (change)="atualizarPreco(p, $event.target.value)"

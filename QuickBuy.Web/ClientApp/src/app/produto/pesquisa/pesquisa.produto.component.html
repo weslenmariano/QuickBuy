@@ -24,9 +24,51 @@
       <td style="width:10%">R${{p.preco}}</td>
       <td style="width:20%"><img src="../../../../../arquivos/{{p.nomeArquivo}}" style="width:40px; height:40px" /></td>
       <td><button class="btn btn-success btn-sm" (click)="editarProduto(p)">Editar</button></td>
-      <td><button class="btn btn-danger btn-sm" (click)="deletarProduto(p)">Deletar</button></td>
+      <!-- <td><button class="btn btn-danger btn-sm" (click)="deletarProduto(p)">Deletar</button></td>  -- MODAL COM ng2-opd-popup -->
+      <td><button class="btn btn-danger btn-sm" (click)="setadeletarProduto(p)" data-toggle="modal" data-target="#exampleModalCenter">Deletar</button></td>
     </tr>
   </tbody>
 </table>
 
+<!-- Modal -->
+<div *ngIf="produtoDeletar">
+  <div class="modal animated bounceIn" id="exampleModalCenter" tabindex="-1" role="dialog"
+       aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="false">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Confirmação de Exclusão</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body d-block mb-3">
+          <strong>Deseja realmente deletar esse produto?</strong>
+          <br>
+          <br>
+          <img src="../../../../../arquivos/{{produtoDeletar.nomeArquivo}}" style="width:100px; height:100px" />
+          Nome: {{produtoDeletar.nome}}
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline-danger btn-sm mb-3" style="margin-right:10px" data-dismiss="modal" (click)="DeletarConfirmado()">Deletar</button>
+          <button class="btn btn-outline-success btn-sm mb-3" data-dismiss="modal" onclick="testAnim()">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div *ngIf="produtoDeletar">
+  <popup>
+    <div class="d-block mb-3">
+      <strong>Deseja realmente deletar esse produto?</strong>
+      <u> Produto: {{produtoDeletar.nome}}</u>
+    </div>
+    <div class="d-block  float-sm-right">
+      <div class="d-inline"><button class="btn btn-outline-danger btn-sm mb-3" style="margin-right:10px" (click)="DeletarConfirmado()">Deletar</button></div>
+      <div class="d-inline"> <button class="btn btn-outline-success btn-sm mb-3" (click)="DeletarCancelado()">Cancelar</button></div>
+    </div>
+  </popup>
+</div>
 

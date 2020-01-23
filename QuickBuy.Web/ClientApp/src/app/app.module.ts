@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { TruncateModule } from 'ng2-truncate';
 import { NgxMaskModule } from 'ngx-mask';
+import { PopupModule } from 'ng2-opd-popup';//Try removing the folder: //$ rm - fr node_modules / ng2 - opd - popup / node_modules
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -26,6 +27,21 @@ import { UsuarioDadosServico } from './servicos/usuario/usuarioDados.servico';
 import { GuardaAdmRotas } from './autorizacao/guarda.adm.rotas';
 
 
+/* Custom Hammer configuration */
+import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import * as Hammer from 'hammerjs';
+
+export class CustomHammerConfig extends HammerGestureConfig {
+    overrides = {
+        'pan': {
+            direction: Hammer.DIRECTION_ALL,
+        }
+    }
+}
+/* End Custom hammer configuration */
+
+import { NgxGalleryModule } from 'ngx-gallery';
+import { ProdutoComplementoServico } from './servicos/produto/produtoComplemento.servico';
 
 @NgModule({
     declarations: [
@@ -41,13 +57,16 @@ import { GuardaAdmRotas } from './autorizacao/guarda.adm.rotas';
         LojaEfetivarComponent,
         LojaCompraRealizadaComponent,
         DadosUsuarioComponent,
+        
 
     ],
     imports: [
         BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
         HttpClientModule,
         FormsModule,
+        NgxGalleryModule,
         TruncateModule,
+        PopupModule.forRoot(),
         NgxMaskModule.forRoot(),
         RouterModule.forRoot([
             { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -63,7 +82,7 @@ import { GuardaAdmRotas } from './autorizacao/guarda.adm.rotas';
 
         ])
     ],
-    providers: [UsuarioServico, ProdutoServico, PedidoServico,UsuarioDadosServico],
+    providers: [UsuarioServico, ProdutoServico, PedidoServico, ProdutoComplementoServico, UsuarioDadosServico, { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig }],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

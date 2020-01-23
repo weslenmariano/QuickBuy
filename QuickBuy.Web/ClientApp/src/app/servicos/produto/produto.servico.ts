@@ -32,6 +32,7 @@ export class ProdutoServico implements OnInit {
         return this.http.post<Produto>(this._baseUrl + "api/produto", JSON.stringify(produto), { headers: this.headers });
     }
 
+
     public salvar(produto: Produto): Observable<Produto> {
 
         return this.http.post<Produto>(this._baseUrl + "api/produto/salvar", JSON.stringify(produto), { headers: this.headers });
@@ -69,5 +70,12 @@ export class ProdutoServico implements OnInit {
         const formData: FormData = new FormData();
         formData.append("arquivoEnviado", arquivoSelecionado, arquivoSelecionado.name);
         return this.http.post<string>(this._baseUrl + "api/produto/enviarArquivo", formData)
+    }
+
+    public deletarArquivo(produto: Produto): Observable<Produto[]> {
+
+        // boa pratica
+        return this.http.post<Produto[]>(this._baseUrl + "api/produtoComplemento/deletarArquivos", JSON.stringify(produto), { headers: this.headers });
+
     }
 }

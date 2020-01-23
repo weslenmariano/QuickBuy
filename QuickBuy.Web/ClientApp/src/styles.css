@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+
+#ng2-opd-popup-main {
+  margin-left: 37% !important;
+  width: 25% !important;
+  right: 0 !important;
+  left: 0 !important;
+  z-index: 999 !important;
+  top: 20% !important;
+}
+
+

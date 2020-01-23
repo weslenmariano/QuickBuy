@@ -13,6 +13,8 @@ namespace QuickBuy.Repositorio.Contexto
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<UsuarioDados> UsuarioDados { get; set; }
         public DbSet<Produto> Produtos { get; set; }
+        public DbSet<ProdutoComplemento> ProdutoComplementos { get; set; }
+        
         public DbSet<Pedido> Pedidos { get; set; }
         public DbSet<ItemPedido> ItensPedidos { get; set; }
         public DbSet<FormaPagamento> FormaPagamento { get; set; }
@@ -29,6 +31,7 @@ namespace QuickBuy.Repositorio.Contexto
             modelBuilder.ApplyConfiguration(new UsuarioConfiguration());
             modelBuilder.ApplyConfiguration(new UsuarioDadosConfiguration());
             modelBuilder.ApplyConfiguration(new ProdutoConfiguration());
+            modelBuilder.ApplyConfiguration(new ProdutoComplementoConfiguration());
             modelBuilder.ApplyConfiguration(new PedidoConfiguration());
             modelBuilder.ApplyConfiguration(new ItemPedidoConfiguration());
             modelBuilder.ApplyConfiguration(new FormaPagamentoConfiguration());

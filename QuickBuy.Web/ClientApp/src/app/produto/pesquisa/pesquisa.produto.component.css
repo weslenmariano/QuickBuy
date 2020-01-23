@@ -1,1 +1,26 @@
 @import url(../../produto/produto.component.css);
+@import url('../../../assets/css/animate.css');
+
+.modal-header {
+  /* position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 50px;
+  padding: 10px;
+    border: 0;
+   */
+  background: #DF0101;
+}
+
+.modal-title {
+  font-weight: 300;
+  font-size: 2em;
+  color: #fff;
+  line-height: 30px;
+}
+.modal-content {
+  border-radius: 10px;
+  border-color: #DF0101;
+
+}
