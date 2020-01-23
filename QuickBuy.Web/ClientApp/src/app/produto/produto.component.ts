@@ -32,6 +32,7 @@ export class ProdutoComponent implements OnInit {
     public qtdArquivos: number;
 
     public item: string[] = [];
+    public itensGaleria: string[] = [];
     public arquivosDeletarGaleria: string[] = [];
     public editComp: ProdutoComplemento[] = [];
     public produtoComplementos: ProdutoComplemento[] = []; // a declaracao ja esta inicializando a lista.
@@ -153,63 +154,58 @@ export class ProdutoComponent implements OnInit {
         ];
     }
 
-    public inputChange(files: FileList, opcao: number) {
+    public inputChangePrincipal(files: FileList) {
+        this.arquivoSelecionado = files.item(0);
+        this.ativarSpinnerFoto = true;
+        this.produtoServico.enviarArquivo(this.arquivoSelecionado)
+            .subscribe(
+                nomeArquivo => {
+                    this.produto.nomeArquivo = nomeArquivo;
+                    this.criarGaleriaImgPrincipal(nomeArquivo);
+                    console.log(nomeArquivo);
+                    this.ativarSpinnerFoto = false;
+                    this.exibirFotoPrincipal = true;
+                    if (this.edicaoProduto && this.produtoImgPrincipal.nomeArquivo != ""){ this.DeletaImagemPrincipal = true };
+                },
+                erro => {
+                    console.log(erro.error);
+                    this.ativarSpinnerFoto = false;
+                    this.exibirFotoPrincipal = false;
+
+                }
+            );
+     }
+
+    public inputChangeGaleria(files: FileList) {
         this.qtdArquivos = files.length;
-        if (opcao == 0) {
-            this.arquivoSelecionado = files.item(0);
-            this.ativarSpinnerFoto = true;
-            this.produtoServico.enviarArquivo(this.arquivoSelecionado)
+        this.itensGaleria = [];
+        if (this.edicaoProduto && this.arquivosDeletarGaleria.length > 0) { this.DeletaImagemGaleria = true };
+        for (var i = 0; i < files.length; i++) {
+
+            this.arquivoSelecionado = files.item(i);
+
+            this.produtoComplementoServico.enviarArquivo(this.arquivoSelecionado)
                 .subscribe(
                     nomeArquivo => {
-                        this.produto.nomeArquivo = nomeArquivo;
-                        this.criarGaleriaImgPrincipal(nomeArquivo);
-                        console.log(nomeArquivo);
-                        this.ativarSpinnerFoto = false;
-                        this.exibirFotoPrincipal = true;
-                        if (this.edicaoProduto && this.produtoImgPrincipal.nomeArquivo != ""){ this.DeletaImagemPrincipal = true };
+                        this.itensGaleria.push(nomeArquivo);
+                        this.criarGaleria(this.itensGaleria);
                     },
                     erro => {
                         console.log(erro.error);
-                        this.ativarSpinnerFoto = false;
-                        this.exibirFotoPrincipal = false;
-
                     }
                 );
-        }
-        else if (opcao == 1) { // multiplos arquivos
-            this.item = [];
-            if (this.edicaoProduto && this.arquivosDeletarGaleria.length > 0) { this.DeletaImagemGaleria = true };
-            for (var i = 0; i < files.length; i++) {
-               
-                this.arquivoSelecionado = files.item(i);
-
-                this.produtoComplementoServico.enviarArquivo(this.arquivoSelecionado)
-                    .subscribe(
-                        nomeArquivo => {
-                            this.item.push(nomeArquivo);
-                            this.criarGaleria(this.item);
-                        },
-                        erro => {
-                            console.log(erro.error);
-                        }
-                );
-                
-            }
-            //#################
-        } else {
-            alert('Opcao Invalida');
         }
     }
 
 
-    public criarGaleria(item: string[]) {
+    public criarGaleria(itensGaleria: string[]) {
         this.exibirGaleria = true;
         var pathArquivos = "../../../../../arquivos/";
         var array = [];
-        if (item.length >= 1) {
+        if (itensGaleria.length >= 1) {
             //alert("populando Array das imagens a serem exibidas na tela");
-            for (var i = 0; i < item.length; i++) {
-                array.push({ "small": pathArquivos + item[i], "medium": pathArquivos + item[i], "big": pathArquivos + item[i] });
+            for (var i = 0; i < itensGaleria.length; i++) {
+                array.push({ "small": pathArquivos + itensGaleria[i], "medium": pathArquivos + itensGaleria[i], "big": pathArquivos + itensGaleria[i] });
             }
         } else {
             this.exibirGaleria = false;
@@ -240,7 +236,7 @@ export class ProdutoComponent implements OnInit {
         if (this.produto.nomeArquivo == null) {
             this.produto.nomeArquivo = semImagem;
         }
-        this.criarGaleria(this.item);
+        this.criarGaleria(this.itensGaleria);
         this.ativarEspera();
         this.produtoServico.cadastrar(this.produto)
             .subscribe(
@@ -264,11 +260,11 @@ export class ProdutoComponent implements OnInit {
 
     public cadastrarComplemento(produtoId: number) {
         this.prodComp.produtoId = produtoId;
-        if (this.item.length > 0) {
+        if (this.itensGaleria.length > 0) {
             this.ativarEsperaGaleria();
             //CADASTRANDO TODOS AS NOVAS IMAGENS
-            for (var i = 0; i < this.item.length; i++) {
-                this.prodComp.nomeArquivo = this.item[i];
+            for (var i = 0; i < this.itensGaleria.length; i++) {
+                this.prodComp.nomeArquivo = this.itensGaleria[i];
                 this.prodComp.tipoArquivo = "Image";
                 this.prodComp.ativo = true;
                 this.produtoComplementoServico.cadastrarComplemento(this.prodComp)

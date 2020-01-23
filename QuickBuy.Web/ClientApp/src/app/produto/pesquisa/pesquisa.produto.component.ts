@@ -1,10 +1,12 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { Produto } from "../../modelo/produto";
 import { ProdutoServico } from "../../servicos/produto/produto.servico";
 import { Router } from "@angular/router";
 import { ProdutoComplemento } from "../../modelo/produtoComplemento";
 import { ProdutoComplementoServico } from "../../servicos/produto/produtoComplemento.servico";
 import { Popup } from 'ng2-opd-popup';
+
+
 
 @Component({
     selector: "pesquisar-produto",
@@ -18,6 +20,11 @@ export class PesquisaProdutoComponent implements OnInit {
     public produtos: Produto[];
     public produtosComplemento: ProdutoComplemento[];
     public produtoDeletar: Produto;
+    public esperaDeletar: boolean;
+
+    @ViewChild('fechaModalPeloEventoDeOutroBotao') closeAddExpenseModal: ElementRef;
+    
+
     ngOnInit(): void {
         
     }
@@ -31,7 +38,7 @@ export class PesquisaProdutoComponent implements OnInit {
                 console.log(erro.error);
             }
         )
-
+        //alert("Contrutor obter todos complementos");
         this.produtoComplemento.obterTodosComplementos().subscribe(
             produtosComp => {
                 this.produtosComplemento = produtosComp;
@@ -45,6 +52,7 @@ export class PesquisaProdutoComponent implements OnInit {
     public adicionarProduto() {
         sessionStorage.setItem('produtoSession',"");
         this.router.navigate(['/produto']);
+        
     }
 
     public setadeletarProduto(produto: Produto) {
@@ -54,18 +62,18 @@ export class PesquisaProdutoComponent implements OnInit {
 
     public deletarProduto(produto: Produto) {
         
-        this.popup.options = {
-            header: "Confirmação de Exclusão",
-            color: "#DF0101", // red, blue....
-            //widthProsentage: 30, // The with of the popou measured by browser width
-            animationDuration: 1, // in seconds, 0 = no animation
-            showButtons: false, // You can hide this in case you want to use custom buttons
-            //confirmBtnContent: "Deletar", // The text on your confirm button
-            //cancleBtnContent: "Cancelar", // the text on your cancel button
-            //confirmBtnClass: "btn btn-danger ", // your class for styling the confirm button
-            //cancleBtnClass: "btn btn-primary margin-right: 3px;",
-            animation: "bounceIn" // 'fadeInLeft', 'fadeInRight', 'fadeInUp', 'bounceIn','bounceInDown'
-        };
+        //this.popup.options = {
+        //    header: "Confirmação de Exclusão",
+        //    color: "#DF0101", // red, blue....
+        //    //widthProsentage: 30, // The with of the popou measured by browser width
+        //    animationDuration: 1, // in seconds, 0 = no animation
+        //    showButtons: false, // You can hide this in case you want to use custom buttons
+        //    //confirmBtnContent: "Deletar", // The text on your confirm button
+        //    //cancleBtnContent: "Cancelar", // the text on your cancel button
+        //    //confirmBtnClass: "btn btn-danger ", // your class for styling the confirm button
+        //    //cancleBtnClass: "btn btn-primary margin-right: 3px;",
+        //    animation: "bounceIn" // 'fadeInLeft', 'fadeInRight', 'fadeInUp', 'bounceIn','bounceInDown'
+        //};
 
         
         this.produtoDeletar = produto;
@@ -74,22 +82,59 @@ export class PesquisaProdutoComponent implements OnInit {
     }
 
     public DeletarConfirmado() {
+        this.esperaDeletar = true;
+       
+          //DELETAR ARQUIVOS DO SERVIDOR -- IMAGENS GALERIA
+        this.produtosComplemento = this.produtosComplemento.filter(pc => pc.produtoId == this.produtoDeletar.id);
+        for (var i = 0; i < this.produtosComplemento.length; i++) {
+            this.produtoComplemento.deletarArquivos(this.produtosComplemento[i])
+                .subscribe(
+                    produtoDeletarJson => {
+                        console.log(produtoDeletarJson);
+                        this.esperaDeletar = true;
+                    },
+                    err => {
+                        console.log(err.error);
+                    }
+                );
+
+        } 
+        //DELETAR ARQUIVOS DO SERVIDOR -- IMAGEM PRINCIPAL
+        if (this.produtoDeletar.nomeArquivo == "produto-sem-imagem.jpg") {
+            this.produtoDeletar.nomeArquivo = null;
+        }
+        this.produtoServico.deletarArquivo(this.produtoDeletar)
+            .subscribe(
+                produtoDeletarJson => {
+                    console.log(produtoDeletarJson);
+                            
+                },
+                err => {
+                    console.log(err.error);
+                }
+            );
+        //alert("Deletar PRODUTO");
         if (this.produtoDeletar) {
             this.produtoServico.deletar(this.produtoDeletar).subscribe(
                 produtos => {
                     this.produtos = produtos;
+                    this.esperaDeletar = false;
                 },
                 erro => {
                     console.log(erro.error);
                 }
             )
         }
-        this.popup.hide();
+        this.esperaDeletar = false;
+        //graças a biblioteca de ViewChild, ElementRef do angular core
+        //referencia o botao superior direito do modal (que possui o data-dismiss), chamando o evento de clique nele, ao qual fecha o modal por aqui.
+        this.closeAddExpenseModal.nativeElement.click(); 
+        //  this.popup.hide(); // PRIMEIRA VERSAO POPUP
     }
 
-    public DeletarCancelado() {
-        this.popup.hide();
-    }
+    //public DeletarCancelado() {
+    //    this.popup.hide(); // PRIMEIRA VERSAO POPUP
+    //}
 
     public editarProduto(produto: Produto) {
 

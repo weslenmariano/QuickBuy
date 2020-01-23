@@ -38,7 +38,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLongTitle">Confirmação de Exclusão</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" class="close" data-dismiss="modal" #fechaModalPeloEventoDeOutroBotao aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -50,8 +50,12 @@
           Nome: {{produtoDeletar.nome}}
         </div>
         <div class="modal-footer">
-          <button class="btn btn-outline-danger btn-sm mb-3" style="margin-right:10px" data-dismiss="modal" (click)="DeletarConfirmado()">Deletar</button>
-          <button class="btn btn-outline-success btn-sm mb-3" data-dismiss="modal" >Cancelar</button>
+          <div class="spinner-border text-primary" role="status" *ngIf="esperaDeletar">
+            <span class="sr-only">Deletando Arquivos...</span>
+          </div>
+          <!-- o evendo te fechar o modal esta sendo chamado no ts, ao qual referencia o botao (fechaModalPeloEventoDeOutroBotao) de fechar no modal-->
+          <button class="btn btn-outline-danger btn-sm mb-3" style="margin-right:10px" (click)="DeletarConfirmado()">Deletar</button>
+          <button class="btn btn-outline-success btn-sm mb-3" data-dismiss="modal">Cancelar</button>
         </div>
       </div>
     </div>
@@ -59,7 +63,8 @@
 
 </div>
 
-<div *ngIf="produtoDeletar">
+<!--MODAL PRIMEIRA VERSAO--- PARA UTILIZADO DEVE DESCONMENTAR ABAIXO E NO TS
+    <div *ngIf="produtoDeletar">
   <popup>
     <div class="d-block mb-3">
       <strong>Deseja realmente deletar esse produto?</strong>
@@ -70,5 +75,5 @@
       <div class="d-inline"> <button class="btn btn-outline-success btn-sm mb-3" (click)="DeletarCancelado()">Cancelar</button></div>
     </div>
   </popup>
-</div>
+</div>-->
 
