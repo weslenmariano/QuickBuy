@@ -26,10 +26,17 @@ export class PesquisaProdutoComponent implements OnInit {
     
 
     ngOnInit(): void {
-        
+        this.ObterComplementos();
     }
 
     constructor(private popup: Popup, private produtoServico: ProdutoServico, private produtoComplemento: ProdutoComplementoServico, private router: Router) {
+        this.ObterProdutos();
+       // this.ObterComplementos();
+       
+        
+    }
+
+    public ObterProdutos() {
         this.produtoServico.obterTodosProdutos().subscribe(
             produtos => {
                 this.produtos = produtos;
@@ -38,7 +45,8 @@ export class PesquisaProdutoComponent implements OnInit {
                 console.log(erro.error);
             }
         )
-        //alert("Contrutor obter todos complementos");
+    }
+    public ObterComplementos() {
         this.produtoComplemento.obterTodosComplementos().subscribe(
             produtosComp => {
                 this.produtosComplemento = produtosComp;
@@ -57,6 +65,7 @@ export class PesquisaProdutoComponent implements OnInit {
 
     public setadeletarProduto(produto: Produto) {
         //alert("setadeletarProduto");
+        
         this.produtoDeletar = produto;
     }
 
@@ -91,7 +100,7 @@ export class PesquisaProdutoComponent implements OnInit {
                 .subscribe(
                     produtoDeletarJson => {
                         console.log(produtoDeletarJson);
-                        this.esperaDeletar = true;
+                       
                     },
                     err => {
                         console.log(err.error);
@@ -118,28 +127,40 @@ export class PesquisaProdutoComponent implements OnInit {
             this.produtoServico.deletar(this.produtoDeletar).subscribe(
                 produtos => {
                     this.produtos = produtos;
-                    this.esperaDeletar = false;
+                    
                 },
                 erro => {
                     console.log(erro.error);
                 }
             )
         }
-        this.esperaDeletar = false;
+        
         //graças a biblioteca de ViewChild, ElementRef do angular core
         //referencia o botao superior direito do modal (que possui o data-dismiss), chamando o evento de clique nele, ao qual fecha o modal por aqui.
-        this.closeAddExpenseModal.nativeElement.click(); 
+        
+        this.LimparSessao();
+        this.ObterComplementos();
+        this.esperaDeletar = false;
+        //for (var i = 0; i < 10000; i++) {
+        //    i++;
+        //}
+       // alert("Vai fechar o modal");
+        this.closeAddExpenseModal.nativeElement.click();
         //  this.popup.hide(); // PRIMEIRA VERSAO POPUP
     }
 
-    //public DeletarCancelado() {
+    public DeletarCancelado() {
+       this.esperaDeletar = false;
     //    this.popup.hide(); // PRIMEIRA VERSAO POPUP
-    //}
+    }
 
     public editarProduto(produto: Produto) {
-
+       
+        this.ObterComplementos();
+        
         this.produtosComplemento = this.produtosComplemento.filter(pc => pc.produtoId == produto.id);
-
+       // alert(this.produtosComplemento.length);
+       // alert(JSON.stringify(this.produtosComplemento));
 
         //alert(JSON.stringify(produto));
        // alert(JSON.stringify(this.produtosComplemento));
@@ -151,6 +172,11 @@ export class PesquisaProdutoComponent implements OnInit {
         sessionStorage.setItem('produtoComplementoSession', JSON.stringify(this.produtosComplemento));
         this.router.navigate(['/produto']);
         
+    }
+
+    public LimparSessao() {
+        sessionStorage.setItem('produtoSession', "");
+        sessionStorage.setItem('produtoComplementoSession', "");
     }
 
 

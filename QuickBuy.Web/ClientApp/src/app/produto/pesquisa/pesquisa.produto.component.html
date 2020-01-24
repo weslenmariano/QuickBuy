@@ -25,7 +25,10 @@
       <td style="width:20%"><img src="../../../../../arquivos/{{p.nomeArquivo}}" style="width:40px; height:40px" /></td>
       <td><button class="btn btn-success btn-sm" (click)="editarProduto(p)">Editar</button></td>
       <!-- <td><button class="btn btn-danger btn-sm" (click)="deletarProduto(p)">Deletar</button></td>  -- MODAL COM ng2-opd-popup -->
-      <td><button class="btn btn-danger btn-sm" (click)="setadeletarProduto(p)" data-toggle="modal" data-target="#exampleModalCenter">Deletar</button></td>
+      <td>
+        <button class="btn btn-danger btn-sm" (click)="setadeletarProduto(p)" data-toggle="modal" data-target="#exampleModalCenter">Deletar</button>
+        
+      </td>
     </tr>
   </tbody>
 </table>
@@ -52,10 +55,10 @@
         <div class="modal-footer">
           <div class="spinner-border text-primary" role="status" *ngIf="esperaDeletar">
             <span class="sr-only">Deletando Arquivos...</span>
-          </div>
+          </div>         
           <!-- o evendo te fechar o modal esta sendo chamado no ts, ao qual referencia o botao (fechaModalPeloEventoDeOutroBotao) de fechar no modal-->
           <button class="btn btn-outline-danger btn-sm mb-3" style="margin-right:10px" (click)="DeletarConfirmado()">Deletar</button>
-          <button class="btn btn-outline-success btn-sm mb-3" data-dismiss="modal">Cancelar</button>
+          <button class="btn btn-outline-success btn-sm mb-3" data-dismiss="modal" (click)="DeletarCancelado()">Cancelar</button>
         </div>
       </div>
     </div>

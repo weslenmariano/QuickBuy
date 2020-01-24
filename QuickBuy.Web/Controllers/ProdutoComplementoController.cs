@@ -119,7 +119,7 @@ namespace QuickBuy.Web.Controllers
                 var pastaArquivos = _hostingEnvironment.WebRootPath + "\\arquivos\\";
                 System.IO.File.Delete(pastaArquivos + produtoComplemento.NomeArquivo);
                 /// produto da requisicao deve tar a propriedade do Id > 0 para conseguir remover.
-                _produtoComplementoRepositorio.Remover(produtoComplemento);
+                //_produtoComplementoRepositorio.Remover(produtoComplemento);
                 return Ok();
             }
             catch (Exception ex)

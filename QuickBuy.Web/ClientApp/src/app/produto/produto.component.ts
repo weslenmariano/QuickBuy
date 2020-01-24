@@ -61,6 +61,7 @@ export class ProdutoComponent implements OnInit {
         var produtoSession = sessionStorage.getItem('produtoSession');
         var produtoComplementoSession = sessionStorage.getItem('produtoComplementoSession');
 
+       // alert(produtoComplementoSession);
 
        // alert(this.spinnerGaleria);
         this.prodComp = new ProdutoComplemento();
@@ -157,6 +158,9 @@ export class ProdutoComponent implements OnInit {
     public inputChangePrincipal(files: FileList) {
         this.arquivoSelecionado = files.item(0);
         this.ativarSpinnerFoto = true;
+        //##REDIMENSIONAR IMAGEM ANTES DE ENVIAR PARA O SERVIDOR
+
+        //##########
         this.produtoServico.enviarArquivo(this.arquivoSelecionado)
             .subscribe(
                 nomeArquivo => {
@@ -181,9 +185,10 @@ export class ProdutoComponent implements OnInit {
         this.itensGaleria = [];
         if (this.edicaoProduto && this.arquivosDeletarGaleria.length > 0) { this.DeletaImagemGaleria = true };
         for (var i = 0; i < files.length; i++) {
-
             this.arquivoSelecionado = files.item(i);
+            //##REDIMENSIONAR IMAGEM ANTES DE ENVIAR PARA O SERVIDOR
 
+            //##########
             this.produtoComplementoServico.enviarArquivo(this.arquivoSelecionado)
                 .subscribe(
                     nomeArquivo => {
@@ -324,6 +329,7 @@ export class ProdutoComponent implements OnInit {
 
         }
         this.router.navigate(['/pesquisar-produto']);
+        this.LimparSessao();
     }
 
     public LimparSessao() {
