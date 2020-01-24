@@ -189,7 +189,6 @@
 
   <ItemGroup>
     <Folder Include="ClientApp\src\assets\js\" />
-    <Folder Include="ClientApp\src\assets\css\" />
     <Folder Include="wwwroot\arquivos\" />
   </ItemGroup>
 

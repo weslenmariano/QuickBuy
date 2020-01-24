@@ -4,14 +4,31 @@ import { ProdutoServico } from "../../servicos/produto/produto.servico";
 import { Router } from "@angular/router";
 import { ProdutoComplemento } from "../../modelo/produtoComplemento";
 import { ProdutoComplementoServico } from "../../servicos/produto/produtoComplemento.servico";
-import { Popup } from 'ng2-opd-popup';
+//import { Popup } from 'ng2-opd-popup';
+import { trigger, transition, style, sequence, animate } from '@angular/animations';
 
 
 
 @Component({
     selector: "pesquisar-produto",
     templateUrl: "./pesquisa.produto.component.html",
-    styleUrls: ["./pesquisa.produto.component.css"]
+    styleUrls: ["./pesquisa.produto.component.css"],
+    animations: [
+        trigger('anim', [
+            transition('void => *', [
+                style({ opacity: '0.1', transform: 'translateY(5px)' }), // movimento de baixo para cima com deslocamento de 5px
+                //style({ opacity: '0.1', transform: 'translateX(50px)' }), // movimento da direita para esquerda comdeslocamento de 50px
+                sequence([
+                    animate('2s ease', style({ opacity: '1', transform: 'translateY(0px)' })),
+                    //animate('0.5s ease', style({ opacity: '1', transform: 'translateY(50px)' })),
+                    //animate('0.5s ease', style({ opacity: '1', transform: 'translateX(-50px)' })),
+                    //animate('0.5s ease', style({ opacity: '1', transform: 'translateY(-50px)' })),
+                    //animate('0.5s ease', style({ opacity: '1', transform: 'translateX(50px)' })),
+                    //animate('0.5s ease', style({ opacity: '1', transform: 'translateX(0px)' })),
+                ])
+            ])
+        ])
+    ]
 
 })
 
@@ -22,14 +39,17 @@ export class PesquisaProdutoComponent implements OnInit {
     public produtoDeletar: Produto;
     public esperaDeletar: boolean;
 
+    public paginaAtual = 1;
+    public itensNaPag = 5;
+
     @ViewChild('fechaModalPeloEventoDeOutroBotao') closeAddExpenseModal: ElementRef;
     
 
     ngOnInit(): void {
         this.ObterComplementos();
     }
-
-    constructor(private popup: Popup, private produtoServico: ProdutoServico, private produtoComplemento: ProdutoComplementoServico, private router: Router) {
+    //private popup: Popup,
+    constructor( private produtoServico: ProdutoServico, private produtoComplemento: ProdutoComplementoServico, private router: Router) {
         this.ObterProdutos();
        // this.ObterComplementos();
        
@@ -86,7 +106,7 @@ export class PesquisaProdutoComponent implements OnInit {
 
         
         this.produtoDeletar = produto;
-        this.popup.show(this.popup.options);
+     //   this.popup.show(this.popup.options);
 
     }
 

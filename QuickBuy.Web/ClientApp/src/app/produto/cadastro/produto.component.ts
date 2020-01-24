@@ -31,6 +31,8 @@ export class ProdutoComponent implements OnInit {
     public mensagem: string;
     
     public qtdArquivos: number;
+    alturaPardaoImagem: number = 400;
+    larguraPardaoImagem: number = 450;
 
     public item: string[] = [];
     public itensGaleria: string[] = [];
@@ -162,7 +164,7 @@ export class ProdutoComponent implements OnInit {
         this.ativarSpinnerFoto = true;
         //##REDIMENSIONAR IMAGEM ANTES DE ENVIAR PARA O SERVIDOR
         this.image = files.item(0);
-        this.ng2ImgMax.resizeImage(this.image, 400, 400).subscribe(
+        this.ng2ImgMax.resizeImage(this.image, this.larguraPardaoImagem, this.alturaPardaoImagem).subscribe(
             result => {
                 this.uploadedImage = new File([result], result.name);
                 this.arquivoSelecionado = this.uploadedImage;// uploadedImage ja é a imagem redimensionada! 400x300
@@ -218,7 +220,7 @@ export class ProdutoComponent implements OnInit {
             //this.arquivoSelecionado = files.item(i);
             //##REDIMENSIONAR IMAGEM ANTES DE ENVIAR PARA O SERVIDOR
             this.image = files.item(i);
-            this.ng2ImgMax.resizeImage(this.image, 400, 400).subscribe(
+            this.ng2ImgMax.resizeImage(this.image, this.larguraPardaoImagem,this.alturaPardaoImagem).subscribe(
                 result => {
                     this.uploadedImage = new File([result], result.name);
                     this.arquivoSelecionado = this.uploadedImage;// uploadedImage ja é a imagem redimensionada! 400x00

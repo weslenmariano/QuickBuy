@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+.my-pagination /deep/ .ngx-pagination .current {
+  border-radius: 20px !important;
+  border: 2px;
+  background-color: transparent;
+  border-style: solid !important;
+  color: #000000;
+}
+
+.my-pagination /deep/ .ngx-pagination a, .ngx-pagination button {
+  border-radius: 20px !important;
+  border: 1px !important;
+  border-style: solid !important;
+}
+
+.my-pagination /deep/ .ngx-pagination .disabled {
+  border-radius: 20px !important;
+  border: 1px !important;
+  border-style: solid !important;
+}
+
+
