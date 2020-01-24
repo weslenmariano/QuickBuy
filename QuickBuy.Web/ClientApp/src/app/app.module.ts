@@ -5,12 +5,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { TruncateModule } from 'ng2-truncate';
 import { NgxMaskModule } from 'ngx-mask';
-import { PopupModule } from 'ng2-opd-popup';//Try removing the folder: //$ rm - fr node_modules / ng2 - opd - popup / node_modules
+import { PopupModule } from 'ng2-opd-popup';// error TS2416: -> Try removing the folder: //$ rm - fr node_modules / ng2 - opd - popup / node_modules
+import { Ng2ImgMaxModule } from 'ng2-img-max';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { ProdutoComponent } from './produto/produto.component';
+import { ProdutoComponent } from './produto/cadastro/produto.component';
 import { LoginComponent } from './usuario/login/login.component';
 import { GuardaRotas } from './autorizacao/guarda.rotas';
 import { UsuarioServico } from './servicos/usuario/usuario.servico';
@@ -65,6 +66,7 @@ import { ProdutoComplementoServico } from './servicos/produto/produtoComplemento
         HttpClientModule,
         FormsModule,
         NgxGalleryModule,
+        Ng2ImgMaxModule,
         TruncateModule,
         PopupModule.forRoot(),
         NgxMaskModule.forRoot(),

@@ -59,7 +59,7 @@ export class PesquisaProdutoComponent implements OnInit {
 
     public adicionarProduto() {
         sessionStorage.setItem('produtoSession',"");
-        this.router.navigate(['/produto']);
+        this.router.navigate(['../produto']);
         
     }
 
@@ -170,7 +170,7 @@ export class PesquisaProdutoComponent implements OnInit {
 
         sessionStorage.setItem('produtoSession', JSON.stringify(produto));
         sessionStorage.setItem('produtoComplementoSession', JSON.stringify(this.produtosComplemento));
-        this.router.navigate(['/produto']);
+        this.router.navigate(['../produto/']);
         
     }
 

@@ -65,9 +65,9 @@
 
 <div class="input-group mb-2">
   <div class="custom-file col-md-6">
-    <input type="file" class="custom-file-input"
+    <input type="file" class="custom-file-input" accept=".jpg,.gif,.png"
            id="inputFile" aria-describedby="inputGroupFileAddon04" (change)="inputChangePrincipal($event.target.files)" />
-    <label for="inputFile" class="custom-file-label">Escolha a Imagem Principal</label>
+    <label for="inputFile" class="custom-file-label">Escolha a Imagem Principal (jpg,gif,png)</label>
   </div>
   <div class="spinner-border text-primary" role="status" *ngIf="ativarSpinnerFoto">
     <span class="sr-only">Loading Foto...</span>
@@ -82,9 +82,9 @@
 
 <div class="input-group mb-2">
   <div class="custom-file col-md-6">
-    <input type="file" class="custom-file-input"
+    <input type="file" class="custom-file-input" accept=".jpg,.gif,.png"
            id="inputFileMultiplo" aria-describedby="inputGroupFileAddon04" (change)="inputChangeGaleria($event.target.files)" multiple />
-    <label for="inputFileMultiplo" class="custom-file-label">Escolha demais imagens para o produto</label>
+    <label for="inputFileMultiplo" class="custom-file-label">Escolha demais imagens para o produto (jpg,gif,png)</label>
   </div>
   <div *ngIf="qtdArquivos > 0 && itensGaleria.length == 0">
     <span class="spinner-border text-primary" role="status" aria-hidden="true"></span>

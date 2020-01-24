@@ -1,10 +1,11 @@
 import { Component, OnInit } from "@angular/core"
-import { ProdutoServico } from "../servicos/produto/produto.servico";
-import { Produto } from "../modelo/produto";
-import { ProdutoComplemento } from "../modelo/produtoComplemento";
+import { ProdutoServico } from "../../servicos/produto/produto.servico";
+import { Produto } from "../../modelo/produto";
+import { ProdutoComplemento } from "../../modelo/produtoComplemento";
 import { Router } from "@angular/router";
-import { ProdutoComplementoServico } from "../servicos/produto/produtoComplemento.servico";
+import { ProdutoComplementoServico } from "../../servicos/produto/produtoComplemento.servico";
 import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gallery';
+import { Ng2ImgMaxService } from 'ng2-img-max';
 
 @Component({
     selector: "app-produto", // qual tag html que o component produto sera renderizado
@@ -38,6 +39,7 @@ export class ProdutoComponent implements OnInit {
     public produtoComplementos: ProdutoComplemento[] = []; // a declaracao ja esta inicializando a lista.
 
     public arquivoSelecionado: File;
+    public image: File;
 
     public ativarSpinner: boolean;
     public ativarSpinnerFoto: boolean;
@@ -50,10 +52,10 @@ export class ProdutoComponent implements OnInit {
     public DeletaImagemPrincipal: boolean; // remove a imagem antiga da base e do server
     public DeletaImagemGaleria: boolean; // remove as imagens da galeria da base e do server
     
-    
+    uploadedImage: File;
     
 
-    constructor(private produtoServico: ProdutoServico, private produtoComplementoServico: ProdutoComplementoServico, private router: Router) {
+    constructor(private produtoServico: ProdutoServico, private produtoComplementoServico: ProdutoComplementoServico, private router: Router, private ng2ImgMax: Ng2ImgMaxService) {
 
     }
 
@@ -156,49 +158,97 @@ export class ProdutoComponent implements OnInit {
     }
 
     public inputChangePrincipal(files: FileList) {
-        this.arquivoSelecionado = files.item(0);
+      //  this.arquivoSelecionado = files.item(0);
         this.ativarSpinnerFoto = true;
         //##REDIMENSIONAR IMAGEM ANTES DE ENVIAR PARA O SERVIDOR
+        this.image = files.item(0);
+        this.ng2ImgMax.resizeImage(this.image, 400, 400).subscribe(
+            result => {
+                this.uploadedImage = new File([result], result.name);
+                this.arquivoSelecionado = this.uploadedImage;// uploadedImage ja é a imagem redimensionada! 400x300
+                //ENVIO DO ARQUIVO JA REDIMENSIONADO
+                this.produtoServico.enviarArquivo(this.arquivoSelecionado)
+                    .subscribe(
+                        nomeArquivo => {
+                            this.produto.nomeArquivo = nomeArquivo;
+                            this.criarGaleriaImgPrincipal(nomeArquivo);
+                            console.log(nomeArquivo);
+                            this.ativarSpinnerFoto = false;
+                            this.exibirFotoPrincipal = true;
+                            if (this.edicaoProduto && this.produtoImgPrincipal.nomeArquivo != "") { this.DeletaImagemPrincipal = true };
+                        },
+                        erro => {
+                            console.log(erro.error);
+                            this.ativarSpinnerFoto = false;
+                            this.exibirFotoPrincipal = false;
 
-        //##########
-        this.produtoServico.enviarArquivo(this.arquivoSelecionado)
-            .subscribe(
-                nomeArquivo => {
-                    this.produto.nomeArquivo = nomeArquivo;
-                    this.criarGaleriaImgPrincipal(nomeArquivo);
-                    console.log(nomeArquivo);
-                    this.ativarSpinnerFoto = false;
-                    this.exibirFotoPrincipal = true;
-                    if (this.edicaoProduto && this.produtoImgPrincipal.nomeArquivo != ""){ this.DeletaImagemPrincipal = true };
-                },
-                erro => {
-                    console.log(erro.error);
-                    this.ativarSpinnerFoto = false;
-                    this.exibirFotoPrincipal = false;
+                        }
+                    );
+            },
+            error => {
+                console.log('😢 Oh no!', error.error);
+            }
+        );
+        //###########################################################
+        //this.produtoServico.enviarArquivo(this.arquivoSelecionado)
+        //    .subscribe(
+        //        nomeArquivo => {
+        //            this.produto.nomeArquivo = nomeArquivo;
+        //            this.criarGaleriaImgPrincipal(nomeArquivo);
+        //            console.log(nomeArquivo);
+        //            this.ativarSpinnerFoto = false;
+        //            this.exibirFotoPrincipal = true;
+        //            if (this.edicaoProduto && this.produtoImgPrincipal.nomeArquivo != ""){ this.DeletaImagemPrincipal = true };
+        //        },
+        //        erro => {
+        //            console.log(erro.error);
+        //            this.ativarSpinnerFoto = false;
+        //            this.exibirFotoPrincipal = false;
 
-                }
-            );
+        //        }
+        //    );
      }
 
     public inputChangeGaleria(files: FileList) {
         this.qtdArquivos = files.length;
         this.itensGaleria = [];
         if (this.edicaoProduto && this.arquivosDeletarGaleria.length > 0) { this.DeletaImagemGaleria = true };
-        for (var i = 0; i < files.length; i++) {
-            this.arquivoSelecionado = files.item(i);
-            //##REDIMENSIONAR IMAGEM ANTES DE ENVIAR PARA O SERVIDOR
 
+        for (var i = 0; i < files.length; i++) {
+            //this.arquivoSelecionado = files.item(i);
+            //##REDIMENSIONAR IMAGEM ANTES DE ENVIAR PARA O SERVIDOR
+            this.image = files.item(i);
+            this.ng2ImgMax.resizeImage(this.image, 400, 400).subscribe(
+                result => {
+                    this.uploadedImage = new File([result], result.name);
+                    this.arquivoSelecionado = this.uploadedImage;// uploadedImage ja é a imagem redimensionada! 400x00
+                    //ENVIO DO ARQUIVO JA REDIMENSIONADO
+                    this.produtoComplementoServico.enviarArquivo(this.arquivoSelecionado)
+                        .subscribe(
+                            nomeArquivo => {
+                                this.itensGaleria.push(nomeArquivo);
+                                this.criarGaleria(this.itensGaleria);
+                            },
+                            erro => {
+                                console.log(erro.error);
+                            }
+                        );
+                },
+                error => {
+                    console.log('😢 Oh no!', error.error);
+                }
+            );
             //##########
-            this.produtoComplementoServico.enviarArquivo(this.arquivoSelecionado)
-                .subscribe(
-                    nomeArquivo => {
-                        this.itensGaleria.push(nomeArquivo);
-                        this.criarGaleria(this.itensGaleria);
-                    },
-                    erro => {
-                        console.log(erro.error);
-                    }
-                );
+            //this.produtoComplementoServico.enviarArquivo(this.arquivoSelecionado)
+            //    .subscribe(
+            //        nomeArquivo => {
+            //            this.itensGaleria.push(nomeArquivo);
+            //            this.criarGaleria(this.itensGaleria);
+            //        },
+            //        erro => {
+            //            console.log(erro.error);
+            //        }
+            //    );
         }
     }
 
