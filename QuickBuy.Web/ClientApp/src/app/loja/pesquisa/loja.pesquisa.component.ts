@@ -47,6 +47,7 @@ export class LojaPesquisaComponent implements OnInit {
             .subscribe(
                 produtos => {
                     this.produtos = produtos;
+                    if (this.produtos.length > 6) { this.possuiPaginas = true; } else { this.possuiPaginas = false; }
                 },
                 erro => {
                     console.log(erro.error);

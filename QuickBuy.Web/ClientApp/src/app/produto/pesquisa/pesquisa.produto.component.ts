@@ -42,6 +42,7 @@ export class PesquisaProdutoComponent implements OnInit {
     public possuiPaginas: boolean;
     public paginaAtual = 1;
     public itensNaPag = 10;
+    public filtrar: boolean;
 
     @ViewChild('fechaModalPeloEventoDeOutroBotao') closeAddExpenseModal: ElementRef;
     
