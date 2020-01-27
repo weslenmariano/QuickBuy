@@ -1,4 +1,5 @@
-@import url(../../produto/produto.component.css);
+@import url('../../../assets/css/paginacaoTables.css');
+@import url(../../produto/cadastro/produto.component.css);
 @import url('../../../assets/css/animate.css');
 
 .modal-header {

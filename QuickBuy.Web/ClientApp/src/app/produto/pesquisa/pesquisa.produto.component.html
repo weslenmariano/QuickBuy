@@ -5,30 +5,64 @@
   <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
   Carregando Produtos...
 </div>
+<div *ngIf="produtos">
 
-<table class="table table-hover" *ngIf="produtos">
-  <thead>
-    <tr>
-      <th>Nome</th>
-      <th>Descrição</th>
-      <th>Preço</th>
-      <th>Imagem</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let p of produtos">
-      <td>{{p.nome}}</td>
-      <td style="width:50%">{{p.descricao}}</td>
-      <td style="width:10%">R${{p.preco}}</td>
-      <td style="width:20%"><img src="../../../../../arquivos/{{p.nomeArquivo}}" style="width:40px; height:40px" /></td>
-      <td><button class="btn btn-success btn-sm" (click)="editarProduto(p)">Editar</button></td>
-      <!-- <td><button class="btn btn-danger btn-sm" (click)="deletarProduto(p)">Deletar</button></td>  -- MODAL COM ng2-opd-popup -->
-      <td><button class="btn btn-danger btn-sm" (click)="setadeletarProduto(p)" data-toggle="modal" data-target="#exampleModalCenter">Deletar</button></td>
-    </tr>
-  </tbody>
-</table>
+  <div id="filtrarProdutos" class="d-flex justify-content-center">
+    <div *ngIf="filtrar" [@anim]="">
+      <div class="form-inline d-flex justify-content-center">
+        <div class="form-group mx-sm-1 mb-3">
+          <label for="inputBuscar" class="sr-only">Ex: celular</label>
+          <input type="text" id="inputBuscar" placeholder="Ex: celular">
+        </div>
+        <button class="btn btn-outline-secondary mb-3" (click)="filtrarResultados()" [disabled]="ativarSpinnerBuscar">
+          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="ativarSpinnerBuscar"></span>
+          Buscar...
+        </button>
+      </div>
+    </div>
+
+    <div class="p-2" [@anim]="" *ngIf="filtrar">
+      <button class="close " type="button" aria-hidden="true" (click)="exibirFiltro()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div *ngIf="!filtrar">
+      <button class="btn btn-default mb-2" (click)="exibirFiltro()"> <i class="fa fa-search" aria-hidden="true"></i> Filtrar</button>
+    </div>
+
+  </div>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Descrição</th>
+        <th>Preço</th>
+        <th>Imagem</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr [@anim]="" *ngFor="let p of produtos | paginate: { itemsPerPage: itensNaPag, currentPage: paginaAtual }; let i = index">
+        <td>{{p.nome}}</td>
+        <td style="width:50%">{{p.descricao}}</td>
+        <td style="width:10%">R${{p.preco}}</td>
+        <td style="width:20%"><img src="../../../../../arquivos/{{p.nomeArquivo}}" style="width:40px; height:40px" /></td>
+        <td><button class="btn btn-success btn-sm" (click)="editarProduto(p)">Editar</button></td>
+        <!-- <td><button class="btn btn-danger btn-sm" (click)="deletarProduto(p)">Deletar</button></td>  -- MODAL COM ng2-opd-popup -->
+        <td>
+          <button class="btn btn-danger btn-sm" (click)="setadeletarProduto(p)" data-toggle="modal" data-target="#exampleModalCenter">Deletar</button>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="text-right"  *ngIf="possuiPaginas">
+    <pagination-controls class="my-pagination" (pageChange)="paginaAtual = $event"></pagination-controls>
+  </div>
+</div>
+
 
 <!-- Modal -->
 <div *ngIf="produtoDeletar">
@@ -38,7 +72,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLongTitle">Confirmação de Exclusão</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" class="close" data-dismiss="modal" #fechaModalPeloEventoDeOutroBotao aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -50,8 +84,12 @@
           Nome: {{produtoDeletar.nome}}
         </div>
         <div class="modal-footer">
-          <button class="btn btn-outline-danger btn-sm mb-3" style="margin-right:10px" data-dismiss="modal" (click)="DeletarConfirmado()">Deletar</button>
-          <button class="btn btn-outline-success btn-sm mb-3" data-dismiss="modal" onclick="testAnim()">Cancelar</button>
+          <div class="spinner-border text-primary" role="status" *ngIf="esperaDeletar">
+            <span class="sr-only">Deletando Arquivos...</span>
+          </div>         
+          <!-- o evendo te fechar o modal esta sendo chamado no ts, ao qual referencia o botao (fechaModalPeloEventoDeOutroBotao) de fechar no modal-->
+          <button class="btn btn-outline-danger btn-sm mb-3" style="margin-right:10px" (click)="DeletarConfirmado()">Deletar</button>
+          <button class="btn btn-outline-success btn-sm mb-3" data-dismiss="modal" (click)="DeletarCancelado()">Cancelar</button>
         </div>
       </div>
     </div>
@@ -59,7 +97,8 @@
 
 </div>
 
-<div *ngIf="produtoDeletar">
+<!--MODAL PRIMEIRA VERSAO--- PARA UTILIZADO DEVE DESCONMENTAR ABAIXO E NO TS
+    <div *ngIf="produtoDeletar">
   <popup>
     <div class="d-block mb-3">
       <strong>Deseja realmente deletar esse produto?</strong>
@@ -70,5 +109,5 @@
       <div class="d-inline"> <button class="btn btn-outline-success btn-sm mb-3" (click)="DeletarCancelado()">Cancelar</button></div>
     </div>
   </popup>
-</div>
+</div>-->
 

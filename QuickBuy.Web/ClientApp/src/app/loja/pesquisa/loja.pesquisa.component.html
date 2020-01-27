@@ -3,11 +3,40 @@
   Carregando Produtos...
 </div>
 
+
+
 <div class="container" *ngIf="produtos">
+
+  <div id="filtrarProdutos" class="d-flex justify-content-center">
+    <div *ngIf="filtrar" [@anim]="">
+      <div class="form-inline d-flex justify-content-center">
+        <div class="form-group mx-sm-1 mb-3">
+          <label for="inputBuscar" class="sr-only">Ex: celular</label>
+          <input type="text"  id="inputBuscar" placeholder="Ex: celular">
+        </div>
+        <button class="btn btn-outline-secondary mb-3" (click)="filtrarResultados()" [disabled]="ativarSpinnerBuscar">
+          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="ativarSpinnerBuscar"></span>
+          Buscar...
+        </button>
+      </div>
+    </div>
+
+    <div class="p-2" [@anim]="" *ngIf="filtrar">
+      <button class="close " type="button" aria-hidden="true" (click)="fecharFiltro()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div *ngIf="!filtrar">
+      <button class="btn btn-default mb-2" (click)="exibirFiltro()"> <i class="fa fa-search" aria-hidden="true"></i> Filtrar</button>
+    </div>
+
+  </div>
+
+
   <div class="row">
-    <div class="col-md-4 mb-4" *ngFor="let p of produtos">
+    <div class="col-md-4 mb-4" [@anim]="" *ngFor="let p of produtos | paginate: { itemsPerPage: contador, currentPage: pag }; let i = index">
       <a (click)="abrirProduto(p)" style="cursor:pointer">
-        <div class="card">
+        <div class="card" style="padding:10px; height:22rem; width:18rem;">
           <img class="card-top align-self-center" src="../../../../../arquivos/{{p.nomeArquivo}}" style="width:180px;height:180px;" />
           <div class="card-body">
             <!--  <h5 class="card-title">{{p.nome}}</h5> -->
@@ -18,4 +47,8 @@
       </a>
     </div>
   </div>
+  <div class="text-right"  *ngIf="possuiPaginas">
+    <pagination-controls class="my-pagination" (pageChange)="pag = $event" previousLabel="Anterior" nextLabel="Próximo"></pagination-controls>
+  </div>
 </div>
+

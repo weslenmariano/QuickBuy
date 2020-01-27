@@ -3,14 +3,14 @@
     <div class="container">
       <a class="navbar-brand" [routerLink]='["/"]'><img src="../../../assets/img/quick-logo2.png" style="width:90px; height:40px" /></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-label="Toggle navigation"
-        [attr.aria-expanded]="isExpanded" (click)="toggle()">
+              [attr.aria-expanded]="isExpanded" (click)="toggle()">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" [ngClass]='{"show": isExpanded}'>
         <ul class="navbar-nav flex-grow">
           <li class="nav-item" [routerLinkActive]='["link-active"]' [routerLinkActiveOptions]='{ exact: true }'>
             <a class="nav-link text-dark" [routerLink]='["/"]'>
-              <img src="assets/img/home.png" style="width:32px;height:32px"  data-toggle="tooltip" data-placement="bottom" data-html="true" title="Home" />
+              <img src="assets/img/home.png" style="width:32px;height:32px" data-toggle="tooltip" data-placement="bottom" data-html="true" title="Home" />
             </a>
           </li>
 
@@ -21,13 +21,13 @@
           </li>
           <li class="nav-item" [routerLinkActive]='["link-active"]' *ngIf="!usuarioLogado()">
             <a class="nav-link text-dark" [routerLink]='["/entrar"]'>
-              <img src="assets/img/log-in.png" style="width:32px;height:32px"  data-toggle="tooltip" data-placement="bottom" data-html="true" title="Entrar" />
+              <img src="assets/img/log-in.png" style="width:32px;height:32px" data-toggle="tooltip" data-placement="bottom" data-html="true" title="Entrar" />
             </a>
           </li>
 
           <li class="nav-item" [routerLinkActive]='["link-active"]' *ngIf="temItensCarrinhoCompras()">
             <a class="nav-link text-dark" [routerLink]='["/loja-efetivar"]'>
-              <img src="assets/img/ccompras.png" style="width:32px;height:32px"  data-toggle="tooltip" data-placement="bottom" data-html="true" title="Meus Produtos" />
+              <img src="assets/img/ccompras.png" style="width:32px;height:32px" data-toggle="tooltip" data-placement="bottom" data-html="true" title="Meus Produtos" />
             </a>
           </li>
 
@@ -45,7 +45,7 @@
 
             </ul>
           </li>
-          
+
 
           <!--<li class="nav-item" [routerLinkActive]='["link-active"]' *ngIf="usuarioLogado()">
     <a class="nav-item nav-link text-dark" [routerLink]='["/sair"]' (click)="sair()">Sair</a>

@@ -160,7 +160,7 @@
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\produto\pesquisa\pesquisa.produto.component.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\produto\produto.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\produto\cadastro\produto.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\servicos\pedido\pedido.servico.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\servicos\produto\produtoComplemento.servico.ts">
       <SubType>Code</SubType>
@@ -189,7 +189,6 @@
 
   <ItemGroup>
     <Folder Include="ClientApp\src\assets\js\" />
-    <Folder Include="ClientApp\src\assets\css\" />
     <Folder Include="wwwroot\arquivos\" />
   </ItemGroup>
 

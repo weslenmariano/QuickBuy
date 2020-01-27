@@ -41,6 +41,7 @@ namespace QuickBuy.Web.Controllers
             }
         }
 
+
         [HttpPost]
         public IActionResult Post([FromBody]Produto produto)
         {
