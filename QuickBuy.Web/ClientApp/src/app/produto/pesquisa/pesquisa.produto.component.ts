@@ -38,9 +38,10 @@ export class PesquisaProdutoComponent implements OnInit {
     public produtosComplemento: ProdutoComplemento[];
     public produtoDeletar: Produto;
     public esperaDeletar: boolean;
-
+    public ativarSpinnerBuscar: boolean;
+    public possuiPaginas: boolean;
     public paginaAtual = 1;
-    public itensNaPag = 5;
+    public itensNaPag = 10;
 
     @ViewChild('fechaModalPeloEventoDeOutroBotao') closeAddExpenseModal: ElementRef;
     
@@ -199,7 +200,27 @@ export class PesquisaProdutoComponent implements OnInit {
         sessionStorage.setItem('produtoComplementoSession', "");
     }
 
+    public exibirFiltro() {
+        this.filtrar = !this.filtrar;
+    }
 
+    public filtrarResultados() {
+        //alert("filtrarResultados");
+        //recuperando o value do campo nda pagina html;
+        var filtro = (<HTMLSelectElement>document.getElementById('inputBuscar')).value;
+        this.ativarSpinnerBuscar = true;
+        this.produtoServico.obterTodosProdutos()
+            .subscribe(
+                produtos => {
+                    this.produtos = produtos.filter(p => p.descricao.search(filtro) != -1 || p.descricao.search(filtro) != -1);
+                    if (this.produtos.length > 10) { this.possuiPaginas = true; } else { this.possuiPaginas = false; }
+                    this.ativarSpinnerBuscar = false;
+                },
+                erro => {
+                    console.log(erro.error);
+                }
+            )
+    }
 
 
 }

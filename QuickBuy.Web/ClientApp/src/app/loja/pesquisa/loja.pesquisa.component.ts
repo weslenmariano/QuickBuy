@@ -28,17 +28,21 @@ import { trigger, transition, style, sequence, animate } from '@angular/animatio
     ]
 })
 
-export class LojaPesquisaComponent implements OnInit{
+export class LojaPesquisaComponent implements OnInit {
 
     public produtos: Produto[];
     pag: number = 1;
-    contador: number = 6; 
+    contador: number = 6;
+    public filtrar: boolean;
+    public possuiPaginas: boolean;
+    public ativarSpinnerBuscar: boolean;
 
     ngOnInit(): void {
-    
+      
+
     }
 
-    constructor(private produtoServico: ProdutoServico, private router:Router) {
+    constructor(private produtoServico: ProdutoServico, private router: Router) {
         this.produtoServico.obterTodosProdutos()
             .subscribe(
                 produtos => {
@@ -48,15 +52,43 @@ export class LojaPesquisaComponent implements OnInit{
                     console.log(erro.error);
                 }
             )
-        
+
     }
 
+    public exibirFiltro() {
+            this.filtrar = !this.filtrar;
+    }
+
+    public fecharFiltro() {
+        this.exibirFiltro();
+        (<HTMLSelectElement>document.getElementById('inputBuscar')).value = "";
+        this.filtrarResultados();
+    }
+
+
     public abrirProduto(produto: Produto) {
-       // alert(produto.nomeArquivo);
-        
+        // alert(produto.nomeArquivo);
+
         sessionStorage.setItem('produtoDetalhe', JSON.stringify(produto));
         this.router.navigate(['/loja-produto'])
 
     }
 
+    public filtrarResultados() {
+        //alert("filtrarResultados");
+        //recuperando o value do campo nda pagina html;
+        var filtro = (<HTMLSelectElement>document.getElementById('inputBuscar')).value;
+        this.ativarSpinnerBuscar = true;
+        this.produtoServico.obterTodosProdutos()
+            .subscribe(
+                produtos => {
+                    this.produtos = produtos.filter(p => p.descricao.search(filtro) != -1 || p.descricao.search(filtro) != -1);
+                    if (this.produtos.length > 6) { this.possuiPaginas = true; } else { this.possuiPaginas = false; }
+                    this.ativarSpinnerBuscar = false;
+                },
+                erro => {
+                    console.log(erro.error);
+                }
+            )
+    }
 }

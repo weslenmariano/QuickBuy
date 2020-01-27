@@ -6,6 +6,32 @@
   Carregando Produtos...
 </div>
 <div *ngIf="produtos">
+
+  <div id="filtrarProdutos" class="d-flex justify-content-center">
+    <div *ngIf="filtrar" [@anim]="">
+      <div class="form-inline d-flex justify-content-center">
+        <div class="form-group mx-sm-1 mb-3">
+          <label for="inputBuscar" class="sr-only">Ex: celular</label>
+          <input type="text" id="inputBuscar" placeholder="Ex: celular">
+        </div>
+        <button class="btn btn-outline-secondary mb-3" (click)="filtrarResultados()" [disabled]="ativarSpinnerBuscar">
+          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="ativarSpinnerBuscar"></span>
+          Buscar...
+        </button>
+      </div>
+    </div>
+
+    <div class="p-2" [@anim]="" *ngIf="filtrar">
+      <button class="close " type="button" aria-hidden="true" (click)="exibirFiltro()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div *ngIf="!filtrar">
+      <button class="btn btn-default mb-2" (click)="exibirFiltro()"> <i class="fa fa-search" aria-hidden="true"></i> Filtrar</button>
+    </div>
+
+  </div>
+
   <table class="table table-hover">
     <thead>
       <tr>
@@ -32,8 +58,8 @@
       </tr>
     </tbody>
   </table>
-  <div class="text-right">
-    <pagination-controls  class="my-pagination" (pageChange)="paginaAtual = $event"></pagination-controls>
+  <div class="text-right"  *ngIf="possuiPaginas">
+    <pagination-controls class="my-pagination" (pageChange)="paginaAtual = $event"></pagination-controls>
   </div>
 </div>
 

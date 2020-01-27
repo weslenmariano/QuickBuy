@@ -4,3 +4,16 @@ a:hover {
   background-color: #000000;
 }
 
+#inputBuscar {
+  /*border-style: solid;
+  border-radius: 20px !important;
+  border: 1px !important;*/
+  padding: 3px;
+  font-size: 16px;
+  border-width: 1px;
+  border-radius: 20px;
+  border-style: solid;
+  border-color: #000000;
+}
+
+
