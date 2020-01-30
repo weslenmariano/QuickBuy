@@ -18,6 +18,7 @@ namespace QuickBuy.Repositorio.Contexto
         public DbSet<Pedido> Pedidos { get; set; }
         public DbSet<ItemPedido> ItensPedidos { get; set; }
         public DbSet<FormaPagamento> FormaPagamento { get; set; }
+        public DbSet<ProdutoCategoria> ProdutoCategoria { get; set; }
 
 
         public QuickBuyContexto(DbContextOptions options) : base(options)
@@ -35,6 +36,7 @@ namespace QuickBuy.Repositorio.Contexto
             modelBuilder.ApplyConfiguration(new PedidoConfiguration());
             modelBuilder.ApplyConfiguration(new ItemPedidoConfiguration());
             modelBuilder.ApplyConfiguration(new FormaPagamentoConfiguration());
+            modelBuilder.ApplyConfiguration(new CategoriaProdutoConfiguration());
 
             modelBuilder.Entity<FormaPagamento>().HasData(      new FormaPagamento() 
                                                                 { 
@@ -53,6 +55,32 @@ namespace QuickBuy.Repositorio.Contexto
                                                                     Id = 3,
                                                                     Nome = "Depósito",
                                                                     Descricao = "Forma de Pagamento Depósito"
+                                                                }
+                                                         );
+            
+            modelBuilder.Entity<ProdutoCategoria>().HasData(    new ProdutoCategoria()
+                                                                {
+                                                                    Id = 1,
+                                                                    NomeCategoria = "Categoria1",
+                                                                    DescricaoCategoria = "Categoria1 Teste"
+                                                                },
+                                                                new ProdutoCategoria()
+                                                                {
+                                                                    Id = 2,
+                                                                    NomeCategoria = "Categoria2",
+                                                                    DescricaoCategoria = "Categoria2 Teste"
+                                                                },
+                                                                new ProdutoCategoria()
+                                                                {
+                                                                    Id = 3,
+                                                                    NomeCategoria = "Categoria3",
+                                                                    DescricaoCategoria = "Categoria3 Teste"
+                                                                },
+                                                                new ProdutoCategoria()
+                                                                {
+                                                                    Id = 4,
+                                                                    NomeCategoria = "Categoria4",
+                                                                    DescricaoCategoria = "Categoria4 Teste"
                                                                 }
                                                          );
             base.OnModelCreating(modelBuilder);
