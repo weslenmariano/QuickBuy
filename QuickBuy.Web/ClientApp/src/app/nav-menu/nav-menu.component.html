@@ -19,6 +19,13 @@
               <img src="assets/img/boxes_210x210.png" style="width:32px;height:32px" data-toggle="tooltip" data-placement="bottom" data-html="true" title="Produtos" />
             </a>
           </li>
+
+          <li class="nav-item" [routerLinkActive]='["link-active"]' *ngIf="usuarioAdministrador()">
+            <a class="nav-link text-dark" [routerLink]='["/pesquisa-categoria"]'>
+              <img src="assets/img/categoria_210x205.png" style="width:32px;height:32px" data-toggle="tooltip" data-placement="bottom" data-html="true" title="Categorias" />
+            </a>
+          </li>
+
           <li class="nav-item" [routerLinkActive]='["link-active"]' *ngIf="!usuarioLogado()">
             <a class="nav-link text-dark" [routerLink]='["/entrar"]'>
               <img src="assets/img/log-in.png" style="width:32px;height:32px" data-toggle="tooltip" data-placement="bottom" data-html="true" title="Entrar" />

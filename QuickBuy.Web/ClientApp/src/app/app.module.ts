@@ -28,6 +28,8 @@ import { LojaCompraRealizadaComponent } from './loja/efetivar/loja.compra.realiz
 import { DadosUsuarioComponent } from './usuario/dadosUsuario/dados.usuario.component';
 import { UsuarioDadosServico } from './servicos/usuario/usuarioDados.servico';
 import { GuardaAdmRotas } from './autorizacao/guarda.adm.rotas';
+import { CategoriaComponent } from './produto/cadastro/categoria.component';
+
 
 
 
@@ -46,6 +48,10 @@ export class CustomHammerConfig extends HammerGestureConfig {
 
 import { NgxGalleryModule } from 'ngx-gallery';
 import { ProdutoComplementoServico } from './servicos/produto/produtoComplemento.servico';
+import { ProdutoCategoriaServico } from './servicos/produto/produtoCategoria.servico';
+import { PesquisaCategoriaComponent } from './produto/pesquisa/pesquisa.categoria.component';
+/* import { NgSelectModule } from '@ng-select/ng-select'; // npm i -s @ng-select/ng-select@latest rxjs-compat */
+ 
 
 @NgModule({
     declarations: [
@@ -61,6 +67,8 @@ import { ProdutoComplementoServico } from './servicos/produto/produtoComplemento
         LojaEfetivarComponent,
         LojaCompraRealizadaComponent,
         DadosUsuarioComponent,
+        CategoriaComponent,
+        PesquisaCategoriaComponent,
         
 
     ],
@@ -68,6 +76,7 @@ import { ProdutoComplementoServico } from './servicos/produto/produtoComplemento
         BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
         HttpClientModule,
         FormsModule,
+ //       NgSelectModule,
         NgxGalleryModule,
         Ng2ImgMaxModule,
         NgxPaginationModule,
@@ -85,11 +94,16 @@ import { ProdutoComplementoServico } from './servicos/produto/produtoComplemento
             { path: 'loja-produto', component: LojaProdutoComponent },
             { path: 'loja-efetivar', component: LojaEfetivarComponent, canActivate: [GuardaRotas] },
             { path: 'compra-realizada-sucesso', component: LojaCompraRealizadaComponent },
-            { path: 'usuario-dados', component: DadosUsuarioComponent, canActivate: [GuardaRotas]  }
+            { path: 'usuario-dados', component: DadosUsuarioComponent, canActivate: [GuardaRotas] },
+            { path: 'categoria', component: CategoriaComponent, canActivate: [GuardaAdmRotas] },
+          { path: 'pesquisa-categoria', component: PesquisaCategoriaComponent, canActivate: [GuardaAdmRotas] },
+          
 
         ])
     ],
-    providers: [UsuarioServico, ProdutoServico, PedidoServico, ProdutoComplementoServico, UsuarioDadosServico, { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig }],
+    providers: [UsuarioServico, PedidoServico,
+                ProdutoServico, ProdutoComplementoServico,
+                ProdutoCategoriaServico, UsuarioDadosServico, { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig }],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -251,9 +251,8 @@ namespace QuickBuy.Repositorio.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<bool>("Ativo")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(true);
+                    b.Property<int>("Ativo")
+                        .HasMaxLength(1);
 
                     b.Property<DateTime>("DataCadastro")
                         .ValueGeneratedOnAdd()
@@ -274,7 +273,7 @@ namespace QuickBuy.Repositorio.Migrations
                         new
                         {
                             Id = 1,
-                            Ativo = false,
+                            Ativo = 0,
                             DataCadastro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescricaoCategoria = "Categoria1 Teste",
                             NomeCategoria = "Categoria1"
@@ -282,7 +281,7 @@ namespace QuickBuy.Repositorio.Migrations
                         new
                         {
                             Id = 2,
-                            Ativo = false,
+                            Ativo = 0,
                             DataCadastro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescricaoCategoria = "Categoria2 Teste",
                             NomeCategoria = "Categoria2"
@@ -290,7 +289,7 @@ namespace QuickBuy.Repositorio.Migrations
                         new
                         {
                             Id = 3,
-                            Ativo = false,
+                            Ativo = 0,
                             DataCadastro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescricaoCategoria = "Categoria3 Teste",
                             NomeCategoria = "Categoria3"
@@ -298,7 +297,7 @@ namespace QuickBuy.Repositorio.Migrations
                         new
                         {
                             Id = 4,
-                            Ativo = false,
+                            Ativo = 0,
                             DataCadastro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescricaoCategoria = "Categoria4 Teste",
                             NomeCategoria = "Categoria4"

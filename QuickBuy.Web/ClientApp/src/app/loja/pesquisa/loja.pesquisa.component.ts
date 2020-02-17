@@ -83,7 +83,7 @@ export class LojaPesquisaComponent implements OnInit {
         this.produtoServico.obterTodosProdutos()
             .subscribe(
                 produtos => {
-                    this.produtos = produtos.filter(p => p.descricao.search(filtro) != -1 || p.descricao.search(filtro) != -1);
+                    this.produtos = produtos.filter(p => p.descricao.toLowerCase().search(filtro.toLowerCase()) != -1 || p.descricao.toLowerCase().search(filtro.toLowerCase()) != -1);
                     if (this.produtos.length > 6) { this.possuiPaginas = true; } else { this.possuiPaginas = false; }
                     this.ativarSpinnerBuscar = false;
                 },

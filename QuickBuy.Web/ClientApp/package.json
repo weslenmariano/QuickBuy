@@ -36,6 +36,7 @@
     "ngx-pagination": "^5.0.0",
     "popper.js": "^1.14.3",
     "rxjs": "^6.0.0",
+    "rxjs-compat": "^6.5.4",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {

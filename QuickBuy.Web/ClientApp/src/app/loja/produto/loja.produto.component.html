@@ -13,7 +13,23 @@
       <div class="row mb-4"><h1 class="h4">R$ {{produto.preco}}</h1></div>
       <div class="row mb-4">
         <button class="btn btn-danger btn-lg" (click)="comprar()">Comprar</button>
+       
       </div>
+    </div>
+  </div>
+  <br />
+  <div class="row">
+    <div class="col-md-4 mb-4" [@anim]="" *ngFor="let p of produtosExibir">
+      <a (click)="abrirProduto(p)" style="cursor:pointer">
+        <div class="card" style="padding:10px; height:22rem; width:18rem;">
+          <img class="card-top align-self-center" src="../../../../../arquivos/{{p.nomeArquivo}}" style="width:180px;height:180px;" />
+          <div class="card-body">
+            <!--  <h5 class="card-title">{{p.nome}}</h5> -->
+            <div class="card-text">{{p.descricao | truncate:50}}</div>
+            <h5 class="h5">R$ {{p.preco}}</h5>
+          </div>
+        </div>
+      </a>
     </div>
   </div>
 

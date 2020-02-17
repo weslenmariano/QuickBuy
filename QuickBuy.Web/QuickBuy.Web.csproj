@@ -85,18 +85,25 @@
     <None Remove="ClientApp\src\app\loja\produto\loja.produto.component.css" />
     <None Remove="ClientApp\src\app\loja\produto\loja.produto.component.html" />
     <None Remove="ClientApp\src\app\loja\produto\loja.produto.component.ts" />
+    <None Remove="ClientApp\src\app\modelo\categoriaCombo.ts" />
     <None Remove="ClientApp\src\app\modelo\itemPedido.ts" />
     <None Remove="ClientApp\src\app\modelo\pedido.ts" />
     <None Remove="ClientApp\src\app\modelo\produto.ts" />
+    <None Remove="ClientApp\src\app\modelo\produtoCategoria.ts" />
     <None Remove="ClientApp\src\app\modelo\produtoComplemento.ts" />
     <None Remove="ClientApp\src\app\modelo\usuario.ts" />
     <None Remove="ClientApp\src\app\modelo\usuarioDados.ts" />
+    <None Remove="ClientApp\src\app\produto\cadastro\categoria.component.ts" />
+    <None Remove="ClientApp\src\app\produto\pesquisa\pesquisa.categoria.component.css" />
+    <None Remove="ClientApp\src\app\produto\pesquisa\pesquisa.categoria.component.html" />
+    <None Remove="ClientApp\src\app\produto\pesquisa\pesquisa.categoria.component.ts" />
     <None Remove="ClientApp\src\app\produto\pesquisa\pesquisa.produto.component.css" />
     <None Remove="ClientApp\src\app\produto\pesquisa\pesquisa.produto.component.html" />
     <None Remove="ClientApp\src\app\produto\pesquisa\pesquisa.produto.component.ts" />
     <None Remove="ClientApp\src\app\produto\produto.component.ts" />
     <None Remove="ClientApp\src\app\servicos\pedido\pedido.servico.ts" />
     <None Remove="ClientApp\src\app\servicos\produto\produto.servico.ts" />
+    <None Remove="ClientApp\src\app\servicos\produto\produtoCategoria.servico.ts" />
     <None Remove="ClientApp\src\app\servicos\produto\produtoComplemento.servico.ts" />
     <None Remove="ClientApp\src\app\servicos\usuario\usuario.servico.ts" />
     <None Remove="ClientApp\src\app\servicos\usuario\usuarioDados.servico.ts" />
@@ -147,12 +154,26 @@
     <TypeScriptCompile Include="ClientApp\src\app\loja\produto\loja.produto.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\modelo\itemPedido.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\modelo\pedido.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\modelo\categoriaCombo.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\modelo\produtoCategoria.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\modelo\produtoComplemento.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\modelo\produto.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\modelo\usuarioDados.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\modelo\usuario.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\produto\cadastro\categoria.component.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\produto\pesquisa\pesquisa.categoria.component.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\produto\pesquisa\pesquisa.categoria.component.html">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\produto\pesquisa\pesquisa.categoria.component.css">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\produto\pesquisa\pesquisa.produto.component.css">
       <SubType>Code</SubType>
     </TypeScriptCompile>
@@ -162,6 +183,9 @@
     <TypeScriptCompile Include="ClientApp\src\app\produto\pesquisa\pesquisa.produto.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\produto\cadastro\produto.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\servicos\pedido\pedido.servico.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\servicos\produto\produtoCategoria.servico.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\servicos\produto\produtoComplemento.servico.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>

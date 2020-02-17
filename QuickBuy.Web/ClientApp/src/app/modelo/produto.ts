@@ -7,4 +7,7 @@ export class Produto {
     public precoOriginal: number;
     public quantidade: number;
     public usuarioId: number;
+    public tag: string;
+    public ativo: boolean;
+    public produtoCategoriaId: number;
 }

@@ -19,10 +19,12 @@ namespace QuickBuy.Repositorio.Config
             builder
                 .Property(f => f.DescricaoCategoria)
                 .HasMaxLength(250);
+
             builder
                .Property(f => f.Ativo)
                .IsRequired()
-               .HasDefaultValue(true);
+               .HasMaxLength(1);
+                
 
             builder
                .Property(f => f.DataCadastro)
