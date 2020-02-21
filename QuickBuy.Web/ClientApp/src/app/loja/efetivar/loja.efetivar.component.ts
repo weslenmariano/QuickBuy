@@ -21,18 +21,21 @@ export class LojaEfetivarComponent implements OnInit {
   public total: number;
   public produto: Produto;
   public prodInvalido: boolean;
+  public produtoLocal: Produto;
+  public todosProdutos: Produto[] = [];
+  public carregandoProdutos: boolean;
 
   ngOnInit(): void {
+    this.carregandoProdutos = true;
     this.carrinhoCompras = new LojaCarrinhoCompras();
-    this.produtos = this.carrinhoCompras.obterProdutos();
-    this.produtos = this.produtos.filter(p => p.usuarioId == this.usuarioServico.usuario.id);
+    //this.produtos = this.carrinhoCompras.obterProdutos();
+    //this.produtos = this.produtos.filter(p => p.usuarioId == this.usuarioServico.usuario.id);
+   // alert("verificar se houve mudanças");
     //VERIFICA ALTERACOES DE PRODUTOS NO CARRINHO COM A BASE.
-    this.verificarAlteracoesProduto(this.produtos);
+    //this.verificarAlteracoesProduto(this.produtos);
+    this.verificarAlteracoes();
     //
-    this.atualizarTotal();
-    if (!this.temProdutoDoUsuario()) {
-      this.router.navigate(['/']);
-    }
+    
   }
 
   constructor(private usuarioServico: UsuarioServico, private pedidoServico: PedidoServico, private router: Router, private produtoServico: ProdutoServico) {
@@ -60,6 +63,9 @@ export class LojaEfetivarComponent implements OnInit {
     this.carrinhoCompras.removerProduto(produto);
     this.produtos = this.carrinhoCompras.obterProdutos();
     this.produtos = this.produtos.filter(p => p.usuarioId == this.usuarioServico.usuario.id);
+    //VERIFICA ALTERACOES DE PRODUTOS NO CARRINHO COM A BASE.
+    this.verificarAlteracoes();
+    //
     this.atualizarTotal();
     if (!this.temProdutoDoUsuario()) {
       this.router.navigate(['/']);
@@ -76,20 +82,11 @@ export class LojaEfetivarComponent implements OnInit {
   }
 
   public efetivarCompra() {
-    this.pedidoServico.efetivarCompra(this.criarPedido())
-      .subscribe(
-        pedidoId => {
-          console.log(pedidoId);
-          sessionStorage.setItem("pedidoId", pedidoId.toString());
-          this.produtos = [];
-          this.carrinhoCompras.limparCarrinhoCompras();
-          //redirecionar para outra pagina
-          this.router.navigate(['/compra-realizada-sucesso']);
+    alert("Verificar Alteracoes Compra");
+    this.verificarAlteracoesCompra();
+  
 
-        },
-        seerro => {
-          console.log(seerro.error);
-        });
+    
   }
 
   public criarPedido(): Pedido {
@@ -138,23 +135,115 @@ export class LojaEfetivarComponent implements OnInit {
     this.router.navigate(['/loja-produto'])
 
   }
-
-  public verificarAlteracoesProduto(produtos: Produto[]) {
-    for (var i = 0; i < produtos.length; i++) {
-      alert(produtos[i].id);
-      this.produtoServico.obterProduto(produtos[i].id)
+  public verificarAlteracoes() {
+    this.todosProdutos = [];
+    this.prodInvalido = false;
+    this.carregandoProdutos = true;
+      this.produtoServico.obterTodosProdutos()
         .subscribe(
-          dadosProd => {
-            this.produto = dadosProd;
-            alert(this.produto.nome);
-            alert(this.produto.descricao);
-            alert(this.produto.preco);
+          prod => {
+            this.produtos = this.carrinhoCompras.obterProdutos();
+            this.produtos = this.produtos.filter(p => p.usuarioId == this.usuarioServico.usuario.id);
+            for (var i = 0; i < this.produtos.length; i++) {
+              this.produtoLocal = prod.filter(p => p.id == this.produtos[i].id)[0];
+              this.todosProdutos.push(this.produtoLocal);
+            }
+
+            //this.produtoAlterado(this.todosProdutos);
+
+            for (var i = 0; i < this.produtos.length; i++) {
+              var produtoValidar: Produto;
+              produtoValidar = this.todosProdutos.filter(p => p.id == this.produtos[i].id)[0];
+              if ((this.produtos[i].id == produtoValidar.id) &&
+                (this.produtos[i].nome == produtoValidar.nome) &&
+                (this.produtos[i].descricao == produtoValidar.descricao) &&
+                (this.produtos[i].preco == produtoValidar.preco) &&
+                (this.produtos[i].produtoCategoriaId == produtoValidar.produtoCategoriaId)
+              ) {
+                this.produtos[i].alterado = false;
+              }
+              else {
+                this.produtos[i].alterado = true;
+                this.prodInvalido = true;
+              }
+            }
+            //this.total = this.produtos.reduce((acc, produto) => acc + produto.preco, 0);
+            this.atualizarTotal();
+            if (!this.temProdutoDoUsuario()) {
+              this.router.navigate(['/']);
+            }
+            this.carregandoProdutos = false;
           },
           seerro => {
+            this.carregandoProdutos = false;
             console.log(seerro.error);
           });
-    }
-   
+    
+  }
+
+  public verificarAlteracoesCompra() {
+    this.prodInvalido = false;
+    this.todosProdutos = [];
+    this.produtoServico.obterTodosProdutos()
+      .subscribe(
+        prod => {
+          this.produtos = this.carrinhoCompras.obterProdutos();
+          this.produtos = this.produtos.filter(p => p.usuarioId == this.usuarioServico.usuario.id);
+          for (var i = 0; i < this.produtos.length; i++) {
+            this.produtoLocal = prod.filter(p => p.id == this.produtos[i].id)[0];
+            this.todosProdutos.push(this.produtoLocal);
+          }
+          for (var i = 0; i < this.produtos.length; i++) {
+            var produtoValidar: Produto;
+            produtoValidar = this.todosProdutos.filter(p => p.id == this.produtos[i].id)[0];
+            alert(JSON.stringify(produtoValidar));
+            alert(this.produtos[i].descricao);
+            if ((this.produtos[i].id == produtoValidar.id) &&
+              (this.produtos[i].nome == produtoValidar.nome) &&
+              (this.produtos[i].descricao == produtoValidar.descricao) &&
+              (this.produtos[i].preco == produtoValidar.preco) &&
+              (this.produtos[i].produtoCategoriaId == produtoValidar.produtoCategoriaId)
+            ) {
+              this.produtos[i].alterado = false;
+            }
+            else {
+              this.produtos[i].alterado = true;
+              this.prodInvalido = true;
+            }
+          }
+          
+          ///
+          if (!this.prodInvalido) {
+            this.pedidoServico.efetivarCompra(this.criarPedido())
+              .subscribe(
+                pedidoId => {
+                  console.log(pedidoId);
+                  sessionStorage.setItem("pedidoId", pedidoId.toString());
+                  this.produtos = [];
+                  this.carrinhoCompras.limparCarrinhoCompras();
+                  //redirecionar para outra pagina
+                  this.router.navigate(['/compra-realizada-sucesso']);
+
+                },
+                seerro => {
+                  console.log(seerro.error);
+                });
+
+
+          }
+          ///
+          else {
+            this.atualizarTotal();
+            if (!this.temProdutoDoUsuario()) {
+              this.router.navigate(['/']);
+            }
+            this.carregandoProdutos = false;
+          }
+        },
+        seerro => {
+          this.carregandoProdutos = false;
+          console.log(seerro.error);
+        });
 
   }
 }

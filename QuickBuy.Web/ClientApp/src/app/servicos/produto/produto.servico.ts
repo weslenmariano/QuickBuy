@@ -66,13 +66,8 @@ export class ProdutoServico implements OnInit {
     //   return this.http.get<Produto[]>(this._baseUrl + "api/produto");
     //}
 
-    public obterProdutox(produtoId: number): Observable<Produto> {
-      alert("obter produto Id:"+ produtoId)
-        return this.http.get<Produto>(this._baseUrl + "api/produto/obter");
-  }
-
   public obterProduto(produtoId: number): Observable<Produto> {
-    alert("obter produto Id:" + produtoId)
+   // alert("obter produto Id:" + produtoId)
     return this.http.post<Produto>(this._baseUrl + "api/produto/obter", JSON.stringify(produtoId), { headers: this.headers });
   }
 
