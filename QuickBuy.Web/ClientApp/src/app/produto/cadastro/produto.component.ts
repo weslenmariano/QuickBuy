@@ -114,6 +114,11 @@ export class ProdutoComponent implements OnInit {
     //alert("carrega Categoria");
     this.carregaCategoria();
 
+    //if (this.produto.produtoCategoriaId != null) {
+    //  alert(this.produto.produtoCategoriaId);
+    //  (<HTMLSelectElement>document.getElementById('categoriasId')).value = this.produtoCategoria.find(cat => cat.id == this.produto.produtoCategoriaId).nomeCategoria;
+    //}
+    
 
     this.galleryOptions = [
       {
@@ -175,6 +180,9 @@ export class ProdutoComponent implements OnInit {
         preview: false
       }
     ];
+
+    //let element = (<HTMLSelectElement>document.getElementById('categoriasId'));
+    //element.value = this.produtoCategoria.find(cat => cat.id == this.produto.produtoCategoriaId).id + "";
   }
 
   public inputChangePrincipal(files: FileList) {
@@ -447,13 +455,6 @@ export class ProdutoComponent implements OnInit {
     //alert(JSON.stringify(this.produtoCategoria));
 
   }
-
-  public vercombo() {
-    alert("Categorias: ");
-   
-
-  }
-
 
   public LimparSessao() {
     sessionStorage.setItem('produtoSession', "");

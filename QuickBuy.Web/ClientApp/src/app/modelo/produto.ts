@@ -9,5 +9,6 @@ export class Produto {
     public usuarioId: number;
     public tag: string;
     public ativo: boolean;
-    public produtoCategoriaId: number;
+  public produtoCategoriaId: number;
+  public alterado: boolean;
 }
