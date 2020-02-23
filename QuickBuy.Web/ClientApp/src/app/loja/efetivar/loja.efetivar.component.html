@@ -1,5 +1,10 @@
-<div class="container">
-  <div class="row">
+<div class="d-flex justify-content-center" *ngIf="carregandoProdutos">
+  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+  Carregando Produtos...
+</div>
+<div class="container" *ngIf="!carregandoProdutos">
+
+  <div class="row" >
     <div class="col-md-9">
       <table class="table table-hover">
         <thead>
@@ -12,16 +17,30 @@
           </tr>
         </thead>
         <tbody>
+         
           <tr *ngFor="let p of produtos">
             <td style="width:10%"><img src="../../../../../arquivos/{{p.nomeArquivo}}" style="width:60px;height:60px" /></td>
-            <td style="width:50%">{{p.descricao}}</td>
+            <td style="width:50%">
+              <a (click)="abrirProduto(p)" style="cursor:pointer">{{p.descricao | truncate:30}}</a>
+              <div class="text-danger" style="font-size:10px" *ngIf="p.alterado">
+                <strong>*O produto sofreu alterações ou esta indisponível, é necessário excluir do carrinho.</strong>
+              </div>
+            </td>
             <td style="width:10%">
-              <input type="number" class="form-control" value="1" (change)="atualizarPreco(p, $event.target.value)"
-                     [(ngModel)]="p.quantidade" placeholder="1"/>
+              <div *ngIf="p.alterado">
+                <input type="number" class="form-control" style="background-color:#c4c3c3"  value="1" 
+                       [(ngModel)]="p.quantidade" placeholder="1" disabled />
+              </div>
+              <div  *ngIf="!p.alterado">
+                <input type="number" class="form-control" value="1" (change)="atualizarPreco(p, $event.target.value)"
+                       [(ngModel)]="p.quantidade" placeholder="1" />
+              </div>
             </td>
             <td style="width:20%">R$ {{p.preco | number:'1.0-2'}}</td>
             <td style="width:10%"><button class="btn btn-secondary btn-sm" (click)="remover(p)">Remover</button></td>
+           
           </tr>
+          
         </tbody>
       </table>
     </div>
@@ -32,10 +51,20 @@
           <div class="card-body">
             <table class="mb-2">
               <tr>
-                <td style="width:50%"><strong>Total:</strong></td><td><strong>R$ {{total | number:'1.0-2'}}</strong></td>
+                <td style="width:50%"><strong>Total:</strong></td>
+                <td><strong>R$ {{total | number:'1.0-2'}}</strong></td>
               </tr>
             </table>
-            <button class="btn btn-danger" style="width:100%" (click)="efetivarCompra()">Efetivar Compra</button>
+            <div *ngIf="prodInvalido">
+              <button class="btn btn-danger" disabled style="width:100%" >Efetivar Compra</button>
+              <div class="text-danger" style="font-size:10px">
+                <strong>*Ops. Existe algum item inválido no carrinho. </strong>
+              </div>
+            </div>
+            <div *ngIf="!prodInvalido">
+            <button class="btn btn-danger"  style="width:100%" (click)="efetivarCompra()">Efetivar Compra</button>
+            </div>
+            
           </div>
         </div>
       </div>

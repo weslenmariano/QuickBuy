@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuickBuy.Dominio.ObjetoDeValor;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -10,7 +11,12 @@ namespace QuickBuy.Dominio.Entidades
         public string Nome { get; set; }
         public string Descricao { get; set; }
         public decimal Preco { get; set; }
-
+        public string NomeArquivo { get; set; }
+        public DateTime DataCadastro { get; set; }
+        public string Tag { get; set; }
+        public bool Ativo { get; set; }
+        public int ProdutoCategoriaId { get; set; }
+        public virtual ProdutoCategoria ProdutoCategoria { get; set; }
 
         public override void Validate()
         {

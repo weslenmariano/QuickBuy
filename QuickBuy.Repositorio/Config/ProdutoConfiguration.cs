@@ -25,6 +25,24 @@ namespace QuickBuy.Repositorio.Config
                 .Property(p => p.Preco)
                 .HasColumnType("decimal(19,4)")
                 .IsRequired();
+
+            builder
+               .Property(p => p.Ativo)
+               .IsRequired()
+               .HasDefaultValue(true);
+
+            builder
+                .Property(p => p.Tag)
+                .HasMaxLength(200);
+
+            builder
+               .Property(p => p.DataCadastro)
+               .IsRequired()
+               .HasDefaultValueSql("sysdate()");
+
+            builder
+              .Property(p => p.ProdutoCategoriaId)
+              .IsRequired();
         }
     }
 }

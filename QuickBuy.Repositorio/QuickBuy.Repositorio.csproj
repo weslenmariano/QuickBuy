@@ -7,6 +7,12 @@
   <ItemGroup>
     <Compile Remove="Migrations\20200102161534_InclusaoDadosDeUsuario.cs" />
     <Compile Remove="Migrations\20200102161534_InclusaoDadosDeUsuario.Designer.cs" />
+    <Compile Remove="Migrations\20200130185753_AjusteCategoriaProduto.cs" />
+    <Compile Remove="Migrations\20200130185753_AjusteCategoriaProduto.Designer.cs" />
+    <Compile Remove="Migrations\20200130191054_AjusteCategoriaProduto.cs" />
+    <Compile Remove="Migrations\20200130191054_AjusteCategoriaProduto.Designer.cs" />
+    <Compile Remove="Migrations\20200130192642_AddCategoriaProduto.cs" />
+    <Compile Remove="Migrations\20200130192642_AddCategoriaProduto.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

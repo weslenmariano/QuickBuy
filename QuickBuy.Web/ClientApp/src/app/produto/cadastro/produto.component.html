@@ -63,6 +63,20 @@
   </div>
 </div>
 
+<!-- CATEGORIA DO PRODUTO-->
+<div *ngIf="!ativarSpinnerCb">
+  <select class="mb-2 col-md-6 btn btn-outline-light dropdown-toggle" id="categoriasId" [(ngModel)]="categorias">
+    <option *ngFor="let cat of  produtoCategoria " [value]="cat.id">
+      {{cat.nomeCategoria}}
+    </option>
+  </select>
+  <div class="invalid-feedback mb-2" role="status" *ngIf="idCatInvalido">
+    Selecione uma categoria para o produto.
+  </div>
+</div>
+<span class="spinner-border spinner-border-sm mb-2" role="status" *ngIf="ativarSpinnerCb"></span>
+<!-- FIM CATEGORIA DO PRODUTO-->
+
 <div class="input-group mb-2">
   <div class="custom-file col-md-6">
     <input type="file" class="custom-file-input" accept=".jpg,.gif,.png"
@@ -82,6 +96,9 @@
 
 <div class="input-group mb-2">
   <div class="custom-file col-md-6">
+    
+
+    fi
     <input type="file" class="custom-file-input" accept=".jpg,.gif,.png"
            id="inputFileMultiplo" aria-describedby="inputGroupFileAddon04" (change)="inputChangeGaleria($event.target.files)" multiple />
     <label for="inputFileMultiplo" class="custom-file-label">Escolha demais imagens para o produto (jpg,gif,png)</label>
@@ -91,15 +108,15 @@
   </div>
 </div>
 <div *ngIf="exibirGaleria">
-  <ngx-gallery [options]="galleryOptions" [images]="galleryImages" style=" border:2px solid #ddd; border-radius:4px; padding: 0 0 5px 5px" ></ngx-gallery>
+  <ngx-gallery [options]="galleryOptions" [images]="galleryImages" style=" border:2px solid #ddd; border-radius:4px; padding: 0 0 5px 5px"></ngx-gallery>
 </div>
 
 <div class="form-inline">
-  <button class="btn btn-primary" style="margin-right:4px" (click)="cadastrar()" [disabled]="ativarSpinner">
+  <button class="btn btn-primary mb-2" style="margin-right:4px" (click)="cadastrar()" [disabled]="ativarSpinner">
     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="ativarSpinner"></span>
     Cadastrar
   </button>
-  <button class="btn btn-secondary" [routerLink]='["/pesquisar-produto"]'>Cancelar</button>
+  <button class="btn btn-secondary mb-2" [routerLink]='["/pesquisar-produto"]'>Cancelar</button>
 </div>
 
 

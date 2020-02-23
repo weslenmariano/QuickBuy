@@ -62,6 +62,14 @@ namespace QuickBuy.Repositorio.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<bool>("Ativo")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(true);
+
+                    b.Property<DateTime>("DataCadastro")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("sysdate()");
+
                     b.Property<string>("Descricao")
                         .IsRequired()
                         .HasMaxLength(400);
@@ -75,7 +83,14 @@ namespace QuickBuy.Repositorio.Migrations
                     b.Property<decimal>("Preco")
                         .HasColumnType("decimal(19,4)");
 
+                    b.Property<int>("ProdutoCategoriaId");
+
+                    b.Property<string>("Tag")
+                        .HasMaxLength(200);
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ProdutoCategoriaId");
 
                     b.ToTable("Produtos");
                 });
@@ -231,6 +246,64 @@ namespace QuickBuy.Repositorio.Migrations
                         });
                 });
 
+            modelBuilder.Entity("QuickBuy.Dominio.ObjetoDeValor.ProdutoCategoria", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Ativo")
+                        .HasMaxLength(1);
+
+                    b.Property<DateTime>("DataCadastro")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("sysdate()");
+
+                    b.Property<string>("DescricaoCategoria")
+                        .HasMaxLength(250);
+
+                    b.Property<string>("NomeCategoria")
+                        .IsRequired()
+                        .HasMaxLength(100);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProdutoCategoria");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Ativo = 0,
+                            DataCadastro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DescricaoCategoria = "Categoria1 Teste",
+                            NomeCategoria = "Categoria1"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Ativo = 0,
+                            DataCadastro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DescricaoCategoria = "Categoria2 Teste",
+                            NomeCategoria = "Categoria2"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Ativo = 0,
+                            DataCadastro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DescricaoCategoria = "Categoria3 Teste",
+                            NomeCategoria = "Categoria3"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Ativo = 0,
+                            DataCadastro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DescricaoCategoria = "Categoria4 Teste",
+                            NomeCategoria = "Categoria4"
+                        });
+                });
+
             modelBuilder.Entity("QuickBuy.Dominio.Entidades.ItemPedido", b =>
                 {
                     b.HasOne("QuickBuy.Dominio.Entidades.Pedido")
@@ -248,6 +321,14 @@ namespace QuickBuy.Repositorio.Migrations
                     b.HasOne("QuickBuy.Dominio.Entidades.Usuario", "Usuario")
                         .WithMany("Pedidos")
                         .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("QuickBuy.Dominio.Entidades.Produto", b =>
+                {
+                    b.HasOne("QuickBuy.Dominio.ObjetoDeValor.ProdutoCategoria", "ProdutoCategoria")
+                        .WithMany()
+                        .HasForeignKey("ProdutoCategoriaId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
