@@ -8,6 +8,7 @@ import { UsuarioServico } from "../../servicos/usuario/usuario.servico";
 import { ItemPedido } from "../../modelo/itemPedido";
 import { PedidoServico } from "../../servicos/pedido/pedido.servico";
 import { forEach } from "@angular/router/src/utils/collection";
+import { isUndefined } from "util";
 
 @Component({
   selector: "loja-efetivar",
@@ -82,7 +83,7 @@ export class LojaEfetivarComponent implements OnInit {
   }
 
   public efetivarCompra() {
-    alert("Verificar Alteracoes Compra");
+    //alert("Verificar Alteracoes Compra");
     this.verificarAlteracoesCompra();
   
 
@@ -139,20 +140,25 @@ export class LojaEfetivarComponent implements OnInit {
     this.todosProdutos = [];
     this.prodInvalido = false;
     this.carregandoProdutos = true;
-      this.produtoServico.obterTodosProdutos()
-        .subscribe(
-          prod => {
-            this.produtos = this.carrinhoCompras.obterProdutos();
-            this.produtos = this.produtos.filter(p => p.usuarioId == this.usuarioServico.usuario.id);
-            for (var i = 0; i < this.produtos.length; i++) {
-              this.produtoLocal = prod.filter(p => p.id == this.produtos[i].id)[0];
+    this.produtoServico.obterTodosProdutos()
+      .subscribe(
+        prod => {
+          this.produtos = this.carrinhoCompras.obterProdutos();
+          this.produtos = this.produtos.filter(p => p.usuarioId == this.usuarioServico.usuario.id);
+          for (var i = 0; i < this.produtos.length; i++) {
+            this.produtoLocal = prod.filter(p => p.id == this.produtos[i].id)[0];
+            if (isUndefined(this.produtoLocal)) {
+              this.produtos[i].alterado = true;
+              this.prodInvalido = true;
+            } else {
               this.todosProdutos.push(this.produtoLocal);
             }
+            
+          }
 
-            //this.produtoAlterado(this.todosProdutos);
-
-            for (var i = 0; i < this.produtos.length; i++) {
-              var produtoValidar: Produto;
+          for (var i = 0; i < this.produtos.length; i++) {
+            var produtoValidar: Produto;
+            if (this.produtos[i].alterado == false) {
               produtoValidar = this.todosProdutos.filter(p => p.id == this.produtos[i].id)[0];
               if ((this.produtos[i].id == produtoValidar.id) &&
                 (this.produtos[i].nome == produtoValidar.nome) &&
@@ -167,6 +173,7 @@ export class LojaEfetivarComponent implements OnInit {
                 this.prodInvalido = true;
               }
             }
+          }
             //this.total = this.produtos.reduce((acc, produto) => acc + produto.preco, 0);
             this.atualizarTotal();
             if (!this.temProdutoDoUsuario()) {
@@ -191,24 +198,29 @@ export class LojaEfetivarComponent implements OnInit {
           this.produtos = this.produtos.filter(p => p.usuarioId == this.usuarioServico.usuario.id);
           for (var i = 0; i < this.produtos.length; i++) {
             this.produtoLocal = prod.filter(p => p.id == this.produtos[i].id)[0];
-            this.todosProdutos.push(this.produtoLocal);
+            if (isUndefined(this.produtoLocal)) {
+              this.produtos[i].alterado = true;
+              this.prodInvalido = true;
+            } else {
+              this.todosProdutos.push(this.produtoLocal);
+            }
           }
           for (var i = 0; i < this.produtos.length; i++) {
             var produtoValidar: Produto;
-            produtoValidar = this.todosProdutos.filter(p => p.id == this.produtos[i].id)[0];
-            alert(JSON.stringify(produtoValidar));
-            alert(this.produtos[i].descricao);
-            if ((this.produtos[i].id == produtoValidar.id) &&
-              (this.produtos[i].nome == produtoValidar.nome) &&
-              (this.produtos[i].descricao == produtoValidar.descricao) &&
-              (this.produtos[i].preco == produtoValidar.preco) &&
-              (this.produtos[i].produtoCategoriaId == produtoValidar.produtoCategoriaId)
-            ) {
-              this.produtos[i].alterado = false;
-            }
-            else {
-              this.produtos[i].alterado = true;
-              this.prodInvalido = true;
+            if (this.produtos[i].alterado == false) {
+              produtoValidar = this.todosProdutos.filter(p => p.id == this.produtos[i].id)[0];
+              if ((this.produtos[i].id == produtoValidar.id) &&
+                (this.produtos[i].nome == produtoValidar.nome) &&
+                (this.produtos[i].descricao == produtoValidar.descricao) &&
+                (this.produtos[i].preco == produtoValidar.preco) &&
+                (this.produtos[i].produtoCategoriaId == produtoValidar.produtoCategoriaId)
+              ) {
+                this.produtos[i].alterado = false;
+              }
+              else {
+                this.produtos[i].alterado = true;
+                this.prodInvalido = true;
+              }
             }
           }
           
