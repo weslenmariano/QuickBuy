@@ -90,7 +90,9 @@
     <None Remove="ClientApp\src\app\modelo\pedido.ts" />
     <None Remove="ClientApp\src\app\modelo\produto.ts" />
     <None Remove="ClientApp\src\app\modelo\produtoCategoria.ts" />
+    <None Remove="ClientApp\src\app\modelo\produtoCategoriaHistorico.ts" />
     <None Remove="ClientApp\src\app\modelo\produtoComplemento.ts" />
+    <None Remove="ClientApp\src\app\modelo\produtoHistorico.ts" />
     <None Remove="ClientApp\src\app\modelo\usuario.ts" />
     <None Remove="ClientApp\src\app\modelo\usuarioDados.ts" />
     <None Remove="ClientApp\src\app\produto\cadastro\categoria.component.ts" />
@@ -104,7 +106,9 @@
     <None Remove="ClientApp\src\app\servicos\pedido\pedido.servico.ts" />
     <None Remove="ClientApp\src\app\servicos\produto\produto.servico.ts" />
     <None Remove="ClientApp\src\app\servicos\produto\produtoCategoria.servico.ts" />
+    <None Remove="ClientApp\src\app\servicos\produto\produtoCategoriaHistorico.servico.ts" />
     <None Remove="ClientApp\src\app\servicos\produto\produtoComplemento.servico.ts" />
+    <None Remove="ClientApp\src\app\servicos\produto\produtoHistorico.servico.ts" />
     <None Remove="ClientApp\src\app\servicos\usuario\usuario.servico.ts" />
     <None Remove="ClientApp\src\app\servicos\usuario\usuarioDados.servico.ts" />
     <None Remove="ClientApp\src\app\usuario\cadastro\cadastro.usuario.component.ts" />
@@ -155,6 +159,8 @@
     <TypeScriptCompile Include="ClientApp\src\app\modelo\itemPedido.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\modelo\pedido.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\modelo\categoriaCombo.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\modelo\produtoCategoriaHistorico.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\modelo\produtoHistorico.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\modelo\produtoCategoria.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\modelo\produtoComplemento.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\modelo\produto.ts" />
@@ -183,6 +189,12 @@
     <TypeScriptCompile Include="ClientApp\src\app\produto\pesquisa\pesquisa.produto.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\produto\cadastro\produto.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\servicos\pedido\pedido.servico.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\servicos\produto\produtoCategoriaHistorico.servico.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\src\app\servicos\produto\produtoHistorico.servico.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="ClientApp\src\app\servicos\produto\produtoCategoria.servico.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>

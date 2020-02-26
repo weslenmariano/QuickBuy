@@ -46,6 +46,8 @@ namespace QuickBuy.Web
             services.AddScoped<IUsuarioDadosRepositorio, UsuarioDadosRepositorio>();
             services.AddScoped<IProdutoComplementoRepositorio, ProdutoComplementoRepositorio>();
             services.AddScoped<IProdutoCategoriaRepositorio, ProdutoCategoriaRepositorio>();
+            services.AddScoped<IProdutoHistoricoRepositorio, ProdutoHistoricoRepositorio>();
+            services.AddScoped<ICategoriaHistoricoRepositorio, CategoriaHistoricoRepositorio>();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {

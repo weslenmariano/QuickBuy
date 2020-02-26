@@ -13,6 +13,8 @@
     <Compile Remove="Migrations\20200130191054_AjusteCategoriaProduto.Designer.cs" />
     <Compile Remove="Migrations\20200130192642_AddCategoriaProduto.cs" />
     <Compile Remove="Migrations\20200130192642_AddCategoriaProduto.Designer.cs" />
+    <Compile Remove="Migrations\20200223232439_addHistoricoProdutos.cs" />
+    <Compile Remove="Migrations\20200223232439_addHistoricoProdutos.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

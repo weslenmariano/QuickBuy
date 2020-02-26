@@ -21,6 +21,9 @@ namespace QuickBuy.Repositorio.Contexto
         public DbSet<FormaPagamento> FormaPagamento { get; set; }
         public DbSet<ProdutoCategoria> ProdutoCategoria { get; set; }
 
+        
+        public DbSet<ProdutoHistorico> ProdutoHistorico { get; set; }
+
 
         public QuickBuyContexto(DbContextOptions options) : base(options)
         {
@@ -38,6 +41,9 @@ namespace QuickBuy.Repositorio.Contexto
             modelBuilder.ApplyConfiguration(new ItemPedidoConfiguration());
             modelBuilder.ApplyConfiguration(new FormaPagamentoConfiguration());
             modelBuilder.ApplyConfiguration(new CategoriaProdutoConfiguration());
+            modelBuilder.ApplyConfiguration(new ProdutoHistoricoConfiguration());
+            modelBuilder.ApplyConfiguration(new CategoriaHistoricoConfiguration());
+
 
             modelBuilder.Entity<FormaPagamento>().HasData(new FormaPagamento()
             {

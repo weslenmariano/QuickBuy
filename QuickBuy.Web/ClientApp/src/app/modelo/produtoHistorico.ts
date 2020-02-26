@@ -1,4 +1,4 @@
-export class Produto {
+export class ProdutoHistorico {
   public id: number;
   public nome: string;
   public descricao: string;
@@ -10,5 +10,4 @@ export class Produto {
   public tag: string;
   public ativo: boolean;
   public produtoCategoriaId: number;
-  public alterado: boolean;
 }

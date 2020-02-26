@@ -30,6 +30,10 @@ import { UsuarioDadosServico } from './servicos/usuario/usuarioDados.servico';
 import { GuardaAdmRotas } from './autorizacao/guarda.adm.rotas';
 import { CategoriaComponent } from './produto/cadastro/categoria.component';
 
+import { ProdutoHistoricoServico } from './servicos/produto/produtoHistorico.servico';
+import { ProdutoCategoriaHistoricoServico } from './servicos/produto/produtoCategoriaHistorico.servico';
+
+
 
 
 
@@ -102,7 +106,7 @@ import { PesquisaCategoriaComponent } from './produto/pesquisa/pesquisa.categori
         ])
     ],
     providers: [UsuarioServico, PedidoServico,
-                ProdutoServico, ProdutoComplementoServico,
+                ProdutoServico, ProdutoComplementoServico, ProdutoHistoricoServico, ProdutoCategoriaHistoricoServico,
                 ProdutoCategoriaServico, UsuarioDadosServico, { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig }],
     bootstrap: [AppComponent]
 })

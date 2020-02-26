@@ -2,48 +2,22 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using QuickBuy.Repositorio.Contexto;
 
 namespace QuickBuy.Repositorio.Migrations
 {
     [DbContext(typeof(QuickBuyContexto))]
-    partial class QuickBuyContextoModelSnapshot : ModelSnapshot
+    [Migration("20200223233000_AddHistoricoProdutos")]
+    partial class AddHistoricoProdutos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
-
-            modelBuilder.Entity("QuickBuy.Dominio.Entidades.CategoriaHistorico", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("Ativo")
-                        .HasMaxLength(1);
-
-                    b.Property<DateTime>("DataAcao")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("sysdate()");
-
-                    b.Property<DateTime>("DataCadastro")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("sysdate()");
-
-                    b.Property<string>("DescricaoCategoria")
-                        .HasMaxLength(250);
-
-                    b.Property<string>("NomeCategoria")
-                        .IsRequired()
-                        .HasMaxLength(100);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CategoriaHistorico");
-                });
 
             modelBuilder.Entity("QuickBuy.Dominio.Entidades.ItemPedido", b =>
                 {
