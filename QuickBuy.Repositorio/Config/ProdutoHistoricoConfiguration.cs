@@ -37,18 +37,14 @@ namespace QuickBuy.Repositorio.Config
                 .HasMaxLength(200);
 
             builder
-               .Property(p => p.DataCadastro)
-               .IsRequired()
-               .HasDefaultValueSql("sysdate()");
+               .Property(p => p.DataCadastro);
 
             builder
               .Property(p => p.ProdutoCategoriaId)
               .IsRequired();
 
             builder
-              .Property(p => p.DataAcao)
-              .IsRequired()
-              .HasDefaultValueSql("sysdate()");
+              .Property(p => p.DataAcao);
         }
     }
 }

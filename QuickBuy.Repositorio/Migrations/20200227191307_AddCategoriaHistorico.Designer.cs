@@ -9,8 +9,8 @@ using QuickBuy.Repositorio.Contexto;
 namespace QuickBuy.Repositorio.Migrations
 {
     [DbContext(typeof(QuickBuyContexto))]
-    [Migration("20200226171339_AddHistoricoCategorias")]
-    partial class AddHistoricoCategorias
+    [Migration("20200227191307_AddCategoriaHistorico")]
+    partial class AddCategoriaHistorico
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,13 +27,9 @@ namespace QuickBuy.Repositorio.Migrations
                     b.Property<int>("Ativo")
                         .HasMaxLength(1);
 
-                    b.Property<DateTime>("DataAcao")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("sysdate()");
+                    b.Property<DateTime>("DataAcao");
 
-                    b.Property<DateTime>("DataCadastro")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("sysdate()");
+                    b.Property<DateTime>("DataCadastro");
 
                     b.Property<string>("DescricaoCategoria")
                         .HasMaxLength(250);
@@ -92,13 +88,7 @@ namespace QuickBuy.Repositorio.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<bool>("Ativo")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(true);
-
-                    b.Property<DateTime>("DataCadastro")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("sysdate()");
+                    b.Property<DateTime>("DataCadastro");
 
                     b.Property<string>("Descricao")
                         .IsRequired()
@@ -112,6 +102,10 @@ namespace QuickBuy.Repositorio.Migrations
 
                     b.Property<decimal>("Preco")
                         .HasColumnType("decimal(19,4)");
+
+                    b.Property<bool>("ProdAtivo")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(true);
 
                     b.Property<int>("ProdutoCategoriaId");
 
@@ -158,13 +152,9 @@ namespace QuickBuy.Repositorio.Migrations
                         .ValueGeneratedOnAdd()
                         .HasDefaultValue(true);
 
-                    b.Property<DateTime>("DataAcao")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("sysdate()");
+                    b.Property<DateTime>("DataAcao");
 
-                    b.Property<DateTime>("DataCadastro")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("sysdate()");
+                    b.Property<DateTime>("DataCadastro");
 
                     b.Property<string>("Descricao")
                         .IsRequired()
@@ -324,9 +314,7 @@ namespace QuickBuy.Repositorio.Migrations
                     b.Property<int>("Ativo")
                         .HasMaxLength(1);
 
-                    b.Property<DateTime>("DataCadastro")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("sysdate()");
+                    b.Property<DateTime>("DataCadastro");
 
                     b.Property<string>("DescricaoCategoria")
                         .HasMaxLength(250);
@@ -344,7 +332,7 @@ namespace QuickBuy.Repositorio.Migrations
                         {
                             Id = 1,
                             Ativo = 0,
-                            DataCadastro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataCadastro = new DateTime(2020, 2, 27, 16, 13, 7, 181, DateTimeKind.Local).AddTicks(8998),
                             DescricaoCategoria = "Categoria1 Teste",
                             NomeCategoria = "Categoria1"
                         },
@@ -352,7 +340,7 @@ namespace QuickBuy.Repositorio.Migrations
                         {
                             Id = 2,
                             Ativo = 0,
-                            DataCadastro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataCadastro = new DateTime(2020, 2, 27, 16, 13, 7, 183, DateTimeKind.Local).AddTicks(5771),
                             DescricaoCategoria = "Categoria2 Teste",
                             NomeCategoria = "Categoria2"
                         },
@@ -360,7 +348,7 @@ namespace QuickBuy.Repositorio.Migrations
                         {
                             Id = 3,
                             Ativo = 0,
-                            DataCadastro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataCadastro = new DateTime(2020, 2, 27, 16, 13, 7, 183, DateTimeKind.Local).AddTicks(5781),
                             DescricaoCategoria = "Categoria3 Teste",
                             NomeCategoria = "Categoria3"
                         },
@@ -368,7 +356,7 @@ namespace QuickBuy.Repositorio.Migrations
                         {
                             Id = 4,
                             Ativo = 0,
-                            DataCadastro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataCadastro = new DateTime(2020, 2, 27, 16, 13, 7, 183, DateTimeKind.Local).AddTicks(5783),
                             DescricaoCategoria = "Categoria4 Teste",
                             NomeCategoria = "Categoria4"
                         });

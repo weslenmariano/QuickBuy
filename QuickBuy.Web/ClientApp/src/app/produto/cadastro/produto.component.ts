@@ -10,6 +10,8 @@ import { Ng2ImgMaxService } from 'ng2-img-max';
 import { ProdutoCategoriaServico } from "../../servicos/produto/produtoCategoria.servico";
 import { CategoriaCombo } from "../../modelo/categoriaCombo";
 import { ProdutoCategoria } from "../../modelo/produtoCategoria";
+import { isUndefined } from "util";
+import { ProdutoCategoriaHistorico } from "../../modelo/produtoCategoriaHistorico";
 
 @Component({
   selector: "app-produto", // qual tag html que o component produto sera renderizado
@@ -28,6 +30,7 @@ export class ProdutoComponent implements OnInit {
   galleryImagesPrincipal: NgxGalleryImage[];
 
   public produto: Produto;
+  public categoria: ProdutoCategoriaHistorico;
   public produtoImgPrincipal: Produto;
   public prodComp: ProdutoComplemento;
 
@@ -65,6 +68,12 @@ export class ProdutoComponent implements OnInit {
 
   uploadedImage: File;
 
+  public catSelecionadaValue: number = -1;
+  public catSelecionadaDisplay: string = "";
+  public produtoCategoriaSession: string;
+
+  public alterarCategoria: boolean = false;
+  public exibeCheck: boolean = true;
 
   constructor(private produtoServico: ProdutoServico,
     private produtoComplementoServico: ProdutoComplementoServico,
@@ -78,6 +87,7 @@ export class ProdutoComponent implements OnInit {
   ngOnInit(): void {
     var produtoSession = sessionStorage.getItem('produtoSession');
     var produtoComplementoSession = sessionStorage.getItem('produtoComplementoSession');
+    this.produtoCategoriaSession = sessionStorage.getItem('produtoCategoriaSession');
 
     // alert(produtoComplementoSession);
 
@@ -105,20 +115,43 @@ export class ProdutoComponent implements OnInit {
         this.criarGaleria(this.arquivosDeletarGaleria);
       }
       //   alert("alert0:"+this.arquivosDeletarGaleria);
+     // alert(this.produtoCategoriaSession);
+      if (!isUndefined(this.produtoCategoriaSession) && this.produtoCategoriaSession != "") {
 
+        this.categoria = JSON.parse(this.produtoCategoriaSession);
+        this.catSelecionadaValue = this.categoria.id;
+        this.catSelecionadaDisplay = this.categoria.nomeCategoria;
+       // alert("CatSelectedValue:" + this.categoria.id);
+      //  alert("catSelecionadaDisplay:" + this.categoria.nomeCategoria);
+        // this.produto.produtoCategoriaId = this.categoria.id;
+
+      }
     }
     else {
       this.produto = new Produto();
+      this.alterarCategoria = true;
+      this.exibeCheck = false;
+      this.carregaCategoria();
     }
 
     //alert("carrega Categoria");
-    this.carregaCategoria();
+    //this.carregaCategoria();
 
     //if (this.produto.produtoCategoriaId != null) {
     //  alert(this.produto.produtoCategoriaId);
     //  (<HTMLSelectElement>document.getElementById('categoriasId')).value = this.produtoCategoria.find(cat => cat.id == this.produto.produtoCategoriaId).nomeCategoria;
     //}
-    
+    //alert(this.produtoCategoriaSession);
+    //if (!isUndefined(this.produtoCategoriaSession)) {
+
+    //  this.categoria = JSON.parse(this.produtoCategoriaSession);
+    //  this.catSelecionadaValue = this.categoria.id;
+    //  this.catSelecionadaDisplay = this.categoria.nomeCategoria;
+    //  alert("CatSelectedValue:" + this.categoria.id);
+    //  alert("catSelecionadaDisplay:" + this.categoria.nomeCategoria);
+    //  // this.produto.produtoCategoriaId = this.categoria.id;
+
+    //}
 
     this.galleryOptions = [
       {
@@ -314,23 +347,34 @@ export class ProdutoComponent implements OnInit {
 
 
   public cadastrar() {
-    
+
     var semImagem: string = "produto-sem-imagem.jpg";
     let produtoCadastradoId: number;
     if (this.produto.nomeArquivo == null) {
       this.produto.nomeArquivo = semImagem;
     }
-    this.pegaIdCategoria();
-    if (this.categoriaSelecionadaId <= 0 || isNaN(this.categoriaSelecionadaId)) {
-      this.idCatInvalido = true;
-      return;
-    } else {
-      this.produto.produtoCategoriaId = this.categoriaSelecionadaId;
-      this.idCatInvalido = false;
+
+    if (!isUndefined(this.produtoCategoriaSession) && this.alterarCategoria == false) {
+    //  alert("Categoria session");
+      this.produto.produtoCategoriaId = this.categoria.id;
     }
+    else {
+    //  alert("Categoria Combo");
+      this.pegaIdCategoria();
+      if (this.categoriaSelecionadaId <= 0 || isNaN(this.categoriaSelecionadaId)) {
+        this.idCatInvalido = true;
+        return;
+      } else {
+        this.produto.produtoCategoriaId = this.categoriaSelecionadaId;
+        this.idCatInvalido = false;
+      //  alert("Categoria selecionada no combo id: " + this.produto.produtoCategoriaId);
+      }
+    }
+
 
     this.criarGaleria(this.itensGaleria);
     this.ativarEspera();
+    this.produto.prodativo = true;
     this.produtoServico.cadastrar(this.produto)
       .subscribe(
         produtoJson => {
@@ -433,7 +477,7 @@ export class ProdutoComponent implements OnInit {
     this.categoriaServico.obterTodosCategorias()
       .subscribe(
         categoriass => {
-          this.produtoCategoria = categoriass.filter(cat => cat.ativo==1);
+          this.produtoCategoria = categoriass.filter(cat => cat.ativo == 1);
           this.ativarSpinnerCb = false;
         },
         erro => {
@@ -446,7 +490,7 @@ export class ProdutoComponent implements OnInit {
 
   public pegaIdCategoria() {
     // To remove previous selected items from second dropdown  
-    
+
     // Filter items and pass into finaldata
     this.categoriaSelecionadaId = parseInt((<HTMLSelectElement>document.getElementById('categoriasId')).value);
     this.idCatInvalido = true;
@@ -481,6 +525,15 @@ export class ProdutoComponent implements OnInit {
     this.spinnerGaleria = false;
   }
 
+  public checkAtivo(e) {
+    if (e.target.checked) {
+      this.alterarCategoria = true;
+      this.carregaCategoria();
+    } else {
+      //this.categoria.ativo = 0;
+      this.alterarCategoria = false;
+    }
 
+  }
 
 }

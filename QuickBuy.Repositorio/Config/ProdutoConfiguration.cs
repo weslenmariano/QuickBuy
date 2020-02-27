@@ -27,7 +27,7 @@ namespace QuickBuy.Repositorio.Config
                 .IsRequired();
 
             builder
-               .Property(p => p.Ativo)
+               .Property(p => p.ProdAtivo)
                .IsRequired()
                .HasDefaultValue(true);
 
@@ -36,9 +36,7 @@ namespace QuickBuy.Repositorio.Config
                 .HasMaxLength(200);
 
             builder
-               .Property(p => p.DataCadastro)
-               .IsRequired()
-               .HasDefaultValueSql("sysdate()");
+               .Property(p => p.DataCadastro);
 
             builder
               .Property(p => p.ProdutoCategoriaId)

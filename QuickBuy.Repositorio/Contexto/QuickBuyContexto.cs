@@ -71,27 +71,31 @@ namespace QuickBuy.Repositorio.Contexto
                 {
                     Id = 1,
                     NomeCategoria = "Categoria1",
-                    DescricaoCategoria = "Categoria1 Teste"
+                    DescricaoCategoria = "Categoria1 Teste",
+                    DataCadastro = System.Convert.ToDateTime("01/01/2020")
                 },
-                                                                new ProdutoCategoria()
-                                                                {
-                                                                    Id = 2,
-                                                                    NomeCategoria = "Categoria2",
-                                                                    DescricaoCategoria = "Categoria2 Teste"
-                                                                },
-                                                                new ProdutoCategoria()
-                                                                {
-                                                                    Id = 3,
-                                                                    NomeCategoria = "Categoria3",
-                                                                    DescricaoCategoria = "Categoria3 Teste"
-                                                                },
-                                                                new ProdutoCategoria()
-                                                                {
-                                                                    Id = 4,
-                                                                    NomeCategoria = "Categoria4",
-                                                                    DescricaoCategoria = "Categoria4 Teste"
-                                                                }
-                                                         );
+                new ProdutoCategoria()
+                {
+                    Id = 2,
+                    NomeCategoria = "Categoria2",
+                    DescricaoCategoria = "Categoria2 Teste",
+                    DataCadastro = System.Convert.ToDateTime("01/01/2020")
+                },
+                new ProdutoCategoria()
+                {
+                    Id = 3,
+                    NomeCategoria = "Categoria3",
+                    DescricaoCategoria = "Categoria3 Teste",
+                    DataCadastro = System.Convert.ToDateTime("01/01/2020")
+                },
+                new ProdutoCategoria()
+                {
+                    Id = 4,
+                    NomeCategoria = "Categoria4",
+                    DescricaoCategoria = "Categoria4 Teste",
+                    DataCadastro = System.Convert.ToDateTime("01/01/2020")
+                }
+            );
             //foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
             //{
             //    relationship.DeleteBehavior = DeleteBehavior.Restrict;

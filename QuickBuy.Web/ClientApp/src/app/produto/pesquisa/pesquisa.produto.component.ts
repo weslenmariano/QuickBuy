@@ -3,10 +3,12 @@ import { Produto } from "../../modelo/produto";
 import { ProdutoServico } from "../../servicos/produto/produto.servico";
 import { Router } from "@angular/router";
 import { ProdutoComplemento } from "../../modelo/produtoComplemento";
+import { ProdutoCategoria } from "../../modelo/produtoCategoria";
 import { ProdutoComplementoServico } from "../../servicos/produto/produtoComplemento.servico";
 //import { Popup } from 'ng2-opd-popup';
 import { trigger, transition, style, sequence, animate } from '@angular/animations';
 import { ProdutoHistoricoServico } from "../../servicos/produto/produtoHistorico.servico";
+import { ProdutoCategoriaServico } from "../../servicos/produto/produtoCategoria.servico";
 
 
 
@@ -37,6 +39,8 @@ export class PesquisaProdutoComponent implements OnInit {
 
   public produtos: Produto[];
   public produtosComplemento: ProdutoComplemento[];
+  public categorias: ProdutoCategoria[];
+  public produtoCategoria: ProdutoCategoria;
   public produtoDeletar: Produto;
   public esperaDeletar: boolean;
   public ativarSpinnerBuscar: boolean;
@@ -45,14 +49,22 @@ export class PesquisaProdutoComponent implements OnInit {
   public itensNaPag = 10;
   public filtrar: boolean;
 
+  // testes
+ 
+
+ 
+  //
+
   @ViewChild('fechaModalPeloEventoDeOutroBotao') closeAddExpenseModal: ElementRef;
 
 
   ngOnInit(): void {
     this.ObterComplementos();
+    this.ObterCategorias();
+    
   }
   //private popup: Popup,
-  constructor(private produtoServico: ProdutoServico, private produtoComplemento: ProdutoComplementoServico, private router: Router, private produtoHistoricoServico: ProdutoHistoricoServico) {
+  constructor(private produtoServico: ProdutoServico, private produtoComplemento: ProdutoComplementoServico, private router: Router, private produtoHistoricoServico: ProdutoHistoricoServico, private produtoCategoriaServico: ProdutoCategoriaServico) {
     this.ObterProdutos();
     // this.ObterComplementos();
 
@@ -80,8 +92,24 @@ export class PesquisaProdutoComponent implements OnInit {
     )
   }
 
+
+  public ObterCategorias() {
+    this.categorias = [];
+        this.produtoCategoriaServico.obterTodosCategorias().subscribe(
+      categoriasObtidas => {
+            this.categorias = categoriasObtidas;
+           // alert("Categorias Obtidas: " + JSON.stringify(categoriasObtidas));
+      },
+      erro => {
+        console.log(erro.error);
+      }
+    )
+  }
+
   public adicionarProduto() {
-    sessionStorage.setItem('produtoSession', "");
+    //sessionStorage.setItem('produtoSession', "");
+
+    this.LimparSessao();
     this.router.navigate(['../produto']);
 
   }
@@ -196,19 +224,25 @@ export class PesquisaProdutoComponent implements OnInit {
   public editarProduto(produto: Produto) {
 
     this.ObterComplementos();
-
+    
     this.produtosComplemento = this.produtosComplemento.filter(pc => pc.produtoId == produto.id);
+   // this.categorias = this.categorias.filter(cat => cat.id == produto.produtoCategoriaId);
+
+    this.produtoCategoria = this.categorias.filter(cat => cat.id == produto.produtoCategoriaId)[0];
     // alert(this.produtosComplemento.length);
     // alert(JSON.stringify(this.produtosComplemento));
 
     //alert(JSON.stringify(produto));
     // alert(JSON.stringify(this.produtosComplemento));
+    //alert(JSON.stringify(this.produtoCategoria));
 
     console.log(JSON.stringify(produto))
     console.log(JSON.stringify(this.produtosComplemento));
+    console.log(JSON.stringify(this.produtoCategoria));
 
     sessionStorage.setItem('produtoSession', JSON.stringify(produto));
     sessionStorage.setItem('produtoComplementoSession', JSON.stringify(this.produtosComplemento));
+    sessionStorage.setItem('produtoCategoriaSession', JSON.stringify(this.produtoCategoria));
     this.router.navigate(['../produto/']);
 
   }
@@ -216,6 +250,7 @@ export class PesquisaProdutoComponent implements OnInit {
   public LimparSessao() {
     sessionStorage.setItem('produtoSession', "");
     sessionStorage.setItem('produtoComplementoSession', "");
+    sessionStorage.setItem('produtoCategoriaSession', "");
   }
 
   public exibirFiltro() {

@@ -8,7 +8,8 @@ export class Produto {
   public quantidade: number;
   public usuarioId: number;
   public tag: string;
-  public ativo: boolean;
+  public prodativo: boolean;
   public produtoCategoriaId: number;
   public alterado: boolean;
+  public dataCadastro: Date;
 }

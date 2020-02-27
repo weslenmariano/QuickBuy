@@ -27,9 +27,7 @@ namespace QuickBuy.Repositorio.Config
                 
 
             builder
-               .Property(f => f.DataCadastro)
-               .IsRequired()
-               .HasDefaultValueSql("sysdate()");
+               .Property(f => f.DataCadastro);
         }
     }
 }

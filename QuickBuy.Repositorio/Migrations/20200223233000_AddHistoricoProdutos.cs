@@ -18,11 +18,11 @@ namespace QuickBuy.Repositorio.Migrations
                     Descricao = table.Column<string>(maxLength: 400, nullable: false),
                     Preco = table.Column<decimal>(type: "decimal(19,4)", nullable: false),
                     NomeArquivo = table.Column<string>(nullable: true),
-                    DataCadastro = table.Column<DateTime>(nullable: false, defaultValueSql: "sysdate()"),
+                    DataCadastro = table.Column<DateTime>(nullable: true),
                     Tag = table.Column<string>(maxLength: 200, nullable: true),
                     Ativo = table.Column<bool>(nullable: false, defaultValue: true),
                     ProdutoCategoriaId = table.Column<int>(nullable: false),
-                    DataAcao = table.Column<DateTime>(nullable: false, defaultValueSql: "sysdate()")
+                    DataAcao = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {

@@ -63,15 +63,27 @@
   </div>
 </div>
 
+<div  *ngIf="catSelecionadaDisplay">
+  <div *ngIf="!alterarCategoria">
+    <input type="text" class="form-control mb-2 col-md-6" id="inputCategoria" disabled value="{{catSelecionadaDisplay}}">
+  </div>
+  <div *ngIf="exibeCheck">
+    <input type="checkbox" id="chkAtivo"
+           data-md-icheck (change)="checkAtivo($event)" />
+    <label for="chkAtivo">Alterar Categoria</label>
+  </div>
+</div>
 <!-- CATEGORIA DO PRODUTO-->
-<div *ngIf="!ativarSpinnerCb">
-  <select class="mb-2 col-md-6 btn btn-outline-light dropdown-toggle" id="categoriasId" [(ngModel)]="categorias">
-    <option *ngFor="let cat of  produtoCategoria " [value]="cat.id">
-      {{cat.nomeCategoria}}
-    </option>
-  </select>
-  <div class="invalid-feedback mb-2" role="status" *ngIf="idCatInvalido">
-    Selecione uma categoria para o produto.
+<div *ngIf="alterarCategoria">
+  <div *ngIf="!ativarSpinnerCb">
+    <select class="mb-2 col-md-6 btn btn-outline-light dropdown-toggle" id="categoriasId" [(ngModel)]="categorias">
+      <option *ngFor="let cat of  produtoCategoria " [value]="cat.id">
+        {{cat.nomeCategoria}}
+      </option>
+    </select>
+    <div class="invalid-feedback mb-2" role="status" *ngIf="idCatInvalido">
+      Selecione uma categoria para o produto.
+    </div>
   </div>
 </div>
 <span class="spinner-border spinner-border-sm mb-2" role="status" *ngIf="ativarSpinnerCb"></span>
@@ -96,7 +108,7 @@
 
 <div class="input-group mb-2">
   <div class="custom-file col-md-6">
-    
+
 
     fi
     <input type="file" class="custom-file-input" accept=".jpg,.gif,.png"

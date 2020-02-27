@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var ProdutoCategoria = /** @class */ (function () {
-    function ProdutoCategoria() {
+var ProdutoCategoriaHistorico = /** @class */ (function () {
+    function ProdutoCategoriaHistorico() {
     }
-    return ProdutoCategoria;
+    return ProdutoCategoriaHistorico;
 }());
-exports.ProdutoCategoria = ProdutoCategoria;
-//# sourceMappingURL=produtoCategoria.js.map
+exports.ProdutoCategoriaHistorico = ProdutoCategoriaHistorico;
+//# sourceMappingURL=produtoCategoriaHistorico.js.map

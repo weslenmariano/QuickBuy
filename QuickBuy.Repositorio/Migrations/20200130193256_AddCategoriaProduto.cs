@@ -9,16 +9,14 @@ namespace QuickBuy.Repositorio.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<bool>(
-                name: "Ativo",
+                name: "ProdAtivo",
                 table: "Produtos",
-                nullable: false,
-                defaultValue: true);
+                nullable: true);
 
             migrationBuilder.AddColumn<DateTime>(
                 name: "DataCadastro",
                 table: "Produtos",
-                nullable: false,
-                defaultValueSql: "sysdate()");
+                nullable: true);
 
             migrationBuilder.AddColumn<int>(
                 name: "ProdutoCategoriaId",
@@ -40,8 +38,8 @@ namespace QuickBuy.Repositorio.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     NomeCategoria = table.Column<string>(maxLength: 100, nullable: false),
                     DescricaoCategoria = table.Column<string>(maxLength: 250, nullable: true),
-                    Ativo = table.Column<bool>(nullable: false, defaultValue: true),
-                    DataCadastro = table.Column<DateTime>(nullable: false, defaultValueSql: "sysdate()")
+                    Ativo = table.Column<bool>(nullable: true),
+                    DataCadastro = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -50,23 +48,23 @@ namespace QuickBuy.Repositorio.Migrations
 
             migrationBuilder.InsertData(
                 table: "ProdutoCategoria",
-                columns: new[] { "Id", "DescricaoCategoria", "NomeCategoria" },
-                values: new object[] { 1, "Categoria1 Teste", "Categoria1" });
+                columns: new[] { "Id", "DescricaoCategoria", "NomeCategoria","DataCadastro" },
+                values: new object[] { 1, "Categoria1 Teste", "Categoria1", "2020/01/01" });
 
             migrationBuilder.InsertData(
                 table: "ProdutoCategoria",
-                columns: new[] { "Id", "DescricaoCategoria", "NomeCategoria" },
-                values: new object[] { 2, "Categoria2 Teste", "Categoria2" });
+                columns: new[] { "Id", "DescricaoCategoria", "NomeCategoria", "DataCadastro" },
+                values: new object[] { 2, "Categoria2 Teste", "Categoria2", "2020/01/01" });
 
             migrationBuilder.InsertData(
                 table: "ProdutoCategoria",
-                columns: new[] { "Id", "DescricaoCategoria", "NomeCategoria" },
-                values: new object[] { 3, "Categoria3 Teste", "Categoria3" });
+                columns: new[] { "Id", "DescricaoCategoria", "NomeCategoria", "DataCadastro" },
+                values: new object[] { 3, "Categoria3 Teste", "Categoria3", "2020/01/01" });
 
             migrationBuilder.InsertData(
                 table: "ProdutoCategoria",
-                columns: new[] { "Id", "DescricaoCategoria", "NomeCategoria" },
-                values: new object[] { 4, "Categoria4 Teste", "Categoria4" });
+                columns: new[] { "Id", "DescricaoCategoria", "NomeCategoria", "DataCadastro" },
+                values: new object[] { 4, "Categoria4 Teste", "Categoria4", "2020/01/01" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Produtos_ProdutoCategoriaId",
@@ -96,7 +94,7 @@ namespace QuickBuy.Repositorio.Migrations
                 table: "Produtos");
 
             migrationBuilder.DropColumn(
-                name: "Ativo",
+                name: "ProdAtivo",
                 table: "Produtos");
 
             migrationBuilder.DropColumn(
