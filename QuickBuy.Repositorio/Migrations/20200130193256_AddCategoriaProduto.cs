@@ -38,7 +38,7 @@ namespace QuickBuy.Repositorio.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     NomeCategoria = table.Column<string>(maxLength: 100, nullable: false),
                     DescricaoCategoria = table.Column<string>(maxLength: 250, nullable: true),
-                    Ativo = table.Column<bool>(nullable: true),
+                    Ativo = table.Column<bool>(nullable: false, defaultValue: true),
                     DataCadastro = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>

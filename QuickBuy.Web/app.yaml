@@ -1,5 +1,4 @@
 ﻿runtime: aspnetcore
-
 env: flex
 
 # This sample incurs costs to run on the App Engine flexible environment. 
@@ -11,13 +10,16 @@ env: flex
 # https://cloud.google.com/appengine/docs/flexible/dotnet/configuring-your-app-with-app-yaml
 
 manual_scaling:
-
   instances: 1
-
 resources:
-
   cpu: 1
-
   memory_gb: 0.5
-
   disk_size_gb: 10
+
+env_variables:
+  SQL_USER: root
+  SQL_PASSWORD: 112233
+  SQL_DATABASE: QuickBuyDB
+  INSTANCE_CONNECTION_NAME: project-wm-test1:us-central1:mysqldbcloud1
+beta_settings:
+  cloud_sql_instances: project-wm-test1:us-central1:mysqldbcloud1

@@ -23,7 +23,7 @@ namespace QuickBuy.Repositorio.Config
             builder
                .Property(f => f.Ativo)
                .IsRequired()
-               .HasMaxLength(1);
+               .HasDefaultValue(true);
                 
 
             builder
