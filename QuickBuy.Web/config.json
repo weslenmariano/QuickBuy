@@ -1,7 +1,9 @@
 {
   "ConnectionStrings": {
     //"QuickBuyDB": "Server=localhost;Database=QuickBuyDB;Uid=root;Pwd=;",
-    "QuickBuyDB": "server=35.224.170.18;uid=root;pwd=112233;database=QuickBuyDB",
+    "QuickBuyDB": "Server=tcp:quickbuywebdbserver.database.windows.net,1433;Initial Catalog=lannypersonalizados_db;Persist Security Info=False;User ID=weslen;Password=@wm112233;Connection Timeout=30;",
+    "QuickBuyDB1": "server=db4free.net;user id=buydbtst;pwd=11223344;database=quickbuydb",
+    "QuickBuyDB2": "server=35.224.170.18;uid=root;pwd=112233;database=QuickBuyDB",
     "SqlServerConnection": "Server=.; Database=MySql_Curso; User Id=myUsername; Password=myPassword;"
   }
   //"root@35.224.170.18": 3306

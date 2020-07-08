@@ -38,8 +38,10 @@ namespace QuickBuy.Web
             var connectionString = Configuration.GetConnectionString("QuickBuyDB");
             services.AddDbContext<QuickBuyContexto>(option => 
                                                         option.UseLazyLoadingProxies()
-                                                              .UseMySql(connectionString, m => 
-                                                                                                m.MigrationsAssembly("QuickBuy.Repositorio")));
+                                                        .UseSqlServer(connectionString, m =>
+                                                                        m.MigrationsAssembly("QuickBuy.Repositorio")));
+            //.UseMySql(connectionString, m => 
+            //                                m.MigrationsAssembly("QuickBuy.Repositorio")));
             services.AddScoped<IProdutoRepositorio, ProdutoRepositorio>();
             services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
             services.AddScoped<IPedidoRepositorio, PedidoRepositorio>();

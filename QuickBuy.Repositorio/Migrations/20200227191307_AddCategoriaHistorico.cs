@@ -13,7 +13,8 @@ namespace QuickBuy.Repositorio.Migrations
                  columns: table => new
                  {
                      Id = table.Column<int>(nullable: false)
-                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                         //.Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                      NomeCategoria = table.Column<string>(maxLength: 50, nullable: false),
                      DescricaoCategoria = table.Column<string>(maxLength: 400, nullable: false),
                      Ativo = table.Column<bool>(nullable: false, defaultValue: true),

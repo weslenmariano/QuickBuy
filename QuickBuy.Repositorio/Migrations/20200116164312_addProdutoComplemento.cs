@@ -12,7 +12,8 @@ namespace QuickBuy.Repositorio.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        //.Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ProdutoId = table.Column<int>(nullable: false),
                     NomeArquivo = table.Column<string>(maxLength: 200, nullable: false),
                     TipoArquivo = table.Column<string>(maxLength: 400, nullable: false),
