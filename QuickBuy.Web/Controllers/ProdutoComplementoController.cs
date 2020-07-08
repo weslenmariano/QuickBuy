@@ -117,7 +117,9 @@ namespace QuickBuy.Web.Controllers
             try
             {
                 var pastaArquivos = _hostingEnvironment.WebRootPath + "\\arquivos\\";
+                if (produtoComplemento.NomeArquivo != "produto-sem-imagem.jpg") { 
                 System.IO.File.Delete(pastaArquivos + produtoComplemento.NomeArquivo);
+                }
                 /// produto da requisicao deve tar a propriedade do Id > 0 para conseguir remover.
                 //_produtoComplementoRepositorio.Remover(produtoComplemento);
                 return Ok();

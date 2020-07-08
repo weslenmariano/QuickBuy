@@ -1,9 +1,13 @@
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { ProdutoCategoria } from "../../modelo/produtoCategoria";
 import { ProdutoCategoriaServico } from "../../servicos/produto/produtoCategoria.servico";
+
 import { Router } from "@angular/router";
 //import { Popup } from 'ng2-opd-popup';
 import { trigger, transition, style, sequence, animate } from '@angular/animations';
+import { ProdutoCategoriaHistorico } from "../../modelo/produtoCategoriaHistorico";
+import { ProdutoCategoriaHistoricoServico } from "../../servicos/produto/produtoCategoriaHistorico.servico";
+
 
 
 
@@ -53,7 +57,7 @@ export class PesquisaCategoriaComponent implements OnInit {
 
   }
   //private popup: Popup,
-  constructor(private produtoCategoriaServico: ProdutoCategoriaServico, private router: Router) {
+  constructor(private produtoCategoriaServico: ProdutoCategoriaServico, private router: Router, private produtoCategoriaHistoricoServico: ProdutoCategoriaHistoricoServico) {
     this.ObterCategorias();
     // this.ObterComplementos();
 
@@ -119,9 +123,21 @@ export class PesquisaCategoriaComponent implements OnInit {
    
     //alert("Deletar PRODUTO");
     if (this.categoriaDeletar) {
+
       this.produtoCategoriaServico.deletar(this.categoriaDeletar).subscribe(
         categoriass => {
           this.categorias = categoriass;
+          // SALVAR Categoria NO HISTORICO ANTES DE DELETAR
+          //alert("categoria Deletar");
+          this.produtoCategoriaHistoricoServico.cadastrar(this.categoriaDeletar).subscribe(
+            categoriaDeletar => {
+              console.log("Categoria Armazenado no histórico");
+            },
+            seerro => {
+              console.log("Erro ao armazenar categoria no histórico" + seerro.error);
+            }
+          )
+      //
           this.closeAddExpenseModal.nativeElement.click();
         },
         erro => {

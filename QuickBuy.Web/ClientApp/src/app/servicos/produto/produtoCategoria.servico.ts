@@ -44,7 +44,7 @@ export class ProdutoCategoriaServico implements OnInit {
     }
 
     public obterTodosCategorias(): Observable<ProdutoCategoria[]> {
-
+      
         return this.http.get<ProdutoCategoria[]>(this._baseUrl + "api/produtoCategoria");
     }
 

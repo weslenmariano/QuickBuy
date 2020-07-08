@@ -11,7 +11,7 @@ namespace QuickBuy.Dominio.ObjetoDeValor
         public int Id { get; set; }
         public string NomeCategoria{ get; set; }
         public string DescricaoCategoria { get; set; }
-        public int Ativo { get; set; }
+        public bool Ativo { get; set; }
         public DateTime DataCadastro { get; set; }
 
 

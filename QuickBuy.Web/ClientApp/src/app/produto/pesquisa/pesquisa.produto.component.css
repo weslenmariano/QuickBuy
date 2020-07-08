@@ -26,3 +26,8 @@
   border-color: #DF0101;
 
 }
+
+.open.dropdown .dropdown-menu {
+  display: block;
+  transform: none;
+}

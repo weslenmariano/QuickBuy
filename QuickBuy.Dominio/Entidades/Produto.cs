@@ -14,7 +14,7 @@ namespace QuickBuy.Dominio.Entidades
         public string NomeArquivo { get; set; }
         public DateTime DataCadastro { get; set; }
         public string Tag { get; set; }
-        public bool Ativo { get; set; }
+        public bool ProdAtivo { get; set; }
         public int ProdutoCategoriaId { get; set; }
         public virtual ProdutoCategoria ProdutoCategoria { get; set; }
 

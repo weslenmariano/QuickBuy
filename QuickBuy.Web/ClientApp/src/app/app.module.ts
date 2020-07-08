@@ -10,6 +10,7 @@ import { Ng2ImgMaxModule } from 'ng2-img-max';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
@@ -30,6 +31,10 @@ import { UsuarioDadosServico } from './servicos/usuario/usuarioDados.servico';
 import { GuardaAdmRotas } from './autorizacao/guarda.adm.rotas';
 import { CategoriaComponent } from './produto/cadastro/categoria.component';
 
+import { ProdutoHistoricoServico } from './servicos/produto/produtoHistorico.servico';
+import { ProdutoCategoriaHistoricoServico } from './servicos/produto/produtoCategoriaHistorico.servico';
+
+//import { NgSelectModule } from '@ng-select/ng-select';
 
 
 
@@ -76,7 +81,7 @@ import { PesquisaCategoriaComponent } from './produto/pesquisa/pesquisa.categori
         BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
         HttpClientModule,
         FormsModule,
- //       NgSelectModule,
+  //      NgSelectModule,
         NgxGalleryModule,
         Ng2ImgMaxModule,
         NgxPaginationModule,
@@ -102,7 +107,7 @@ import { PesquisaCategoriaComponent } from './produto/pesquisa/pesquisa.categori
         ])
     ],
     providers: [UsuarioServico, PedidoServico,
-                ProdutoServico, ProdutoComplementoServico,
+                ProdutoServico, ProdutoComplementoServico, ProdutoHistoricoServico, ProdutoCategoriaHistoricoServico,
                 ProdutoCategoriaServico, UsuarioDadosServico, { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig }],
     bootstrap: [AppComponent]
 })

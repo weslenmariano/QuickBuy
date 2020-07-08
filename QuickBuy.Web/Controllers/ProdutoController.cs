@@ -70,10 +70,13 @@ namespace QuickBuy.Web.Controllers
 
                 if (produto.Id > 0)
                 {
+                     produto.ProdutoCategoria = null;
                     _produtoRepositorio.Atualizar(produto);
                 }
                 else
                 {
+                    produto.ProdAtivo = true;
+                    produto.DataCadastro = System.DateTime.Now;
                     _produtoRepositorio.Adicionar(produto);
                 }
                 

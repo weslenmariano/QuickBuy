@@ -17,6 +17,30 @@ namespace QuickBuy.Repositorio.Migrations
                 .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
+            modelBuilder.Entity("QuickBuy.Dominio.Entidades.CategoriaHistorico", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Ativo")
+                        .HasMaxLength(1);
+
+                    b.Property<DateTime>("DataAcao");
+
+                    b.Property<DateTime>("DataCadastro");
+
+                    b.Property<string>("DescricaoCategoria")
+                        .HasMaxLength(250);
+
+                    b.Property<string>("NomeCategoria")
+                        .IsRequired()
+                        .HasMaxLength(100);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CategoriaHistorico");
+                });
+
             modelBuilder.Entity("QuickBuy.Dominio.Entidades.ItemPedido", b =>
                 {
                     b.Property<int>("Id")
@@ -62,13 +86,7 @@ namespace QuickBuy.Repositorio.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<bool>("Ativo")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValue(true);
-
-                    b.Property<DateTime>("DataCadastro")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("sysdate()");
+                    b.Property<DateTime>("DataCadastro");
 
                     b.Property<string>("Descricao")
                         .IsRequired()
@@ -82,6 +100,10 @@ namespace QuickBuy.Repositorio.Migrations
 
                     b.Property<decimal>("Preco")
                         .HasColumnType("decimal(19,4)");
+
+                    b.Property<bool>("ProdAtivo")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(true);
 
                     b.Property<int>("ProdutoCategoriaId");
 
@@ -117,6 +139,42 @@ namespace QuickBuy.Repositorio.Migrations
                     b.HasIndex("ProdutoId");
 
                     b.ToTable("ProdutoComplementos");
+                });
+
+            modelBuilder.Entity("QuickBuy.Dominio.Entidades.ProdutoHistorico", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("Ativo")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(true);
+
+                    b.Property<DateTime>("DataAcao");
+
+                    b.Property<DateTime>("DataCadastro");
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasMaxLength(400);
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<string>("NomeArquivo");
+
+                    b.Property<decimal>("Preco")
+                        .HasColumnType("decimal(19,4)");
+
+                    b.Property<int>("ProdutoCategoriaId");
+
+                    b.Property<string>("Tag")
+                        .HasMaxLength(200);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProdutoHistorico");
                 });
 
             modelBuilder.Entity("QuickBuy.Dominio.Entidades.Usuario", b =>
@@ -254,9 +312,7 @@ namespace QuickBuy.Repositorio.Migrations
                     b.Property<int>("Ativo")
                         .HasMaxLength(1);
 
-                    b.Property<DateTime>("DataCadastro")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("sysdate()");
+                    b.Property<DateTime>("DataCadastro");
 
                     b.Property<string>("DescricaoCategoria")
                         .HasMaxLength(250);
@@ -274,7 +330,7 @@ namespace QuickBuy.Repositorio.Migrations
                         {
                             Id = 1,
                             Ativo = 0,
-                            DataCadastro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataCadastro = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescricaoCategoria = "Categoria1 Teste",
                             NomeCategoria = "Categoria1"
                         },
@@ -282,7 +338,7 @@ namespace QuickBuy.Repositorio.Migrations
                         {
                             Id = 2,
                             Ativo = 0,
-                            DataCadastro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataCadastro = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescricaoCategoria = "Categoria2 Teste",
                             NomeCategoria = "Categoria2"
                         },
@@ -290,7 +346,7 @@ namespace QuickBuy.Repositorio.Migrations
                         {
                             Id = 3,
                             Ativo = 0,
-                            DataCadastro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataCadastro = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescricaoCategoria = "Categoria3 Teste",
                             NomeCategoria = "Categoria3"
                         },
@@ -298,7 +354,7 @@ namespace QuickBuy.Repositorio.Migrations
                         {
                             Id = 4,
                             Ativo = 0,
-                            DataCadastro = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DataCadastro = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DescricaoCategoria = "Categoria4 Teste",
                             NomeCategoria = "Categoria4"
                         });
